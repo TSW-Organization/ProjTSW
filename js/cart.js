@@ -13,7 +13,7 @@ function toggleSidebar() {
         sidebarOpen = true;
     }
     else {
-        sidebar.style.left = "-300px";
+        sidebar.style.left = "-400px";
         sidebar.style.transition = "left 600ms";
         main.style.opacity = "1";
         footer.style.opacity = "1";
@@ -47,7 +47,7 @@ function closeAll() {
     var footer = document.getElementsByTagName("footer")[0];
     
     if(sidebarOpen==true) {
-        sidebar.style.left = "-300px";
+        sidebar.style.left = "-400px";
         sidebar.style.transition = "left 600ms";
         sidebarOpen=false;
         main.style.opacity = "1";
