@@ -1,7 +1,10 @@
+/* FOOTER */
 footer {
     background-color: #8cada7;
     padding-top: 25px;
     margin-top: 30px;
+    width: 100vw;
+    overflow: hidden;
 }
 
 .carousel-cell {
@@ -30,6 +33,7 @@ footer {
 
 #info {
     margin-top: 30px;
+    margin-left: 10px;
 }
 
 #signature {
@@ -40,4 +44,41 @@ footer {
     text-align: center;
     align-items: center;
     height: 30px;
+}
+
+@media only screen and (max-width:768px) {
+	
+	.carousel-cell {
+	    height: 180px;
+	    border-radius: 5px;
+	    margin-right: 5px;
+	}
+	
+	.carousel-cell h1 {
+	    font-size: 18px;
+	}
+	
+	.carousel-cell p {
+	    font-size: 12px; 
+	    font-size: 12px; 
+	    margin-top: 3px;
+	    margin-left: 1%;
+	    margin-right: 1%;
+	}
+	
+	#info h1 {
+		font-size: 18px;
+	}
+	
+	#info p {
+		font-size: 12px;
+	}
+	
+	#signature {
+	    font-size: 12px;
+	}
+	
+	.flickity-button {
+		display: none;
+	}
 }

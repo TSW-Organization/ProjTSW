@@ -4,6 +4,7 @@ function toggleSidebar() {
     var sidebar = document.getElementById("sidebar");
     var main = document.getElementsByTagName("main")[0];
     var footer = document.getElementsByTagName("footer")[0];
+    var body = document.getElementsByTagName("body")[0];
 
     if(sidebarOpen==false) {
         sidebar.style.left = "0px";
@@ -11,6 +12,7 @@ function toggleSidebar() {
         main.style.opacity = "0.8";
         footer.style.opacity = "0.8";
         sidebarOpen = true;
+        body.classList.add("sidebar-open");
     }
     else {
         sidebar.style.left = "-400px";
@@ -18,6 +20,7 @@ function toggleSidebar() {
         main.style.opacity = "1";
         footer.style.opacity = "1";
         sidebarOpen=false;
+        body.classList.remove("sidebar-open");
     }  
 }
 
@@ -25,39 +28,32 @@ function toggleSidebar() {
 var userbarOpen = false;
 function toggleUserbar() {
     var userbar = document.getElementById("userbar");
+    var body = document.getElementsByTagName("body")[0];
 
     if(userbarOpen==false) {
-        userbar.style.right = "0px";
-        userbar.style.transition = "right 600ms";
+        userbar.style.display = "block";
+        userbar.style.opacity = "1";
         userbarOpen = true;
+        body.classList.add("userbar-open");
     }
     else {
-        userbar.style.right = "-300px";
-        userbar.style.transition = "right 600ms";
+        userbar.style.opacity = "0";
+        userbar.style.display = "none";
         userbarOpen=false;
+        body.classList.remove("userbar-open");
     }  
 }
 
 
 // FUNZIONE CHE CHIUDE TUTTE LE SIDEBAR
 function closeAll() {
-    var sidebar = document.getElementById("sidebar");
-    var userbar = document.getElementById("userbar");
-    var main = document.getElementsByTagName("main")[0];
-    var footer = document.getElementsByTagName("footer")[0];
-    
+
     if(sidebarOpen==true) {
-        sidebar.style.left = "-400px";
-        sidebar.style.transition = "left 600ms";
-        sidebarOpen=false;
-        main.style.opacity = "1";
-        footer.style.opacity = "1";
+        toggleSidebar();
     }
     
     if(userbarOpen==true) {
-        userbar.style.right = "-300px";
-        userbar.style.transition = "right 600ms";
-        userbarOpen=false;
+        toggleUserbar();
     }
 }
 
