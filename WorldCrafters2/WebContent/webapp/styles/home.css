@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+#userbar li button,
+#userbar li a {
+    display: inline-block;
+    padding: 10px;
+    color: #333333 !important;
+    text-decoration: none;
+    font-size: 14px !important;
+    font-weight: bold;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    height: 25px; /* Altezza fissa dei pulsanti */
+    
+}
+
+#userbar li button:hover,
+#userbar li a:hover {
+    text-decoration: underline;
+}
+
+* {
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+	overflow-x: hidden;
+	width: 100vw;
+}
+
+/* PRESENTATION */
+#presentationContainer {
+    background-image: url(../imgs/presentation-bg2.jpg);
+    background-position: center;
+    background-size: cover;
+    height: 600px;
+    overflow: hidden;
+}
+
+#presentationContainer p {
+    position: absolute;
+    font-size: 55px;
+    text-align: right;
+    background-color: white;
+    padding: 14px;
+    border-bottom-right-radius: 20px;
+}
+
+
+/* SHOWCASE */
+#showcaseContainer {
+    background-color: white;
+    padding: 30px;
+    margin-top: -200px;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    overflow: hidden;
+}
+
+#showcase {
+    display: grid; 
+    gap: 1em; 
+    grid-template-areas: 
+        ". . . . . ."
+        ". . . . . ."
+        ". . . . . ."; 
+}
+
+.product p {
+    padding: 4px;
+}
+
+.product {
+    border: 1px solid gray;
+    height: auto;
+}
+
+.product a {
+    text-decoration: none;
+    color: black;
+}
+
+.product img {
+    width: 100%;
+}
+
+.product .product-price {
+    text-align: right;
+    margin-right: 5px;
+    text-align: center;
+}
+
+.product .add-to-cart {
+    text-align: center;
+    border: 1px solid gray;
+    cursor: pointer;
+}
+
+
+@media only screen and (max-width: 768px) {
+	
+	body {
+		overflow-x: hidden;
+		width: 100vw;
+	}
+	
+	/* PRESENTATION */
+	#presentationContainer {
+	    background-image: url(../imgs/presentation-bg2.jpg);
+	    background-position: center;
+	    background-size: cover;
+	    height: 300px;
+	}
+	
+	#presentationContainer p {
+	    position: absolute;
+	    font-size: 14px;
+	    text-align: right;
+	    background-color: white;
+	    padding: 14px;
+	    border-bottom-right-radius: 20px;
+	}
+
+
+	/* SHOWCASE */
+	#showcaseContainer {
+	    background-color: white;
+	    padding: 15px;
+	    margin-top: -200px;
+	    width: 94%;
+	    margin-left: 3%;
+	    margin-right: 3%;
+	    border-top-left-radius: 10px;
+	    border-top-right-radius: 10px;
+	}
+	
+	#showcaseContainer h1 {
+		font-size: 16px;
+	}
+	
+	#showcase {
+	    display: grid; 
+	    gap: 3px;
+	    grid-template-areas: 
+	        ". . ."
+	        ". . ."
+	        ". . ."
+	        ". . ."
+	        ". . ."
+	        ". . ."
+	        ". . .";
+	}
+	
+	
+	.product {
+	    border: 1px solid gray;
+	    height: auto;
+	}
+	
+	.product a {
+	    text-decoration: none;
+	    color: black;
+	    font-size: 10px;
+	}
+	
+	.product p {
+		padding: 4px;
+		font-size: 10px;
+	}
+	
+	.product img {
+	    width: 100%;
+	}
+	
+	.product .product-price {
+	    text-align: right;
+	    margin-right: 5px;
+	    text-align: center;
+	}
+	
+	.product .add-to-cart {
+	    text-align: center;
+	    border: 1px solid gray;
+	    cursor: pointer;
+	}
+}
