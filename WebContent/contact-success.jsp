@@ -40,7 +40,7 @@
         <div id="messageContainer">
         	<h1>Messaggio inviato con successo. Ti risponderemo al più presto</h1>
         	<br><br>
-        	<a href="home.jsp">Torna alla home</a>
+        	<a href="home">Torna alla home</a>
         </div>
     </main>
 

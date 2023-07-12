@@ -1,4 +1,4 @@
-package worldcrafters;
+package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,11 +23,11 @@ public class DriverManagerConnectionPool  {
 		Connection newConnection = null;
 		String ip = "localhost";
 		String port = "3306";
-		String db = "storage";
+		String db = "worldcrafters";
 		String username = "root";
-		String password = "admin";
+		String password = "1234";
 
-		newConnection = DriverManager.getConnection("jdbc:mysql://"+ ip+":"+ port+"/"+db+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", username, password);
+		newConnection = DriverManager.getConnection("jdbc:mysql://"+ ip+":"+ port+"/"+db+"?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", username, password);
 		newConnection.setAutoCommit(false);
 		return newConnection;
 	}

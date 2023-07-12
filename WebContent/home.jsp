@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<%@ page import="java.util.List" %>
+<%@ page import="model.Product" %>
+
 <%
    	request.setAttribute("showHeader", true);
 	request.setAttribute("showFooter", true);
@@ -12,6 +15,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorldCrafters</title>
+    <link rel="icon" type="image/x-icon" href="imgs/favicon.ico">
     <link rel="stylesheet" type="text/css" href="styles/home.css">
     <link rel="stylesheet" type="text/css" href="styles/userbar.css">
     <link rel="stylesheet" type="text/css" href="vendor/flickity.min.css">
@@ -42,117 +46,20 @@
         <div id="showcaseContainer">
             <h1>Prodotti in evidenza</h1><br>
             <div id="showcase"> 
-	            <div class="product">
-	                <a href="#"><img src="imgs/prodotto1.jpg"></a>
-	                <a href="#" class="product-title">Lampade luminose srgs  sergrse rsegrs</a>
-	                <p class="product-price">$ 9.99</p>
-	                <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
-	            </div>
-	            <div class="product">
-	                <a href="#"><img src="imgs/prodotto2.jpg"></a>
-	                <a href="#" class="product-title">Lampade luminose srgs  sergrse rsegrs</a>
-	                <p class="product-price">$ 9.99</p>
-	                <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
-	            </div>
-	            <div class="product">
-	                <a href="#"><img src="imgs/prodotto3.jpg"></a>
-	                <a href="#" class="product-title">Lampade luminose srgs  sergrse rsegrs</a>
-	                <p class="product-price">$ 9.99</p>
-	                <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
-	            </div>
-	            <div class="product">
-	                <a href="#"><img src="imgs/prodotto4.jpg"></a>
-	                <a href="#" class="product-title">Lampade luminose srgs  sergrse rsegrs</a>
-	                <p class="product-price">$ 9.99</p>
-	                <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
-	            </div>
-	            <div class="product">
-	                <a href="#"><img src="imgs/prodotto5.jpg"></a>
-	                <a href="#" class="product-title">Lampade luminose srgs  sergrse rsegrs</a>
-	                <p class="product-price">$ 9.99</p>
-	                <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
-	            </div>
-	            <div class="product">
-	                <a href="#"><img src="imgs/prodotto6.jpg"></a>
-	                <a href="#" class="product-title">Lampade luminose srgs  sergrse rsegrs</a>
-	                <p class="product-price">$ 9.99</p>
-	                <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
-	            </div>
-	            <div class="product">
-	                <a href="#"><img src="imgs/prodotto7.jpg"></a>
-	                <a href="#" class="product-title">Lampade luminose srgs  sergrse rsegrs</a>
-	                <p class="product-price">$ 9.99</p>
-	                <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
-	            </div>
-	            <div class="product">
-	                <a href="#"><img src="imgs/prodotto8.jpg"></a>
-	                <a href="#" class="product-title">Lampade luminose srgs  sergrse rsegrs</a>
-	                <p class="product-price">$ 9.99</p>
-	                <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
-	            </div>
-	            <div class="product">
-	                <a href="#"><img src="imgs/prodotto9.jpg"></a>
-	                <a href="#" class="product-title">Lampade luminose srgs  sergrse rsegrs</a>
-	                <p class="product-price">$ 9.99</p>
-	                <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
-	            </div>
-	            <div class="product">
-	                <a href="#"><img src="imgs/prodotto10.jpg"></a>
-	                <a href="#" class="product-title">Lampade luminose srgs  sergrse rsegrs</a>
-	                <p class="product-price">$ 9.99</p>
-	                <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
-	            </div>
-	            <div class="product">
-	                <a href="#"><img src="imgs/prodotto1.jpg"></a>
-	                <a href="#" class="product-title">Lampade luminose srgs  sergrse rsegrs</a>
-	                <p class="product-price">$ 9.99</p>
-	                <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
-	            </div>
-	            <div class="product">
-	                <a href="#"><img src="imgs/prodotto2.jpg"></a>
-	                <a href="#" class="product-title">Lampade luminose srgs  sergrse rsegrs</a>
-	                <p class="product-price">$ 9.99</p>
-	                <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
-	            </div>
-	
-	            <div class="product">
-	                <a href="#"><img src="imgs/prodotto3.jpg"></a>
-	                <a href="#" class="product-title">Lampade luminose srgs  sergrse rsegrs</a>
-	                <p class="product-price">$ 9.99</p>
-	                <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
-	            </div>
-	            <div class="product">
-	                <a href="#"><img src="imgs/prodotto4.jpg"></a>
-	                <a href="#" class="product-title">Lampade luminose srgs  sergrse rsegrs</a>
-	                <p class="product-price">$ 9.99</p>
-	                <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
-	            </div>
-	            <div class="product">
-	                <a href="#"><img src="imgs/prodotto5.jpg"></a>
-	                <a href="#" class="product-title">Lampade luminose srgs  sergrse rsegrs</a>
-	                <p class="product-price">$ 9.99</p>
-	                <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
-	            </div>
-	            <div class="product">
-	                <a href="#"><img src="imgs/prodotto6.jpg"></a>
-	                <a href="#" class="product-title">Lampade luminose srgs  sergrse rsegrs</a>
-	                <p class="product-price">$ 9.99</p>
-	                <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
-	            </div>
-	            <div class="product">
-	                <a href="#"><img src="imgs/prodotto7.jpg"></a>
-	                <a href="#" class="product-title">Lampade luminose srgs  sergrse rsegrs</a>
-	                <p class="product-price">$ 9.99</p>
-	                <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
-	            </div>
-	            <div class="product">
-	                <a href="#"><img src="imgs/prodotto8.jpg"></a>
-	                <a href="#" class="product-title">Lampade luminose srgs  sergrse rsegrs</a>
-	                <p class="product-price">$ 9.99</p>
-	                <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
-	            </div>
-       
-            </div>
+	            
+				<% List<Product> products = (List<Product>) request.getAttribute("products"); %>
+				<% int counter = 0; %>
+				<% for (int i = 0; i < 18; i++) { %>
+					<% Product product = products.get(i); %>
+				        <div class="product">
+				            <a href="#"><img src="<%= product.getImgSrc()%>"></a>
+				            <a href="#" class="product-title"><%= product.getTitle() %></a>
+				            <p class="product-price">$ <%= product.getPrice() %></p>
+				            <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
+				        </div>
+				<%} %>
+			    
+			</div>
         </div>
         
     </main>
