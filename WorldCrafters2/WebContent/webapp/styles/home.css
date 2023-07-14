@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+/* CSS PER ESTETICA DELLA LISTA LOGIN, REGISTER E CONTACT */
 #userbar li button,
 #userbar li a {
     display: inline-block;
@@ -11,7 +13,6 @@
     background-color: transparent;
     cursor: pointer;
     height: 25px; /* Altezza fissa dei pulsanti */
-    
 }
 
 #userbar li button:hover,
@@ -27,8 +28,8 @@
 }
 
 body {
-	overflow-x: hidden;
-	width: 100vw;
+    overflow-x: hidden;
+    width: 100vw;
 }
 
 /* PRESENTATION */
@@ -49,7 +50,6 @@ body {
     border-bottom-right-radius: 20px;
 }
 
-
 /* SHOWCASE */
 #showcaseContainer {
     background-color: white;
@@ -64,129 +64,86 @@ body {
 }
 
 #showcase {
-    display: grid; 
-    gap: 1em; 
-    grid-template-areas: 
-        ". . . . . ."
-        ". . . . . ."
-        ". . . . . ."; 
-}
-
-.product p {
-    padding: 4px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1em;
 }
 
 .product {
-    border: 1px solid gray;
-    height: auto;
+    position: relative;
+    border: 2px solid #8cada7;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
-.product a {
-    text-decoration: none;
-    color: black;
+.product-image {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: #8cada7; /* Colore di sfondo della cornice */
 }
 
-.product img {
-    width: 100%;
+.product-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border: 2px solid #8cada7; /* Colore del bordo dell'immagine */
+  border-radius: 10px; /* Arrotondamento del bordo dell'immagine */
+}
+.product-details {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  text-align: center;
 }
 
-.product .product-price {
-    text-align: right;
-    margin-right: 5px;
-    text-align: center;
+.product-title {
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: black;
+  text-decoration: none;
+  line-height: 1.2; /* Aggiunta questa proprietà */
+  max-height: 2.4em; /* Aggiunta questa proprietà */
+  overflow: hidden; /* Aggiunta questa proprietà */
 }
 
-.product .add-to-cart {
-    text-align: center;
-    border: 1px solid gray;
-    cursor: pointer;
+.product-price {
+  font-size: 12px;
+  color: #666;
+  margin-top: auto;
+  margin-bottom: 5px; /* Aggiunta questa proprietà */
 }
 
+.add-to-cart {
+  width: 100%;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  background-color: orange;
+  border: 2px solid darkorange;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 10px; /* Modificato da "margin-top: auto;" */
+}
+
+.add-to-cart:hover {
+    background-color: darkorange;
+    border-color: orange;
+    border-width: 3px;
+}
 
 @media only screen and (max-width: 768px) {
-	
-	body {
-		overflow-x: hidden;
-		width: 100vw;
-	}
-	
-	/* PRESENTATION */
-	#presentationContainer {
-	    background-image: url(../imgs/presentation-bg2.jpg);
-	    background-position: center;
-	    background-size: cover;
-	    height: 300px;
-	}
-	
-	#presentationContainer p {
-	    position: absolute;
-	    font-size: 14px;
-	    text-align: right;
-	    background-color: white;
-	    padding: 14px;
-	    border-bottom-right-radius: 20px;
-	}
-
-
-	/* SHOWCASE */
-	#showcaseContainer {
-	    background-color: white;
-	    padding: 15px;
-	    margin-top: -200px;
-	    width: 94%;
-	    margin-left: 3%;
-	    margin-right: 3%;
-	    border-top-left-radius: 10px;
-	    border-top-right-radius: 10px;
-	}
-	
-	#showcaseContainer h1 {
-		font-size: 16px;
-	}
-	
-	#showcase {
-	    display: grid; 
-	    gap: 3px;
-	    grid-template-areas: 
-	        ". . ."
-	        ". . ."
-	        ". . ."
-	        ". . ."
-	        ". . ."
-	        ". . ."
-	        ". . .";
-	}
-	
-	
-	.product {
-	    border: 1px solid gray;
-	    height: auto;
-	}
-	
-	.product a {
-	    text-decoration: none;
-	    color: black;
-	    font-size: 10px;
-	}
-	
-	.product p {
-		padding: 4px;
-		font-size: 10px;
-	}
-	
-	.product img {
-	    width: 100%;
-	}
-	
-	.product .product-price {
-	    text-align: right;
-	    margin-right: 5px;
-	    text-align: center;
-	}
-	
-	.product .add-to-cart {
-	    text-align: center;
-	    border: 1px solid gray;
-	    cursor: pointer;
-	}
+  #showcase {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
