@@ -94,6 +94,7 @@ body {
   border: 2px solid #8cada7; /* Colore del bordo dell'immagine */
   border-radius: 10px; /* Arrotondamento del bordo dell'immagine */
 }
+
 .product-details {
   padding: 10px;
   display: flex;
@@ -141,9 +142,55 @@ body {
     border-color: orange;
     border-width: 3px;
 }
+@media only screen and (max-width: 980px) {
+  #showcase {
+    grid-template-columns: repeat(5, 1fr) !important;
+    grid-template-rows: repeat(3, 1fr) !important;
+  }
+  
+  #presentationContainer p {
+    font-size: 45px !important;
+    padding: 8px !important;
+    border-bottom-right-radius: 12px !important;
+  }
 
+}
 @media only screen and (max-width: 768px) {
   #showcase {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-rows: repeat(3, 1fr) !important;
+  }
+  
+  #presentationContainer p {
+    font-size: 40px !important;
+    padding: 7px !important;
+    border-bottom-right-radius: 10px !important;
+  }
+
+}
+@media only screen and (max-width: 625px) {
+  #showcase {
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-template-rows: repeat(3, 1fr) !important;
+  }
+  
+  #presentationContainer p {
+    font-size: 35px !important;
+    padding: 6px !important;
+    border-bottom-right-radius: 8px !important;
   }
 }
+@media only screen and (max-width: 500px) {
+  #showcase {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: repeat(3, 1fr) !important;
+  }
+  
+  #presentationContainer p {
+    font-size: 30px !important;
+    padding: 5px !important;
+    border-bottom-right-radius: 7px !important;
+  }
+}
+
+
