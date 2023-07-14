@@ -16,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorldCrafters</title>
     <link rel="icon" type="image/x-icon" href="imgs/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
     <link rel="stylesheet" type="text/css" href="styles/home.css">
     <link rel="stylesheet" type="text/css" href="styles/userbar.css">
     <link rel="stylesheet" type="text/css" href="vendor/flickity.min.css">
@@ -27,7 +28,7 @@
     
     <%@ include file="header.jsp" %>
     <%@ include file="sidebar.jsp" %>
-    
+     
     <div id="userbar">
         <ul>
             <li><a href="#">Accedi<br></a></li>
@@ -38,22 +39,21 @@
     
     <main onclick="closeAll()">
         
-        
-        <div id="presentationContainer">
+        <div id="presentation">
             <p>Fatti ispirare dalle tradizioni<br>artigianali di tutto<br>il mondo</p>
         </div>
     	
         <div id="showcaseContainer">
             <h1>Prodotti in evidenza</h1><br>
-            <div id="showcase"> 
+            <div id="showcase" class="overflow-hidden"> 
 	            
 				<% List<Product> products = (List<Product>) request.getAttribute("products"); %>
 				<% int counter = 0; %>
 				<% for (int i = 0; i < 18; i++) { %>
 					<% Product product = products.get(i); %>
 				        <div class="product">
-				            <a href="#"><img src="<%= product.getImgSrc()%>"></a>
-				            <a href="#" class="product-title"><%= product.getTitle() %></a>
+				            <a href="#" class="link"><img src="<%= product.getImgSrc()%>"></a>
+				            <a href="#" class="product-title link"><%= product.getTitle() %></a>
 				            <p class="product-price">$ <%= product.getPrice() %></p>
 				            <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
 				        </div>

@@ -1,19 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+/* HOME */
 
-* {
-    font-family: "Montserrat", sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-	overflow-x: hidden;
-	width: 100vw;
-}
 
 /* PRESENTATION */
-#presentationContainer {
+#presentation {
     background-image: url(../imgs/presentation-bg2.jpg);
     background-position: center;
     background-size: cover;
@@ -21,9 +10,9 @@ body {
     overflow: hidden;
 }
 
-#presentationContainer p {
+#presentation p {
     position: absolute;
-    font-size: 55px;
+    font-size: 50px;
     text-align: right;
     background-color: white;
     padding: 14px;
@@ -35,13 +24,12 @@ body {
 #showcaseContainer {
     background-color: white;
     padding: 30px;
-    margin-top: -200px;
+    margin-top: -240px;
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
-    overflow: hidden;
 }
 
 #showcase {
@@ -50,21 +38,25 @@ body {
     grid-template-areas: 
         ". . . . . ."
         ". . . . . ."
-        ". . . . . ."; 
+        ". . . . . .";
 }
-
-.product p {
-    padding: 4px;
-}
-
 .product {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     border: 1px solid gray;
-    height: auto;
 }
 
-.product a {
-    text-decoration: none;
-    color: black;
+.product .product-title {
+    margin: 6px;
+}
+
+.product-title {
+    width: 100%;
+    display: block;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .product img {
@@ -72,34 +64,31 @@ body {
 }
 
 .product .product-price {
-    text-align: right;
-    margin-right: 5px;
     text-align: center;
+    margin-bottom: 8px;
 }
 
 .product .add-to-cart {
     text-align: center;
     border: 1px solid gray;
     cursor: pointer;
+	word-break: break-all;
 }
 
 
 @media only screen and (max-width: 768px) {
 	
-	body {
-		overflow-x: hidden;
-		width: 100vw;
-	}
 	
 	/* PRESENTATION */
-	#presentationContainer {
+	#presentation {
 	    background-image: url(../imgs/presentation-bg2.jpg);
 	    background-position: center;
 	    background-size: cover;
 	    height: 300px;
+	    overflow: hidden;
 	}
 	
-	#presentationContainer p {
+	#presentation p {
 	    position: absolute;
 	    font-size: 14px;
 	    text-align: right;
@@ -129,30 +118,32 @@ body {
 	    display: grid; 
 	    gap: 3px;
 	    grid-template-areas: 
-	        ". . ."
-	        ". . ."
-	        ". . ."
-	        ". . ."
-	        ". . ."
-	        ". . ."
-	        ". . .";
+	        ". . . ."
+	        ". . . ."
+	        ". . . ."
+	        ". . . ."
+	        ". . . .";
 	}
 	
 	
-	.product {
+	product {
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	    overflow: hidden;
 	    border: 1px solid gray;
-	    height: auto;
 	}
 	
-	.product a {
-	    text-decoration: none;
-	    color: black;
-	    font-size: 10px;
+	.product .product-title {
+	    margin: 6px;
 	}
 	
-	.product p {
-		padding: 4px;
-		font-size: 10px;
+	.product-title {
+	    width: 100%;
+	    display: block;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	    overflow: hidden;
+	    font-size: 12px;
 	}
 	
 	.product img {
@@ -160,14 +151,15 @@ body {
 	}
 	
 	.product .product-price {
-	    text-align: right;
-	    margin-right: 5px;
 	    text-align: center;
+	    font-size: 12px;
+	    margin-bottom: 8px;
 	}
 	
 	.product .add-to-cart {
 	    text-align: center;
 	    border: 1px solid gray;
 	    cursor: pointer;
+	    font-size: 12px;
 	}
 }

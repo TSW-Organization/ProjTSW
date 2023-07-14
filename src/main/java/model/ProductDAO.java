@@ -5,7 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 
 public class ProductDAO {
@@ -53,7 +55,8 @@ public class ProductDAO {
             	e.printStackTrace();
             }
         }
-
+        
+        Collections.shuffle(products, new Random()); //Per randomizzare i prodotti
         return products;
     }
 }

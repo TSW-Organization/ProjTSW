@@ -1,74 +1,57 @@
 /* HEADER */
+
 header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    position: fixed;
     width: 100vw;
     height: 70px;
     padding: 20px;
-    position: fixed;
     top: 0px;
     left: 0px;
     box-shadow: 0px 16px 15px -10px rgba(0,0,0,0.6);
-    overflow: hidden;
     background-color: #8cada7;
+    overflow: hidden;
     z-index: 990;
 }
 
-header i {
-	font-size: 30px;
+header .simple-link {
+    flex-basis: 4%;
 }
 
-header a {
-    text-decoration: none;
-    font-weight: bold;
-    cursor: pointer;
-    color: black;
-    font-size: 20px;
+header .simple-link, 
+#searchbar input {
+	font-size: 20px;
 }
 
-#logoContainer {
+#logo {
 	flex-basis: 16%;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
 }
 
-.link {
-	flex-basis: 4%;
-}
-
-#searchbarContainer {
+#searchbar {
     flex-basis: 40%;
-    display: flex;
-    justify-content: space-between;
     background-color:antiquewhite;
     border-radius: 20px;
     padding: 5px;
 }
 
-#searchbarContainer input {
+#searchbar input {
     flex-basis: 95%;
     background-color: transparent;
     border: none;
     outline: none;
     padding: 5px;
-    font-size: 20px;
 }
 
-#searchbarContainer button {
+#searchbar button {
     flex-basis: 5%;
     border: none;
     background-color: transparent;
-    cursor: pointer;
 }
 
-#logoContainer img {
+#logo img {
 	width: 60px;
 }
 
-#logoContainer span {
-	color: white;
+#logo span {
 	font-size: 30px;
 }
 
@@ -77,43 +60,73 @@ header a {
     height: 70px;
 }
 
+
 @media only screen and (max-width: 768px) {
 	
-	#logoContainer span,
-	#homeButton,
-	#contactButton {
+	#logo span,
+	#homeButton {
 		display: none;
 	}
 	
+	
 	header {
-	    position: absolute;
 	    height: 50px;
 	    padding: 10px;
-	    justify-content: space-around;
+	    top: 0px;
+	    left: 0px;
+	    box-shadow: 0px 16px 15px -10px rgba(0,0,0,0.6);
+	    background-color: #8cada7;
+	    z-index: 990;
 	}
 	
-	header i {
+	.icon {
 		font-size: 15px;
 	}
-
-	#logoContainer {
+	
+	.flex-between {
+		justify-content: space-around;
+	}
+	
+	header .simple-link {
+	    flex-basis: 4%;
+	}
+	
+	header .simple-link, 
+	#searchbar input {
+		font-size: 12px;
+	}
+	
+	#logo {
 		flex-basis: 6%;
 	}
 	
-	#searchbarContainer {
+	#searchbar {
+	    flex-basis: 40%;
+	    background-color:antiquewhite;
+	    border-radius: 20px;
+	    padding: 5px;
+	}
+	
+	#searchbar input {
+	    flex-basis: 95%;
+	    background-color: transparent;
+	    border: none;
+	    outline: none;
 	    padding: 3px;
 	}
 	
-	#searchbarContainer input {    
-	    padding: 3px;
-	    font-size: 12px;
+	#searchbar button {
+	    flex-basis: 5%;
+	    border: none;
+	    background-color: transparent;
 	}
 	
-	#logoContainer img {
+	#logo img {
 		width: 30px;
 	}
 	
 	#headerSpace {
+	    width: 100vw;
 	    height: 50px;
 	}
 }
