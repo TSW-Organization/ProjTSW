@@ -15,7 +15,7 @@ body {
 
 /* BACKGROUND IMAGE */
 #background {
-    background-image: url(../imgs/presentation-bg2.jpg);
+    background-image: url(../images/presentation-bg.jpg);
     background-position: center;
     background-size: cover;
     height: 600px;

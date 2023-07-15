@@ -7,16 +7,4 @@
     	<welcome-file>home.jsp</welcome-file>
   	</welcome-file-list>
 	
-	<servlet>
-	    <servlet-name>HomeServlet</servlet-name>
-	    <servlet-class>servlet.HomeServlet</servlet-class>
-	</servlet>
-	
-	<servlet-mapping>
-	    <servlet-name>HomeServlet</servlet-name>
-	    <url-pattern></url-pattern>
-	    <url-pattern>/home</url-pattern>
-	</servlet-mapping>
-	
-	
 </web-app>

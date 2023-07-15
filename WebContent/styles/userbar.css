@@ -15,10 +15,25 @@
     list-style: none;
 }
 
+
+/* CSS PER ESTETICA DELLA LISTA LOGIN, REGISTER E CONTACT */
+#userbar li button,
 #userbar li a {
+    display: inline-block;
+    padding: 10px;
+    color: #333333;
     text-decoration: none;
-    color: black;
-    font-size: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    height: 25px; /* Altezza fissa dei pulsanti */
+}
+
+#userbar li button:hover,
+#userbar li a:hover {
+    text-decoration: underline;
 }
 
 
@@ -37,11 +52,24 @@
         list-style: none;
     }
     
-    #userbar li a {
-        text-decoration: none;
-        color: black;
-        font-size: 10px;
-    }
+    #userbar li button,
+	#userbar li a {
+	    display: inline-block;
+	    padding: 10px;
+	    color: #333333;
+	    text-decoration: none;
+	    font-size: 14px;
+	    font-weight: bold;
+	    border: none;
+	    background-color: transparent;
+	    cursor: pointer;
+	    height: 25px; /* Altezza fissa dei pulsanti */
+	}
+	
+	#userbar li button:hover,
+	#userbar li a:hover {
+	    text-decoration: underline;
+	}
     
     .userbar-open {
         overflow: hidden;

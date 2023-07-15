@@ -12,7 +12,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorldCrafters</title>
-    <link rel="stylesheet" type="text/css" href="styles/style.css">
     <link rel="stylesheet" type="text/css" href="styles/contact-success.css">
     <link rel="stylesheet" type="text/css" href="styles/userbar.css">
     <link rel="stylesheet" type="text/css" href="vendor/flickity.min.css">
@@ -41,7 +40,7 @@
         <div id="messageContainer">
         	<h1>Messaggio inviato con successo. Ti risponderemo al più presto</h1>
         	<br><br>
-        	<a href="home">Torna alla home</a>
+        	<a href="home.jsp">Torna alla home</a>
         </div>
     </main>
 

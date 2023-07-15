@@ -12,8 +12,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorldCrafters</title>
-    <link rel="icon" type="image/x-icon" href="imgs/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="styles/style.css">
     <link rel="stylesheet" type="text/css" href="styles/cart.css">
     <link rel="stylesheet" type="text/css" href="styles/userbar.css">
     <link rel="stylesheet" type="text/css" href="vendor/flickity.min.css">
@@ -45,35 +43,35 @@
                 <h1>Prodotti nel carrello</h1><br>
                 
                 <div class="product">
-                    <a href="#"><img src="imgs/prodotto1.jpg"></a>
+                    <a href="#"><img src="images/prodotto1.jpg"></a>
                     <p class="product-title">Lampade fesf esesfrgs  sergrse rsegrs rdgrd rdgrd rdgrdgd rdgrdg drgrdgdrgrdg rdgrdgrdg rdgrdgrdg</p>
                     <p class="product-price">$ 9.99</p>
                     <a onclick="" class="remove"><i class="fa fa-close fa-xl"></i></a>
                 </div>
     
                 <div class="product">
-                    <a href="#"><img src="imgs/prodotto4.jpg"></a>
+                    <a href="#"><img src="images/prodotto4.jpg"></a>
                     <p class="product-title">Lampade fesf esesfrgs  sergrse rsegrs</p>
                     <p class="product-price">$ 9.99</p>
                     <a onclick="" class="remove"><i class="fa fa-close fa-xl"></i></a>
                 </div>
     
                 <div class="product">
-                    <a href="#"><img src="imgs/prodotto5.jpg"></a>
+                    <a href="#"><img src="images/prodotto5.jpg"></a>
                     <p class="product-title">Lampade fesf esesfrgs  sergrse rsegrs</p>
                     <p class="product-price">$ 9.99</p>
                     <a onclick="" class="remove"><i class="fa fa-close fa-xl"></i></a>
                 </div>
     
                 <div class="product">
-                    <a href="#"><img src="imgs/prodotto7.jpg"></a>
+                    <a href="#"><img src="images/prodotto7.jpg"></a>
                     <p class="product-title">Lampade fesf esesfrgs  sergrse rsegrs</p>
                     <p class="product-price">$ 9.99</p>
                     <a onclick="" class="remove"><i class="fa fa-close fa-xl"></i></a>
                 </div>
     
                 <div class="product">
-                    <a href="#"><img src="imgs/prodotto9.jpg"></a>
+                    <a href="#"><img src="images/prodotto9.jpg"></a>
                     <p class="product-title">Lampade fesf esesfrgs  sergrse rsegrs</p>
                     <p class="product-price">$ 9.99</p>
                     <a onclick="" class="remove"><i class="fa fa-close fa-xl"></i></a>

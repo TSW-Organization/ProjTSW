@@ -1,165 +1,176 @@
-/* HOME */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
 
+* {
+    font-family: "Montserrat", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+    width: 100vw;
+}
 
 /* PRESENTATION */
-#presentation {
-    background-image: url(../imgs/presentation-bg2.jpg);
+#presentationContainer {
+    background-image: url(../images/presentation-bg.jpg);
     background-position: center;
     background-size: cover;
     height: 600px;
     overflow: hidden;
 }
 
-#presentation p {
+#presentationContainer p {
     position: absolute;
-    font-size: 50px;
+    font-size: 55px;
     text-align: right;
     background-color: white;
     padding: 14px;
     border-bottom-right-radius: 20px;
 }
 
-
 /* SHOWCASE */
 #showcaseContainer {
     background-color: white;
     padding: 30px;
-    margin-top: -240px;
+    margin-top: -200px;
     width: 80%;
     margin-left: 10%;
     margin-right: 10%;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    overflow: hidden;
 }
 
 #showcase {
-    display: grid; 
-    gap: 1em; 
-    grid-template-areas: 
-        ". . . . . ."
-        ". . . . . ."
-        ". . . . . .";
-}
-.product {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    border: 1px solid gray;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1em;
 }
 
-.product .product-title {
-    margin: 6px;
+.product {
+    position: relative;
+    border: 2px solid #8cada7;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-image {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  background-color: #8cada7; /* Colore di sfondo della cornice */
+}
+
+.product-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border: 1px solid #8cada7; /* Colore del bordo dell'immagine */
+  border-radius: 10px; /* Arrotondamento del bordo dell'immagine */
+}
+
+.product-details {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  text-align: center;
 }
 
 .product-title {
-    width: 100%;
-    display: block;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 10px;
+  color: black;
+  text-decoration: none;
+  line-height: 1.2; /* Aggiunta questa proprietà */
+  max-height: 2.4em; /* Aggiunta questa proprietà */
+  overflow: hidden; /* Aggiunta questa proprietà */
 }
 
-.product img {
-    width: 100%;
+.product-price {
+  font-size: 12px;
+  color: #666;
+  margin-top: auto;
+  margin-bottom: 5px; /* Aggiunta questa proprietà */
 }
 
-.product .product-price {
-    text-align: center;
-    margin-bottom: 8px;
+.add-to-cart {
+  width: 100%;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
+  background-color: orange;
+  border: 2px solid darkorange;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 10px; /* Modificato da "margin-top: auto;" */
 }
 
-.product .add-to-cart {
-    text-align: center;
-    border: 1px solid gray;
-    cursor: pointer;
-	word-break: break-all;
+.add-to-cart:hover {
+    background-color: darkorange;
+    border-color: orange;
+    border-width: 3px;
 }
+@media only screen and (max-width: 980px) {
+  #showcase {
+    grid-template-columns: repeat(5, 1fr) !important;
+    grid-template-rows: repeat(3, 1fr) !important;
+  }
+  
+  #presentationContainer p {
+    font-size: 45px !important;
+    padding: 8px !important;
+    border-bottom-right-radius: 12px !important;
+  }
 
-
+}
 @media only screen and (max-width: 768px) {
-	
-	
-	/* PRESENTATION */
-	#presentation {
-	    background-image: url(../imgs/presentation-bg2.jpg);
-	    background-position: center;
-	    background-size: cover;
-	    height: 300px;
-	    overflow: hidden;
-	}
-	
-	#presentation p {
-	    position: absolute;
-	    font-size: 14px;
-	    text-align: right;
-	    background-color: white;
-	    padding: 14px;
-	    border-bottom-right-radius: 20px;
-	}
+  #showcase {
+    grid-template-columns: repeat(4, 1fr) !important;
+    grid-template-rows: repeat(3, 1fr) !important;
+  }
+  
+  #presentationContainer p {
+    font-size: 40px !important;
+    padding: 7px !important;
+    border-bottom-right-radius: 10px !important;
+  }
 
-
-	/* SHOWCASE */
-	#showcaseContainer {
-	    background-color: white;
-	    padding: 15px;
-	    margin-top: -200px;
-	    width: 94%;
-	    margin-left: 3%;
-	    margin-right: 3%;
-	    border-top-left-radius: 10px;
-	    border-top-right-radius: 10px;
-	}
-	
-	#showcaseContainer h1 {
-		font-size: 16px;
-	}
-	
-	#showcase {
-	    display: grid; 
-	    gap: 3px;
-	    grid-template-areas: 
-	        ". . . ."
-	        ". . . ."
-	        ". . . ."
-	        ". . . ."
-	        ". . . .";
-	}
-	
-	
-	product {
-	    text-overflow: ellipsis;
-	    white-space: nowrap;
-	    overflow: hidden;
-	    border: 1px solid gray;
-	}
-	
-	.product .product-title {
-	    margin: 6px;
-	}
-	
-	.product-title {
-	    width: 100%;
-	    display: block;
-	    text-overflow: ellipsis;
-	    white-space: nowrap;
-	    overflow: hidden;
-	    font-size: 12px;
-	}
-	
-	.product img {
-	    width: 100%;
-	}
-	
-	.product .product-price {
-	    text-align: center;
-	    font-size: 12px;
-	    margin-bottom: 8px;
-	}
-	
-	.product .add-to-cart {
-	    text-align: center;
-	    border: 1px solid gray;
-	    cursor: pointer;
-	    font-size: 12px;
-	}
 }
+@media only screen and (max-width: 625px) {
+  #showcase {
+    grid-template-columns: repeat(3, 1fr) !important;
+    grid-template-rows: repeat(3, 1fr) !important;
+  }
+  
+  #presentationContainer p {
+    font-size: 35px !important;
+    padding: 6px !important;
+    border-bottom-right-radius: 8px !important;
+  }
+}
+@media only screen and (max-width: 500px) {
+  #showcase {
+    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-rows: repeat(3, 1fr) !important;
+  }
+  
+  #presentationContainer p {
+    font-size: 30px !important;
+    padding: 5px !important;
+    border-bottom-right-radius: 7px !important;
+  }
+}
+
+

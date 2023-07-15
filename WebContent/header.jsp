@@ -15,30 +15,27 @@
 <link rel="stylesheet" type="text/css" href="styles/header.css">
 </head>
 <body>
-	
-	<header class="flex-between">
+	<header>
         
-        <a id="logo" class="simple-link bold flex-between"  href="home">
-        	<img src="imgs/logo2.png">
-        	<span class="color-white">WorldCrafters</span>
+        <a id="logoContainer" href="home.jsp">
+        	<img src="images/logo2.png">
+        	<span>WorldCrafters</span>
         </a>
         
-        <a class="simple-link bold" onclick="toggleSidebar()"><i class="icon fa fa-bars" aria-hidden="true"></i></a>
+        <a class="link" id="categoriesButton" onclick="toggleSidebar()"><i class="fa fa-bars" aria-hidden="true"></i></a>
         
-        <form id="searchbar" class="flex-between" onclick="closeAll()">
+        <form id="searchbarContainer" onclick="closeAll()">
             <input type="text" placeholder="Cerca...">
-            <button type="submit"><i class="icon fa fa-search" aria-hidden="true"></i></button>
+            <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
         </form>
     
-        <a id="homeButton" class="simple-link bold" href="home">Home</a>
-        <!-- <a class="topnav" href="#"><i class="icon fa fa-heart fa-xl" aria-hidden="true"></i></a>-->
-        <a class="simple-link bold" href="cart.jsp"><i class="icon pointer fa fa-shopping-cart" aria-hidden="true"></i></a>
-        <a class="simple-link bold" onclick="toggleUserbar()"><i class="icon fa fa-user" aria-hidden="true"></i></a>
+        <a class="link" id="homeButton" href="home.jsp">Home</a>
+        <!-- <a class="topnav" href="#"><i class="fa fa-heart fa-xl" aria-hidden="true"></i></a>-->
+        <a class="link" id="cartButton" href="cart.jsp"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+        <a class="link" id="userButton" onclick="toggleUserbar()"><i class="fa fa-user" aria-hidden="true"></i></a>
          
     </header>
-    
     <div id="headerSpace"></div>
-    
 </body>
 </html>
 <% } %>

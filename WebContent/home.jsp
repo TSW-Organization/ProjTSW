@@ -4,9 +4,9 @@
 <%@ page import="model.Product" %>
 
 <%
-   	request.setAttribute("showHeader", true);
-	request.setAttribute("showFooter", true);
-	request.setAttribute("showSidebar", true);
+request.setAttribute("showHeader", true);
+request.setAttribute("showFooter", true);
+request.setAttribute("showSidebar", true);
 %>
 
 <!DOCTYPE html>
@@ -15,58 +15,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorldCrafters</title>
-    <link rel="icon" type="image/x-icon" href="imgs/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="styles/style.css">
-    <link rel="stylesheet" type="text/css" href="styles/home.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" type="text/css" href="styles/userbar.css">
     <link rel="stylesheet" type="text/css" href="vendor/flickity.min.css">
     <link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="styles/log-reg.css">
+    <link rel="stylesheet" type="text/css" href="styles/home.css">
     <script src="vendor/jquery.min.js"></script>
     <script src="vendor/flickity.pkgd.min.js"></script>
+    <script src="scripts/script.js"></script>
 </head>
 <body>
-    
-    <%@ include file="header.jsp" %>
-    <%@ include file="sidebar.jsp" %>
-     
+    <%@ include file="header.jsp"%>
+    <%@ include file="sidebar.jsp"%>
     <div id="userbar">
         <ul>
-            <li><a href="#">Accedi<br></a></li>
-            <li><a href="#">Registrati<br></a></li>
+            <li>
+                <button onclick="openModal('loginModal', 'log.jsp')">login</button>
+                <!-- Finestra modale di login -->
+                <div id="loginModal" class="modal"></div>
+            </li>
+            <li>
+                <button onclick="openModal('registerModal', 'register.jsp')">register</button>
+                <!-- Finestra modale di registrazione -->
+                <div id="registerModal" class="modal"></div>
+            </li>
             <li><a href="contact.jsp">Assistenza<br></a></li>
         </ul>
     </div>
-    
     <main onclick="closeAll()">
-        
-        <div id="presentation">
+        <div id="presentationContainer">
             <p>Fatti ispirare dalle tradizioni<br>artigianali di tutto<br>il mondo</p>
         </div>
-    	
         <div id="showcaseContainer">
             <h1>Prodotti in evidenza</h1><br>
-            <div id="showcase" class="overflow-hidden"> 
-	            
-				<% List<Product> products = (List<Product>) request.getAttribute("products"); %>
-				<% int counter = 0; %>
+            <div id="showcase">
+                
+                <% List<Product> products = (List<Product>) request.getAttribute("products"); %>
 				<% for (int i = 0; i < 18; i++) { %>
 					<% Product product = products.get(i); %>
 				        <div class="product">
-				            <a href="#" class="link"><img src="<%= product.getImgSrc()%>"></a>
-				            <a href="#" class="product-title link"><%= product.getTitle() %></a>
-				            <p class="product-price">$ <%= product.getPrice() %></p>
-				            <p onclick="" class="add-to-cart">Aggiungi al carrello</p>
-				        </div>
+	                        <div class="product-image">
+	                            <a href="#"><img src="<%= product.getImgSrc()%>"></a>
+	                        </div>
+	                        <div class="product-details">
+	                            <a href="#" class="product-title"><%= product.getTitle() %></a>
+	                            <div class="product-price">
+	                                $ <%= product.getPrice() %>
+	                            </div>
+	                            <button class="add-to-cart">Add to cart</button>
+	                        </div>
+                    	</div>
 				<%} %>
-			    
-			</div>
+				
+            </div>
         </div>
-        
     </main>
-    
-	<%@ include file="footer.jsp" %>
-
-    <script src="scripts/script.js"></script>
-    
+    <%@ include file="footer.jsp" %>
 </body>
 </html>
