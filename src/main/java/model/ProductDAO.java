@@ -31,7 +31,7 @@ public class ProductDAO {
 	            String imgSrc = resultSet.getString("imgSrc");
 
 	            Product product = new Product();
-	            product.setTitle(title);
+	            product.setName(title);
 	            product.setPrice(price);
 	            product.setImgSrc(imgSrc);
 

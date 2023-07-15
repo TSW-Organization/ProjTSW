@@ -2,7 +2,7 @@ package model;
 
 public class Product {
 	
-	private String title;
+	private String name;
 	private double price;
 	private String imgSrc;
 	
@@ -11,13 +11,13 @@ public class Product {
 		
 	}
 
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
 
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 

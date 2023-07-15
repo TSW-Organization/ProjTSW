@@ -11,7 +11,7 @@
 	<!-- Aggiungi il wrapper per la finestra di login -->
 	<div class="modal-overlay">
 		<div class="modal-content">
-<button class="close-button" onclick="closeModal()">X</button>
+			<button class="close-button" onclick="closeModal()">X</button>
 			<!-- Aggiorna il testo del pulsante di chiusura -->
 			<h2 class="form-title">Sign in</h2>
 			<!-- Aggiorna il testo del titolo -->
