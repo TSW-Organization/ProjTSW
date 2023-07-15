@@ -1,21 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Collections" %>
 <%@ page import="java.util.List" %>
 <%@ page import="model.Product" %>
-<%@ page import="model.ProductDAO" %>
 
 <%
-    // Crea un'istanza di ProductDAO
-    ProductDAO productDAO = new ProductDAO();
-
-    // Chiama il metodo getAllProducts() per ottenere l'elenco di prodotti
-    List<Product> allProducts = productDAO.getAllProducts();
-
-    // Mescola casualmente l'ordine dei prodotti
-    Collections.shuffle(allProducts);
+    List<Product> allProducts = (List<Product>) request.getAttribute("products");
+    int maxProductsToShow = 18; // Numero massimo di prodotti da visualizzare
+    int productsCounter = 0; // Contatore di prodotti visualizzati
 %>
-
 <%
 request.setAttribute("showHeader", true);
 request.setAttribute("showFooter", true);
@@ -56,15 +47,18 @@ request.setAttribute("showSidebar", true);
             <li><a href="contact.jsp">Assistenza<br></a></li>
         </ul>
     </div>
-    <main onclick="closeAll()">
-        <div id="presentationContainer">
+            <div id="presentationContainer">
             <p>Fatti ispirare dalle tradizioni<br>artigianali di tutto<br>il mondo</p>
         </div>
+    <main onclick="closeAll()">
+        <!-- Il resto del contenuto -->
         <div id="showcaseContainer">
             <h1>Prodotti in evidenza</h1><br>
             <div id="showcase">
-                <% int counter = 0; %>
                 <% for (Product product : allProducts) { %>
+                    <% if (productsCounter >= maxProductsToShow) {
+                            break;
+                        } %>
                     <div class="product">
                         <div class="product-image">
                             <a href="#"><img src="<%= product.getImgSrc()%>"></a>
@@ -77,8 +71,7 @@ request.setAttribute("showSidebar", true);
                             <button class="add-to-cart">Add to cart</button>
                         </div>
                     </div>
-                    <% counter++; %>
-                    <% if (counter == 18) break; %>
+                    <% productsCounter++; %>
                 <% } %>
             </div>
         </div>
