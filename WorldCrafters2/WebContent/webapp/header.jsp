@@ -17,7 +17,7 @@
 <body>
 	<header>
         
-        <a id="logoContainer" href="home.jsp">
+        <a id="logoContainer" href="home">
         	<img src="imgs/logo2.png">
         	<span>WorldCrafters</span>
         </a>
@@ -29,7 +29,7 @@
             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
         </form>
     
-        <a class="link" id="homeButton" href="home.jsp">Home</a>
+        <a class="link" id="homeButton" href="home">Home</a>
         <!-- <a class="topnav" href="#"><i class="fa fa-heart fa-xl" aria-hidden="true"></i></a>-->
         <a class="link" id="cartButton" href="cart.jsp"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
         <a class="link" id="userButton" onclick="toggleUserbar()"><i class="fa fa-user" aria-hidden="true"></i></a>

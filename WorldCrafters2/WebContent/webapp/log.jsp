@@ -11,15 +11,14 @@
 	<!-- Aggiungi il wrapper per la finestra di login -->
 	<div class="modal-overlay">
 		<div class="modal-content">
-<button class="close-button" onclick="closeModal()">X</button>
+            <button class="close-button" onclick="closeModal()">X</button>
 			<!-- Aggiorna il testo del pulsante di chiusura -->
 			<h2 class="form-title">Sign in</h2>
 			<!-- Aggiorna il testo del titolo -->
 			<form method="post" action="login" id="login-form">
 				<div class="form-group">
-					<label for="username">Username:</label> <input type="text"
-						name="username" id="username" placeholder="Il tuo nome" />
-					<!-- Aggiorna il placeholder -->
+					<label for="email">E-mail:</label> <!-- Aggiorna il testo dell'etichetta -->
+					<input type="text" name="email" id="email" placeholder="La tua e-mail" /> <!-- Aggiorna il placeholder -->
 				</div>
 				<div class="form-group">
 					<label for="password">Password:</label> <input type="password"
@@ -44,7 +43,6 @@
 				</div>
 			</div>
 		</div>
-			
 	</div>
 
 	<script>

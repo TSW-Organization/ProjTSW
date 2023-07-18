@@ -3,9 +3,9 @@ package model;
 public class Product {
 	
 	private String title;
-	private double price;
 	private String imgSrc;
-	
+	private double price;
+
 	
 	public Product() {
 		

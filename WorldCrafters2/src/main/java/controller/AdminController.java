@@ -1,29 +1,25 @@
-package servlet;
-
-import model.Product;
-import model.ProductDAO;
+package controller;
 
 import java.io.IOException;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class HomeServlet extends HttpServlet {
+import model.Product;
+import model.ProductDAO;
 
-    private static final long serialVersionUID = 1L;
-
+public class AdminController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    	ProductDAO productDAO = new ProductDAO();
+        // Recupera la lista dei prodotti dal ProductDAO
+        ProductDAO productDAO = new ProductDAO();
         List<Product> products = productDAO.getAllProducts();
-        request.setAttribute("products", products);
-        request.getRequestDispatcher("home.jsp").forward(request, response);
-    }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doGet(request, response);
+        // Imposta l'attributo "products" nella richiesta
+        request.setAttribute("products", products);
+
+        // Esegui il reindirizzamento con sendRedirect()
+        response.sendRedirect("home.jsp");
     }
 }

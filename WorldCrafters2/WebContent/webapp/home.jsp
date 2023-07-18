@@ -7,11 +7,7 @@
     int maxProductsToShow = 18; // Numero massimo di prodotti da visualizzare
     int productsCounter = 0; // Contatore di prodotti visualizzati
 %>
-<%
-request.setAttribute("showHeader", true);
-request.setAttribute("showFooter", true);
-request.setAttribute("showSidebar", true);
-%>
+
 
 <!DOCTYPE html>
 <html lang="it">
@@ -47,7 +43,7 @@ request.setAttribute("showSidebar", true);
             <li><a href="contact.jsp">Assistenza<br></a></li>
         </ul>
     </div>
-            <div id="presentationContainer">
+        <div id="presentationContainer">
             <p>Fatti ispirare dalle tradizioni<br>artigianali di tutto<br>il mondo</p>
         </div>
     <main onclick="closeAll()">
@@ -55,23 +51,27 @@ request.setAttribute("showSidebar", true);
         <div id="showcaseContainer">
             <h1>Prodotti in evidenza</h1><br>
             <div id="showcase">
-                <% for (Product product : allProducts) { %>
-                    <% if (productsCounter >= maxProductsToShow) {
-                            break;
-                        } %>
-                    <div class="product">
-                        <div class="product-image">
-                            <a href="#"><img src="<%= product.getImgSrc()%>"></a>
-                        </div>
-                        <div class="product-details">
-                            <a href="#" class="product-title"><%= product.getTitle() %></a>
-                            <div class="product-price">
-                                $ <%= product.getPrice() %>
+                <% if (allProducts != null && !allProducts.isEmpty()) { %>
+                    <% for (Product product : allProducts) { %>
+                        <% if (productsCounter >= maxProductsToShow) {
+                                break;
+                            } %>
+                        <div class="product">
+                            <div class="product-image">
+                                <a href="#"><img src="<%= product.getImgSrc()%>"></a>
                             </div>
-                            <button class="add-to-cart">Add to cart</button>
+                            <div class="product-details">
+                                <a href="#" class="product-title"><%= product.getTitle() %></a>
+                                <div class="product-price">
+                                    $ <%= product.getPrice() %>
+                                </div>
+                                <button class="add-to-cart">Add to cart</button>
+                            </div>
                         </div>
-                    </div>
-                    <% productsCounter++; %>
+                        <% productsCounter++; %>
+                    <% } %>
+                <% } else { %>
+                    <p>Nessun prodotto disponibile al momento.</p>
                 <% } %>
             </div>
         </div>
