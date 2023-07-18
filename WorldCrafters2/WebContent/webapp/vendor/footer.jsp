@@ -16,7 +16,7 @@
 </head>
 <body>
 	<footer onclick="closeAll()">
-        <div class="carousel" data-flickity='{ "wrapAround": true }'>
+        <div class="main-carousel">
             <div class="carousel-cell cell-1">
                 <h1>Chi siamo</h1>
                 <p>

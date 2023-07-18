@@ -12,6 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WorldCrafters</title>
+    <link rel="icon" type="image/x-icon" href="imgs/favicon.ico">
     <link rel="stylesheet" type="text/css" href="styles/contact.css">
     <link rel="stylesheet" type="text/css" href="styles/userbar.css">
     <link rel="stylesheet" type="text/css" href="vendor/flickity.min.css">
