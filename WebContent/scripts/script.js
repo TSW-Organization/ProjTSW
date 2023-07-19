@@ -58,13 +58,6 @@ function closeAll() {
 }
 
 
-// CREAZIONE CAROUSEL
-var elem = document.querySelector('.main-carousel');
-var flkty = new Flickity( elem, {
-  // options
-  cellAlign: 'left',
-  contain: true
-});
 //FUNZIONE PER FINESTRA DI LOGIN
   // Funzione per aprire la finestra modale e caricare la login.jsp
 function openModal(modalId, pageUrl) {

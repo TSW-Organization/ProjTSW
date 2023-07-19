@@ -50,7 +50,8 @@ request.setAttribute("showSidebar", true);
     <% int productsForPage = 24; %>
 
     <%-- Ottieni la lista completa dei prodotti --%>
-    <% List<Product> products = (List<Product>) request.getAttribute("products"); %>
+    <% @SuppressWarnings("unchecked") 
+       List<Product> products = (List<Product>) request.getAttribute("products"); %>
 
     <%-- Calcola il numero totale di pagine --%>
     <% int pagesNumber = (int) Math.ceil((double) products.size() / productsForPage); %>
@@ -94,60 +95,57 @@ request.setAttribute("showSidebar", true);
         
     </main>
 
-    <%-- Mostra la paginazione solo se ci sono più di una pagina --%>
+    <%-- Mostra la paginazione solo se c'è più di una pagina --%>
     <% if (pagesNumber > 1) { %>
-        <div id="pagination">
-            <%-- Mostra il link alla pagina precedente se non si è sulla prima pagina --%>
-            <% if (currentPage > 1) { %>
-                <a href="?page=<%= currentPage - 1 %>">&lt;</a>
+    <div id="pagination">
+        <%-- Mostra il link alla pagina precedente se non si è sulla prima pagina --%>
+        <% if (currentPage > 1) { %>
+            <a href="?category=<%= request.getParameter("category") %>&page=<%= currentPage - 1 %>">&lt;</a>
+        <% } %>
+
+        <%-- Mostra i numeri di pagina --%>
+        <% int maxVisiblePages = 6; %>
+
+        <% if (pagesNumber <= maxVisiblePages) { %>
+            <% for (int i = 1; i <= pagesNumber; i++) { %>
+                <%-- Evidenzia la pagina corrente --%>
+                <% if (i == currentPage) { %>
+                    <strong><%= i %></strong>
+                <% } else { %>
+                    <a href="?category=<%= request.getParameter("category") %>&page=<%= i %>"><%= i %></a>
+                <% } %>
+            <% } %>
+        <% } else { %>
+            <% int startPage = Math.max(currentPage - (maxVisiblePages / 2), 1); %>
+            <% int endPage = Math.min(startPage + maxVisiblePages - 1, pagesNumber); %>
+
+            <% if (startPage > 1) { %>
+                <a href="?category=<%= request.getParameter("category") %>&page=1">1</a>
+                <span>...</span>
             <% } %>
 
-            <%-- Mostra i numeri di page --%>
-            <% int maxVisiblePages = 6; %>
-
-			<% if (pagesNumber <= maxVisiblePages) { %>
-			    <% for (int i = 1; i <= pagesNumber; i++) { %>
-			        <%-- Evidenzia la pagina corrente --%>
-					<% if (i == currentPage) { %>
-				    	<strong><%= i %></strong>
-					<% } else if (i == 1) { %>
-					    <a href="?page=<%= i %>"><%= i %></a>
-					<% } else { %>
-					    <a href="?page=<%= i %>"><%= i %></a>
-					<% } %>
-			    <% } %>
-			<% } else { %>
-			    <% int startPage = Math.max(currentPage - (maxVisiblePages / 2), 1); %>
-			    <% int endPage = Math.min(startPage + maxVisiblePages - 1, pagesNumber); %>
-			
-			    <% if (startPage > 1) { %>
-			        <a href="?pagina=1">1</a>
-			        <span>...</span>
-			    <% } %>
-			
-			    <% for (int i = startPage; i <= endPage; i++) { %>
-			        <%-- Evidenzia la pagina corrente --%>
-					<% if (i == currentPage) { %>
-    					<strong><%= i %></strong>
-					<% } else if (i == 1) { %>
-					    <a href="?page=<%= i %>"><%= i %></a>
-					<% } else { %>
-					    <a href="?page=<%= i %>"><%= i %></a>
-					<% } %>
-			    <% } %>
-			
-			    <% if (endPage < pagesNumber) { %>
-				    <span>...</span>
-				    <a href="?page=<%= pagesNumber %>"><%= pagesNumber %></a>
-				<% } %>
-			<% } %>
-
-            <%-- Mostra il link alla pagina successiva se non si è sull'ultima pagina --%>
-            <% if (currentPage < pagesNumber) { %>
-                <a href="?page=<%= currentPage + 1 %>">&gt;</a>
+            <% for (int i = startPage; i <= endPage; i++) { %>
+                <%-- Evidenzia la pagina corrente --%>
+                <% if (i == currentPage) { %>
+                    <strong><%= i %></strong>
+                <% } else { %>
+                    <a href="?category=<%= request.getParameter("category") %>&page=<%= i %>"><%= i %></a>
+                <% } %>
             <% } %>
-        </div>
-    <% } %>
+
+            <% if (endPage < pagesNumber) { %>
+                <span>...</span>
+                <a href="?category=<%= request.getParameter("category") %>&page=<%= pagesNumber %>"><%= pagesNumber %></a>
+            <% } %>
+        <% } %>
+
+        <%-- Mostra il link alla pagina successiva se non si è sull'ultima pagina --%>
+        <% if (currentPage < pagesNumber) { %>
+            <a href="?category=<%= request.getParameter("category") %>&page=<%= currentPage + 1 %>">&gt;</a>
+        <% } %>
+    </div>
+<% } %>
+
     
     
     <%@ include file="footer.jsp" %>

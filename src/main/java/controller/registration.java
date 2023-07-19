@@ -18,9 +18,9 @@ public class registration extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String username = request.getParameter("username");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+		String username = request.getParameter("username");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         
@@ -40,7 +40,8 @@ public class registration extends HttpServlet {
     }
     
     private boolean registerUser(String username, String email, String password) throws ClassNotFoundException {
-        Connection connection = null;
+        
+    	Connection connection = null;
         PreparedStatement statement = null;
         Class.forName("com.mysql.cj.jdbc.Driver");
         try {

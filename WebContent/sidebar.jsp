@@ -12,42 +12,51 @@
 <meta charset="UTF-8">
 <title>Sidebar</title>
 <link rel="stylesheet" type="text/css" href="styles/sidebar.css">
+
 </head>
 <body>
 	<div id="sidebar">
         
 	    <i onclick="toggleSidebar()" class="fa fa-times" aria-hidden="true"></i>
 	    <h1>WorldCrafters</h1>
-
+        
         <ul>
-        	<li class="category"><a href="#">Arte </a><i class="fa fa-chevron-down" aria-hidden="true"></i></li>
-        		<li class="subcategory"><a href="#">Fotografia</a></li>
-        		<li class="subcategory"><a href="#">Pittura</a></li>
-        		<li class="subcategory"><a href="#">Scultura</a></li>
-        		<li class="subcategory"><a href="#">Vetro<br><br></a></li>
-        	<li class="category"><a href="#">Abbigliamento </a><i class="fa fa-chevron-down" aria-hidden="true"></i></li>
-        		<li class="subcategory"><a href="#">Uomo</a></li>
-        		<li class="subcategory"><a href="#">Donna</a></li>
-        		<li class="subcategory"><a href="#">Bambino</a></li>
-        		<li class="subcategory"><a href="#">Borse<br><br></a></li>
-			<li class="category"><a href="#">Gioielli </a><i class="fa fa-chevron-down" aria-hidden="true"></i></li>
-				<li class="subcategory"><a href="#">Anelli</a></li>
-				<li class="subcategory"><a href="#">Bracciali</a></li>
-				<li class="subcategory"><a href="#">Collane</a></li>
-				<li class="subcategory"><a href="#">Orecchini<br><br></a></li>
-        	<li class="category"><a href="#">Intrattenimento </a><i class="fa fa-chevron-down" aria-hidden="true"></i></li>
-        		<li class="subcategory"><a href="#">Cinema</a></li>
-        		<li class="subcategory"><a href="#">Libri</a></li>
-        		<li class="subcategory"><a href="#">Musica</a></li>
-        		<li class="subcategory"><a href="#">Giochi e giocattoli<br><br></a></li>
-        	<li class="category"><a href="#">Accessori<br><br></a></li>
-        	<li class="category"><a href="#">Casa e arredi<br><br></a></li>
-        	<li class="category"><a href="#">Oggetti da collezione<br><br></a></li>
-        	<li class="category"><a href="#">Elettronica e accessori<br><br></a></li>
-        	<li class="category"><a href="#">Animali domestici<br><br></a></li>
-        	<li class="category"><a href="#">Vintage<br><br></a></li>
+        	<li class="category"><button onclick="categoryClick('arte')">Arte </button><i class="fa fa-chevron-down" aria-hidden="true"></i></li>
+				<li class="subcategory"><button onclick="categoryClick('fotografia')">Fotografia</button></li>
+				<li class="subcategory"><button onclick="categoryClick('pittura')">Pittura</button></li>
+				<li class="subcategory"><button onclick="categoryClick('scultura')">Scultura</button></li>
+				<li class="subcategory"><button onclick="categoryClick('vetro')">Vetro<br><br></button></li>
+				
+			<li class="category"><button onclick="categoryClick('abbigliamento')">Abbigliamento </button><i class="fa fa-chevron-down" aria-hidden="true"></i></li>
+				<li class="subcategory"><button onclick="categoryClick('abbigliamento_uomo')">Uomo</button></li>
+				<li class="subcategory"><button onclick="categoryClick('abbigliamento_donna')">Donna</button></li>
+				<li class="subcategory"><button onclick="categoryClick('abbigliamento_bambino')">Bambino</button></li>
+				<li class="subcategory"><button onclick="categoryClick('borsa')">Borse<br><br></button></li>
+			
+			<li class="category"><button onclick="categoryClick('gioielli')">Gioielli </button><i class="fa fa-chevron-down" aria-hidden="true"></i></li>
+				<li class="subcategory"><button onclick="categoryClick('anello')">Anelli</button></li>
+				<li class="subcategory"><button onclick="categoryClick('bracciale')">Bracciali</button></li>
+				<li class="subcategory"><button onclick="categoryClick('collana')">Collane</button></li>
+				<li class="subcategory"><button onclick="categoryClick('orecchino')">Orecchini<br><br></button></li>
+			
+			<li class="category"><button onclick="categoryClick('intrattenimento')">Intrattenimento </button><i class="fa fa-chevron-down" aria-hidden="true"></i></li>
+				<li class="subcategory"><button onclick="categoryClick('cinema')">Cinema</button></li>
+				<li class="subcategory"><button onclick="categoryClick('libro')">Libri</button></li>
+				<li class="subcategory"><button onclick="categoryClick('musica')">Musica</button></li>
+				<li class="subcategory"><button onclick="categoryClick('gioco')">Giochi e giocattoli<br><br></button></li>
+			
+			<li class="category"><button onclick="categoryClick('accessorio')">Accessori<br><br></button></li>
+			<li class="category"><button onclick="categoryClick('casa')">Casa e arredi<br><br></button></li>
+			<li class="category"><button onclick="categoryClick('collezione')">Oggetti da collezione<br><br></button></li>
+			<li class="category"><button onclick="categoryClick('elettronica')">Elettronica e accessori<br><br></button></li>
+			<li class="category"><button onclick="categoryClick('animale_domestico')">Animali domestici<br><br></button></li>
+			<li class="category"><button onclick="categoryClick('vintage')">Vintage<br><br></button></li>
+
         </ul>
     </div>
+    
+	<script src="scripts/sidebar.js"></script>
+    
 </body>
 </html>
 <% } %>

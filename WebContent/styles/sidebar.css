@@ -16,23 +16,23 @@
     cursor: default;
 }
 
-#sidebar .category a {
+#sidebar .category button {
 	font-size: 20px;
 }
 
-#sidebar .subcategory a{
+#sidebar .subcategory button{
     margin-left: 30px;
     font-size: 17px;
     color: gray;
 }
 
-#sidebar li {
-    list-style: none;
+button {
+	cursor: pointer;
+	border: none;
 }
 
-#sidebar li a {
-    text-decoration: none;
-    color: black;
+#sidebar li {
+    list-style: none;
 }
 
 .sidebar-open {

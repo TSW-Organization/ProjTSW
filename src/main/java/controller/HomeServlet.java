@@ -27,7 +27,7 @@ public class HomeServlet extends HttpServlet {
 	    ProductDAO productDAO = new ProductDAO();
 
 	    // Chiama il metodo getAllProducts() per ottenere la lista di prodotti
-	    List<Product> products = productDAO.getAllProducts();
+	    List<Product> products = productDAO.getFavoritesProducts();
 		
 		
 		request.setAttribute("products", products);

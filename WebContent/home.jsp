@@ -54,7 +54,8 @@ request.setAttribute("showSidebar", true);
             <h1>Prodotti in evidenza</h1><br>
             <div id="showcase">
                 
-                <% List<Product> products = (List<Product>) request.getAttribute("products"); %>
+                <% @SuppressWarnings("unchecked")
+                   List<Product> products = (List<Product>) request.getAttribute("products"); %>
 				<% for (int i = 0; i < 18; i++) { %>
 					<% Product product = products.get(i); %>
 				        <div class="product">
