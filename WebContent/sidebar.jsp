@@ -33,7 +33,7 @@
 				<li class="subcategory"><button onclick="categoryClick('abbigliamento_bambino')">Bambino</button></li>
 				<li class="subcategory"><button onclick="categoryClick('borsa')">Borse<br><br></button></li>
 			
-			<li class="category"><button onclick="categoryClick('gioielli')">Gioielli </button><i class="fa fa-chevron-down" aria-hidden="true"></i></li>
+			<li class="category"><button onclick="categoryClick('gioiello')">Gioielli </button><i class="fa fa-chevron-down" aria-hidden="true"></i></li>
 				<li class="subcategory"><button onclick="categoryClick('anello')">Anelli</button></li>
 				<li class="subcategory"><button onclick="categoryClick('bracciale')">Bracciali</button></li>
 				<li class="subcategory"><button onclick="categoryClick('collana')">Collane</button></li>

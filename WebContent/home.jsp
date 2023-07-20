@@ -60,15 +60,19 @@ request.setAttribute("showSidebar", true);
 					<% Product product = products.get(i); %>
 				        <div class="product">
 	                        <div class="product-image">
-	                            <a href="#"><img src="<%= product.getImgSrc()%>"></a>
+	                            <a href="product?id=<%= product.getId() %>">
+						            <img src="<%= product.getImgSrc()%>">
+						        </a>
 	                        </div>
 	                        <div class="product-details">
-	                            <a href="#" class="product-name"><%= product.getName() %></a>
+	                            <a href="product?id=<%= product.getId() %>" class="product-name">
+						            <%= product.getName() %>
+						        </a>
 	                            <div class="product-price">
 	                                $ <%= product.getPrice() %>
 	                            </div>
 	                            <button class="add-to-cart">Add to cart</button>
-	                        </div>
+	                        </div>  
                     	</div>
 				<%} %>
 				

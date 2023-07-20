@@ -13,6 +13,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Header</title>
 <link rel="stylesheet" type="text/css" href="styles/header.css">
+<script src="scripts/jquery.min.js"></script>
 </head>
 <body>
 	<header>
@@ -28,7 +29,7 @@
             <input type="text" placeholder="Cerca...">
             <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
         </form>
-    
+    	
         <a class="link" id="homeButton" href="home">Home</a>
         <!-- <a class="topnav" href="#"><i class="fa fa-heart fa-xl" aria-hidden="true"></i></a>-->
         <a class="link" id="cartButton" href="cart.jsp"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>

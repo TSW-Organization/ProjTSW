@@ -11,20 +11,22 @@ import java.util.List;
 
 public class ProductDAO {
 
-
-    private List<Product> executeProductQuery(String query, String... parameters) {
+    public List<Product> getAllProducts() {
+        
         List<Product> products = new ArrayList<>();
+        
+        Connection connection = null;
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
 
-        try (Connection connection = DriverManagerConnectionPool.getConnection();
-        		PreparedStatement statement = connection.prepareStatement(query)) {
+        try {
+	        connection = DriverManagerConnectionPool.getConnection();
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM products WHERE (quantity>0)";
+	        statement = connection.prepareStatement(query);
+	        resultSet = statement.executeQuery();
 
-            for (int i = 0; i < parameters.length; i++) {
-                statement.setString(i + 1, parameters[i]);
-            }
-
-            ResultSet resultSet = statement.executeQuery(); 
-            while (resultSet.next()) {
-            	int id = resultSet.getInt("id");
+	        while (resultSet.next()) {
+	        	int id = resultSet.getInt("id");
 	        	String name = resultSet.getString("name");
 	            double price = resultSet.getDouble("price");
 	            String seller = resultSet.getString("seller");
@@ -48,42 +50,236 @@ public class ProductDAO {
 	            product.setDescription(description);
 
 	            products.add(product);
-            }
-           
-        } catch (SQLException e) {
-            // Gestione delle eccezioni
-            e.printStackTrace();
-        }
-        
-        
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (resultSet != null) {
+	                resultSet.close();
+	            }
+	            if (statement != null) {
+	                statement.close();
+	            }
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
 
-        return products;
-    }
-
-    public List<Product> getAllProducts() {
-        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM products WHERE (quantity>0)";
-        return executeProductQuery(query);
+	    return products;
     }
 
     public List<Product> getFavoritesProducts() {
-        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM products WHERE (quantity>0) ORDER BY favorites DESC";
-        return executeProductQuery(query);
+        
+        List<Product> products = new ArrayList<>();
+        
+        Connection connection = null;
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
+
+        try {
+	        connection = DriverManagerConnectionPool.getConnection();
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM products WHERE (quantity>0) ORDER BY favorites DESC";
+	        statement = connection.prepareStatement(query);
+	        resultSet = statement.executeQuery();
+
+	        while (resultSet.next()) {
+	        	int id = resultSet.getInt("id");
+	        	String name = resultSet.getString("name");
+	            double price = resultSet.getDouble("price");
+	            String seller = resultSet.getString("seller");
+	            String imgSrc = resultSet.getString("imgSrc");
+	            Category category = Category.valueOf(resultSet.getString("category"));
+	            int quantity = resultSet.getInt("quantity");
+	            int favorites = resultSet.getInt("favorites");
+	            Date listingDate = resultSet.getDate("listingDate");
+	            String description = resultSet.getString("description");
+
+	            Product product = new Product();
+	            product.setId(id);
+	            product.setName(name);
+	            product.setPrice(price);
+	            product.setSeller(seller);
+	            product.setImgSrc(imgSrc);
+	            product.setCategory(category);
+	            product.setQuantity(quantity);
+	            product.setFavorites(favorites);
+	            product.setListingDate(listingDate);
+	            product.setDescription(description);
+
+	            products.add(product);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (resultSet != null) {
+	                resultSet.close();
+	            }
+	            if (statement != null) {
+	                statement.close();
+	            }
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return products;
     }
 
-    public List<Product> getProductsByCategory(String chosenCategory) {
-        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM products WHERE (quantity>0) AND (category=? OR category=? OR category=? OR category=?)";
+    public List<Product> getProductsByCategory(String chosenCategory) { 
 
-        if (chosenCategory.equals("arte")) {
-            return executeProductQuery(query, "fotografia", "pittura", "scultura", "vetro");
-        } else if (chosenCategory.equals("abbigliamento")) {
-            return executeProductQuery(query, "abbigliamento_uomo", "abbigliamento_donna", "abbigliamento_bambino", "borsa");
-        } else if (chosenCategory.equals("gioiello")) {
-            return executeProductQuery(query, "anello", "bracciale", "collana", "orecchino");
-        } else if (chosenCategory.equals("intrattenimento")) {
-            return executeProductQuery(query, "cinema", "libro", "musica", "gioco");
-        } else {
-            return executeProductQuery(query, chosenCategory, "0", "0", "0");
-        }
+        List<Product> products = new ArrayList<>();
+        
+        Connection connection = null;
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
+
+        try {
+	        connection = DriverManagerConnectionPool.getConnection();
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM products WHERE (quantity>0) AND (category=? OR category=? OR category=? OR category=?)";
+	        statement = connection.prepareStatement(query);
+	        
+	        if (chosenCategory.equals("arte")) {
+	            statement.setString(1, "fotografia");
+	            statement.setString(2, "pittura");
+	            statement.setString(3, "scultura");
+	            statement.setString(4, "vetro");
+	        } else if (chosenCategory.equals("abbigliamento")) {
+	            statement.setString(1, "abbigliamento_uomo");
+	            statement.setString(2, "abbigliamento_donna");
+	            statement.setString(3, "abbigliamento_bambino");
+	            statement.setString(4, "borsa");
+	        } else if (chosenCategory.equals("gioiello")) {
+	            statement.setString(1, "anello");
+	            statement.setString(2, "bracciale");
+	            statement.setString(3, "collana");
+	            statement.setString(4, "orecchino");
+	        } else if (chosenCategory.equals("intrattenimento")) {
+	            statement.setString(1, "cinema");
+	            statement.setString(2, "libro");
+	            statement.setString(3, "musica");
+	            statement.setString(4, "gioco");
+	        } else {
+	            statement.setString(1, chosenCategory);
+	            statement.setString(2, "0");
+	            statement.setString(3, "0");
+	            statement.setString(4, "0");
+	        }
+	        
+	        resultSet = statement.executeQuery();
+
+	        while (resultSet.next()) {
+	        	int id = resultSet.getInt("id");
+	        	String name = resultSet.getString("name");
+	            double price = resultSet.getDouble("price");
+	            String seller = resultSet.getString("seller");
+	            String imgSrc = resultSet.getString("imgSrc");
+	            Category category = Category.valueOf(resultSet.getString("category"));
+	            int quantity = resultSet.getInt("quantity");
+	            int favorites = resultSet.getInt("favorites");
+	            Date listingDate = resultSet.getDate("listingDate");
+	            String description = resultSet.getString("description");
+
+	            Product product = new Product();
+	            product.setId(id);
+	            product.setName(name);
+	            product.setPrice(price);
+	            product.setSeller(seller);
+	            product.setImgSrc(imgSrc);
+	            product.setCategory(category);
+	            product.setQuantity(quantity);
+	            product.setFavorites(favorites);
+	            product.setListingDate(listingDate);
+	            product.setDescription(description);
+
+	            products.add(product);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (resultSet != null) {
+	                resultSet.close();
+	            }
+	            if (statement != null) {
+	                statement.close();
+	            }
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return products;
     }
     
+    public Product getProductById(int productId) {
+        
+        Product product = new Product();
+        
+        Connection connection = null;
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
+
+        try {
+	        connection = DriverManagerConnectionPool.getConnection();
+	        String query = "SELECT name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM products WHERE id = ?";
+	        statement = connection.prepareStatement(query);
+	        
+	        statement.setInt(1, productId);
+	        
+	        resultSet = statement.executeQuery();
+
+	        if(resultSet.next()) {
+	        	String name = resultSet.getString("name");
+	            double price = resultSet.getDouble("price");
+	            String seller = resultSet.getString("seller");
+	            String imgSrc = resultSet.getString("imgSrc");
+	            Category category = Category.valueOf(resultSet.getString("category"));
+	            int quantity = resultSet.getInt("quantity");
+	            int favorites = resultSet.getInt("favorites");
+	            Date listingDate = resultSet.getDate("listingDate");
+	            String description = resultSet.getString("description");
+
+	            product.setName(name);
+	            product.setPrice(price);
+	            product.setSeller(seller);
+	            product.setImgSrc(imgSrc);
+	            product.setCategory(category);
+	            product.setQuantity(quantity);
+	            product.setFavorites(favorites);
+	            product.setListingDate(listingDate);
+	            product.setDescription(description);
+
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (resultSet != null) {
+	                resultSet.close();
+	            }
+	            if (statement != null) {
+	                statement.close();
+	            }
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return product;
+    }
+       
 }
