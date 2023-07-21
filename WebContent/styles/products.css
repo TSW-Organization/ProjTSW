@@ -1,27 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
-
-* {
-    font-family: "Montserrat", sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    overflow-x: hidden;
-    width: 100vw;
-}
-
-/* PRESENTATION */
-#presentation {
-    background-image: url(../images/presentation-bg.jpg);
-    background-position: center;
-    background-size: cover;
-    height: 600px;
-    overflow: hidden;
-}
-
-/* SHOWCASE */
+/* PRODUCTS PAGES */
 #productsListContainer {
     background-color: white;
     padding: 30px;

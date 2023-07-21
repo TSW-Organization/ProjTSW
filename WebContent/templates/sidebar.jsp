@@ -1,20 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     
-<% 
-	boolean showSidebar = false;
-	showSidebar = (Boolean) request.getAttribute("showSidebar");
-%>
-
-<% if (showSidebar==true) { %> 
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Sidebar</title>
-<link rel="stylesheet" type="text/css" href="styles/sidebar.css">
-
+    <link rel="stylesheet" type="text/css" href="styles/sidebar.css">
+    <script src="scripts/sidebar-userbar.js"></script>
 </head>
 <body>
+	
 	<div id="sidebar">
         
 	    <i onclick="toggleSidebar()" class="fa fa-times" aria-hidden="true"></i>
@@ -55,8 +48,5 @@
         </ul>
     </div>
     
-	<script src="scripts/sidebar.js"></script>
-    
 </body>
 </html>
-<% } %>

@@ -1,3 +1,4 @@
+// CONTACT
 window.onload = function() {
     var form = document.getElementById("contact-form");
     var isFormSubmitted = false;

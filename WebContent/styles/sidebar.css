@@ -7,9 +7,9 @@
     top: 0px;
     height: 100vh;
     left: -400px;
-    z-index: 999;
     padding: 20px;
     border-top-right-radius: 5px;
+    z-index: 100;
 }
 
 #sidebar i{

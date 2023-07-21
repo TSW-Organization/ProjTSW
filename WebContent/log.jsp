@@ -1,11 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Login page</title>
-<link rel="stylesheet" type="text/css" href="styles/log-reg.css">
+	<%@ include file="templates/head.html" %>
+    <link rel="stylesheet" type="text/css" href="styles/log-reg.css">
 </head>
 <body>
 	<!-- Aggiungi il wrapper per la finestra di login -->
@@ -46,13 +45,6 @@
 		</div>
 			
 	</div>
-
-	<script>
-	function closeModal() {
-		  var modal = document.getElementById("loginModal");
-		  modal.style.display = "none";
-		}
-	</script>
-
+	
 </body>
 </html>

@@ -1,9 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Registration page</title>
-<link rel="stylesheet" type="text/css" href="styles/log-reg.css">
+	<%@ include file="templates/head.html" %>
+    <link rel="stylesheet" type="text/css" href="styles/register.css">
 </head>
 <body>
 	<div class="modal-overlay">
@@ -47,12 +48,6 @@
 
 		</div>
 	</div>
-
-	<script>
-		function closeModal() {
-			var modal = document.getElementsByClassName("modal-overlay")[0];
-			modal.style.display = "none";
-		}
-	</script>
+	
 </body>
 </html>

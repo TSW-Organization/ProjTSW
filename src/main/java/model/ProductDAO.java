@@ -281,5 +281,69 @@ public class ProductDAO {
 
 	    return product;
     }
+    
+    public List<Product> getProductsByName(String searchTerm) { 
+
+        List<Product> products = new ArrayList<>();
+        
+        Connection connection = null;
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
+
+        try {
+	        connection = DriverManagerConnectionPool.getConnection();
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM products WHERE (quantity>0) AND (name LIKE ?)";
+	        statement = connection.prepareStatement(query);
+
+	        statement.setString(1, searchTerm);
+	        
+	        resultSet = statement.executeQuery();
+
+	        while (resultSet.next()) {
+	        	int id = resultSet.getInt("id");
+	        	String name = resultSet.getString("name");
+	            double price = resultSet.getDouble("price");
+	            String seller = resultSet.getString("seller");
+	            String imgSrc = resultSet.getString("imgSrc");
+	            Category category = Category.valueOf(resultSet.getString("category"));
+	            int quantity = resultSet.getInt("quantity");
+	            int favorites = resultSet.getInt("favorites");
+	            Date listingDate = resultSet.getDate("listingDate");
+	            String description = resultSet.getString("description");
+
+	            Product product = new Product();
+	            product.setId(id);
+	            product.setName(name);
+	            product.setPrice(price);
+	            product.setSeller(seller);
+	            product.setImgSrc(imgSrc);
+	            product.setCategory(category);
+	            product.setQuantity(quantity);
+	            product.setFavorites(favorites);
+	            product.setListingDate(listingDate);
+	            product.setDescription(description);
+
+	            products.add(product);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (resultSet != null) {
+	                resultSet.close();
+	            }
+	            if (statement != null) {
+	                statement.close();
+	            }
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	    return products;
+    }
        
 }

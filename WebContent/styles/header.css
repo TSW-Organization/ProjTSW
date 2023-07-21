@@ -7,12 +7,10 @@ header {
     height: 70px;
     padding: 20px;
     position: fixed;
-    top: 0px;
-    left: 0px;
     box-shadow: 0px 16px 15px -10px rgba(0,0,0,0.6);
     overflow: hidden;
     background-color: #8cada7;
-    z-index: 990;
+    z-index: 99;
 }
 
 header i {
@@ -38,7 +36,7 @@ header a {
 	flex-basis: 4%;
 }
 
-#searchbarContainer {
+#searchbar-form {
     flex-basis: 40%;
     display: flex;
     justify-content: space-between;
@@ -47,7 +45,7 @@ header a {
     padding: 5px;
 }
 
-#searchbarContainer input {
+#searchbar-form input {
     flex-basis: 95%;
     background-color: transparent;
     border: none;
@@ -56,7 +54,7 @@ header a {
     font-size: 20px;
 }
 
-#searchbarContainer button {
+#searchbar-form button {
     flex-basis: 5%;
     border: none;
     background-color: transparent;

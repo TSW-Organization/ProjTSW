@@ -3,53 +3,26 @@
 <%@ page import="java.util.List" %>
 <%@ page import="model.Product" %>
 
-<%
-request.setAttribute("showHeader", true);
-request.setAttribute("showFooter", true);
-request.setAttribute("showSidebar", true);
-%>
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WorldCrafters</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="styles/userbar.css">
-    <link rel="stylesheet" type="text/css" href="vendor/flickity.min.css">
-    <link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/all.css">
-    <link rel="stylesheet" type="text/css" href="styles/log-reg.css">
+    <%@ include file="templates/head.html" %>
     <link rel="stylesheet" type="text/css" href="styles/home.css">
-    <script src="vendor/jquery.min.js"></script>
-    <script src="vendor/flickity.pkgd.min.js"></script>
-    <script src="scripts/script.js"></script>
 </head>
 <body>
     
-    <%@ include file="header.jsp"%>
-    <%@ include file="sidebar.jsp"%>
+    <%@ include file="templates/header.jsp" %>
+    <%@ include file="templates/sidebar.jsp" %>
+    <%@ include file="templates/guestUserbar.jsp" %>
     
-    <div id="userbar">
-        <ul>
-            <li>
-                <button onclick="openModal('loginModal', 'log.jsp')">login</button>
-                <!-- Finestra modale di login -->
-                <div id="loginModal" class="modal"></div>
-            </li>
-            <li>
-                <button onclick="openModal('registerModal', 'register.jsp')">register</button>
-                <!-- Finestra modale di registrazione -->
-                <div id="registerModal" class="modal"></div>
-            </li>
-            <li><a href="contact.jsp">Assistenza<br></a></li>
-        </ul>
+    <div id="presentationContainer" onclick="closeAll()">
+    	<%@ include file="templates/presentationBg.jsp" %>
+    	<p>Fatti ispirare dalle tradizioni<br>artigianali di tutto<br>il mondo</p>
     </div>
     
+    
     <main onclick="closeAll()">
-        <div id="presentationContainer">
-            <p>Fatti ispirare dalle tradizioni<br>artigianali di tutto<br>il mondo</p>
-        </div>
+
         <div id="showcaseContainer">
             <h1>Prodotti in evidenza</h1><br>
             <div id="showcase">
@@ -80,7 +53,7 @@ request.setAttribute("showSidebar", true);
         </div>
     </main>
     
-    <%@ include file="footer.jsp" %>
+    <%@ include file="templates/footer.jsp" %>
     
 </body>
 </html>
