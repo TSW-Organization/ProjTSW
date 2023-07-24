@@ -21,9 +21,9 @@
 </head>
 <body>
 	
-	<%@ include file="header.jsp" %>
+	<%@ include file="src/header.jsp" %>
     
-    <%@ include file="sidebar.jsp" %>
+    <%@ include file="src/sidebar.jsp" %>
     
     <div id="userbar">
         <ul>
@@ -44,7 +44,7 @@
         </div>
     </main>
 
-	<%@ include file="footer.jsp" %>
+	<%@ include file="src/footer.jsp" %>
 
 
     <script src="scripts/script.js"></script>

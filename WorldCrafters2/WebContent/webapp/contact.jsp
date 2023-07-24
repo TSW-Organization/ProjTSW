@@ -17,14 +17,18 @@
     <link rel="stylesheet" type="text/css" href="styles/userbar.css">
     <link rel="stylesheet" type="text/css" href="vendor/flickity.min.css">
     <link rel="stylesheet" type="text/css" href="vendor/font-awesome/css/all.css">
+    <link rel="stylesheet" type="text/css" href="styles/home.css">
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    
     <script src="vendor/jquery.min.js"></script>
     <script src="vendor/flickity.pkgd.min.js"></script>
+    <script src="scripts/script.js"></script>
 </head>
 <body>
 	
-	<%@ include file="header.jsp" %>
+	<%@ include file="src/header.jsp" %>
     
-    <%@ include file="sidebar.jsp" %>
+    <%@ include file="src/sidebar.jsp" %>
     
     <div id="userbar">
         <ul>
@@ -105,7 +109,7 @@
     	</div>
     </main>
 
-	<%@ include file="footer.jsp" %>
+	<%@ include file="src/footer.jsp" %>
 
 
     <script src="scripts/script.js"></script>

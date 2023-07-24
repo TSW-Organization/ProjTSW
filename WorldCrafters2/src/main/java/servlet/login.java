@@ -28,7 +28,7 @@ public class login extends HttpServlet {
         if (isValidUser) {
             HttpSession session = request.getSession();
             session.setAttribute("name", username);
-            response.sendRedirect("index.jsp"); // Reindirizza l'utente a index.jsp
+            response.sendRedirect("home.jsp"); // Reindirizza l'utente a index.jsp
         } else {
             response.sendRedirect("log.jsp?error=1"); // Reindirizza alla pagina di login con un messaggio di errore
         }

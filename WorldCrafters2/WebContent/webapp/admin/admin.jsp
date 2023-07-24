@@ -38,12 +38,12 @@
     </style>
 </head>
 <body>
-    <%@ include file="header.jsp"%>
-    <%@ include file="sidebar.jsp"%>
+    <%@ include file="../src/header.jsp"%>
+    <%@ include file="../src/sidebar.jsp"%>
     <div id="userbar">
         <ul>
             <li>
-                <button onclick="redirectToHome()">Exit</button>
+                <button onclick="confirmExit()">Exit</button>
             </li>
         </ul>
     </div>
@@ -62,13 +62,22 @@
             </div>
         </div>
     </main>
-    <%@ include file="footer.jsp" %>
+    <%@ include file="../src/footer.jsp" %>
 
     <!-- JavaScript per il reindirizzamento alla home.jsp -->
     <script>
-        function redirectToHome() {
-            window.location.href = "home";
-        }
+    function redirectToHome() {
+          window.location.href = "home";
+      }
+
+      function confirmExit() {
+          var userChoice = confirm("Sei sicuro di voler uscire?");
+          if (userChoice) {
+              redirectToHome();
+          } else {
+              // L'utente ha scelto di restare sulla pagina (nessuna azione richiesta).
+          }
+      }
 
         // Funzioni di amministrazione simulate (nessuna azione reale)
         function addNewProduct() {

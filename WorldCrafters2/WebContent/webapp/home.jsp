@@ -26,17 +26,17 @@
     <script src="scripts/script.js"></script>
 </head>
 <body>
-    <%@ include file="header.jsp"%>
-    <%@ include file="sidebar.jsp"%>
+    <%@ include file="src/header.jsp"%>
+    <%@ include file="src/sidebar.jsp"%>
     <div id="userbar">
         <ul>
             <li>
-                <button onclick="openModal('loginModal', 'log.jsp')">login</button>
+                <button onclick="openModal('loginModal', 'src/log.jsp')">login</button>
                 <!-- Finestra modale di login -->
                 <div id="loginModal" class="modal"></div>
             </li>
             <li>
-                <button onclick="openModal('registerModal', 'register.jsp')">register</button>
+                <button onclick="openModal('registerModal', 'src/register.jsp')">register</button>
                 <!-- Finestra modale di registrazione -->
                 <div id="registerModal" class="modal"></div>
             </li>
@@ -76,6 +76,6 @@
             </div>
         </div>
     </main>
-    <%@ include file="footer.jsp" %>
+    <%@ include file="src/footer.jsp" %>
 </body>
 </html>
