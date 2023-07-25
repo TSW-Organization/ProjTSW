@@ -12,13 +12,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Header</title>
-<link rel="stylesheet" type="text/css" href="styles/header.css">
+<link rel="stylesheet" type="text/css" href="../styles/header.css">
 </head>
 <body>
 	<header>
         
         <a id="logoContainer" href="home">
-        	<img src="imgs/logo2.png">
+        	<img src="../imgs/logo2.png">
         	<span>WorldCrafters</span>
         </a>
         
@@ -31,7 +31,7 @@
     
         <a class="link" id="homeButton" href="home">Home</a>
         <!-- <a class="topnav" href="#"><i class="fa fa-heart fa-xl" aria-hidden="true"></i></a>-->
-        <a class="link" id="cartButton" href="cart.jsp"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+        <a class="link" id="cartButton" href="src/cart.jsp"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
         <a class="link" id="userButton" onclick="toggleUserbar()"><i class="fa fa-user" aria-hidden="true"></i></a>
          
     </header>

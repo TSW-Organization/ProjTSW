@@ -65,7 +65,7 @@
                                 <div class="product-price">
                                     $ <%= product.getPrice() %>
                                 </div>
-                                <button class="add-to-cart">Add to cart</button>
+									<button class="add-to-cart" data-product-id="<%= product.getProductId() %>" data-product-name="<%= product.getTitle() %>" data-product-price="<%= product.getPrice() %>">Add to cart</button>
                             </div>
                         </div>
                         <% productsCounter++; %>

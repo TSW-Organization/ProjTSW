@@ -89,3 +89,42 @@ function closeModal() {
         modals[i].style.display = "none";
     }
 }
+ // Funzione per gestire l'evento di clic sul pulsante "Add to cart"
+function addToCartClicked(event) {
+  const button = event.target;
+  const productId = button.getAttribute('data-product-id');
+  const productName = button.getAttribute('data-product-name');
+  const productPrice = parseFloat(button.getAttribute('data-product-price'));
+
+  // Ora puoi utilizzare queste informazioni per inviare una richiesta AJAX al server
+  // per aggiungere il prodotto al carrello o fare qualsiasi altra operazione desiderata
+
+  // Esempio: Invia il prodotto al carrello tramite una richiesta AJAX
+  const data = {
+    productId: productId,
+    productName: productName,
+    productPrice: productPrice
+  };
+
+  fetch('/add-to-cart', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then(response => response.text())
+  .then(message => {
+    // La risposta dal server può essere utilizzata per fornire un feedback all'utente
+    console.log(message);
+  })
+  .catch(error => {
+    console.error('Errore durante l\'aggiunta al carrello:', error);
+  });
+}
+
+// Aggiungi un gestore di eventi clic per catturare il clic sul pulsante "Add to cart"
+const addToCartButtons = document.querySelectorAll('.add-to-cart');
+addToCartButtons.forEach(button => {
+  button.addEventListener('click', addToCartClicked);
+});

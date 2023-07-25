@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Login page</title>
-<link rel="stylesheet" type="text/css" href="styles/style.css">
+<link rel="stylesheet" type="text/css" href="../styles/style.css">
 </head>
 <body>
 	<!-- Aggiungi il wrapper per la finestra di login -->
