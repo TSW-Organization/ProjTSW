@@ -21,7 +21,7 @@
 
 
 /* PRODUCTS CONTAINER */
-#productsContainer .product {
+#productsContainer .productDetails {
     position: relative;
     display: flex;
     justify-content: space-between;

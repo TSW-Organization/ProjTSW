@@ -6,7 +6,7 @@ function goBack() {
 
 
 
-
+//AGGIUNTA DEI PRODOTTI AL CARRELLO
 function addToCart() {
     
     var urlParams = new URLSearchParams(window.location.search);
@@ -28,23 +28,24 @@ function addToCart() {
 function updateCart() {
     $.ajax({
         type: "GET",
-        url: "cart",
+        url: "get-cart",
         dataType: "json",
         success: function(response) {
             
-            var cartItems = JSON.parse(response);
+            var cartItems = response;
 
             // Ora puoi utilizzare cartItems per aggiornare il contenuto del carrello nel DOM
             var cartList = $("#cartList");
+            
             cartList.empty();
             if (cartItems.length > 0) {
                 $.each(cartItems, function(index, item) {
-                    // Utilizza solo il campo "name" del prodotto
-                    cartList.append("<li>" + item.name + "</li>");
-                    cartList.append("<li>" + item.price + "</li>");
+                    cartList.append("<img style=\"width: 100px;\" src=\" " + item.imgSrc + " \" </img>");
+                    cartList.append("<p>" + item.name + "</p>");
+                    cartList.append("<p>" + item.price + "</p>");
                 });
             } else {
-                cartList.append("<li>Il carrello è vuoto</li>");
+                cartList.append("<p>Il carrello è vuoto</p>");
             }
         },
         error: function(xhr, status, error) {
@@ -52,3 +53,8 @@ function updateCart() {
         }
     });
 }
+
+$(document).ready(function() {
+    // Chiama la funzione updateCart quando il documento è pronto
+    updateCart();
+});
