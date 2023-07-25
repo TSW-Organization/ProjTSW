@@ -14,9 +14,9 @@ public class login extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String username = request.getParameter("username");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+		String username = request.getParameter("username");
         String password = request.getParameter("password");
         
         // Effettua la logica di autenticazione nel database e restituisce true se le credenziali sono corrette

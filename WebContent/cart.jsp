@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
+<%@ page import="java.util.List" %>
+<%@ page import="model.Product" %>
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <%@ include file="templates/head.html" %>
     <link rel="stylesheet" type="text/css" href="styles/cart.css">
+    <script src="scripts/cart.js"></script>
 </head>
 <body>
 
@@ -13,48 +17,34 @@
     <%@ include file="templates/guestUserbar.jsp" %>
 	<%@ include file="templates/presentationBg.jsp" %>
     
+    
+    <ul id="cartList">
+    
+    </ul>
+    
+    
+    
+    
+    
+    
+	<!--  
     <main onclick="closeAll()">
         <div id="cartContainer">
+            
+            <% List<Product> cartItems = (List<Product>) request.getAttribute("cartItems"); %>
             
             <section id="productsContainer">
                 <h1>Prodotti nel carrello</h1><br>
                 
-                <div class="product">
-                    <a href="#"><img src="images/prodotto1.jpg"></a>
-                    <p class="product-title">Lampade fesf esesfrgs  sergrse rsegrs rdgrd rdgrd rdgrdgd rdgrdg drgrdgdrgrdg rdgrdgrdg rdgrdgrdg</p>
-                    <p class="product-price">$ 9.99</p>
-                    <a onclick="" class="remove"><i class="fa fa-close fa-xl"></i></a>
-                </div>
-    
-                <div class="product">
-                    <a href="#"><img src="images/prodotto4.jpg"></a>
-                    <p class="product-title">Lampade fesf esesfrgs  sergrse rsegrs</p>
-                    <p class="product-price">$ 9.99</p>
-                    <a onclick="" class="remove"><i class="fa fa-close fa-xl"></i></a>
-                </div>
-    
-                <div class="product">
-                    <a href="#"><img src="images/prodotto5.jpg"></a>
-                    <p class="product-title">Lampade fesf esesfrgs  sergrse rsegrs</p>
-                    <p class="product-price">$ 9.99</p>
-                    <a onclick="" class="remove"><i class="fa fa-close fa-xl"></i></a>
-                </div>
-    
-                <div class="product">
-                    <a href="#"><img src="images/prodotto7.jpg"></a>
-                    <p class="product-title">Lampade fesf esesfrgs  sergrse rsegrs</p>
-                    <p class="product-price">$ 9.99</p>
-                    <a onclick="" class="remove"><i class="fa fa-close fa-xl"></i></a>
-                </div>
-    
-                <div class="product">
-                    <a href="#"><img src="images/prodotto9.jpg"></a>
-                    <p class="product-title">Lampade fesf esesfrgs  sergrse rsegrs</p>
-                    <p class="product-price">$ 9.99</p>
-                    <a onclick="" class="remove"><i class="fa fa-close fa-xl"></i></a>
-                </div>
-    
-    
+                <% for(Product product : cartItems) { %>
+                	<div class="product">
+	                    <a href="#"><img src="<%= product.getImgSrc() %>"></a>
+	                    <p class="product-name"><%= product.getName() %></p>
+	                    <p class="product-price">$ <%= product.getPrice() %></p>
+	                    <a onclick="" class="remove"><i class="fa fa-close fa-xl"></i></a>
+                	</div>
+                <% } %>
+
             </section>
     
             <section id="paymentContainer">
@@ -63,33 +53,20 @@
                 <div class="list">
                     
                     <div class="product">
-                    	<h4 class="product-title">Prodotto</h4>
+                    	<h4 class="product-name">Prodotto</h4>
                     	<h4>Prezzo</h4>
                     </div>
-                    	
-					<div class="product">
-						<p class="product-title">Lampade fesf esesfrgs  rdgrdg rdgdrgrd sergrse rsegrs</p>
-						<p>$ 9.99</p>
-					</div>
-					<div class="product">
-						<p class="product-title">Lampade fesf esesfrgs  rdgrdg rdgdrgrd sergrse rsegrs</p>
-						<p>$ 9.99</p>
-					</div>
-					<div class="product">
-						<p class="product-title">Lampade fesf esesfrgs  rdgrdg rdgdrgrd sergrse rsegrs</p>
-						<p>$ 9.99</p>
-					</div>
-					<div class="product">
-						<p class="product-title">Lampade fesf esesfrgs  rdgrdg rdgdrgrd sergrse rsegrs</p>
-						<p>$ 9.99</p>
-					</div>
-					<div class="product">
-						<p class="product-title">Lampade fesf esesfrgs  rdgrdg rdgdrgrd sergrse rsegrs</p>
-						<p>$ 9.99</p>
-					</div>
+                    
+                    <% for(Product product : cartItems) { %>
+	                	<div class="product">
+		                    <h4 class="product-name"><%= product.getName() %></h4>
+                    		<h4>$ <%= product.getPrice() %></h4>
+	                	</div>
+	                <% } %>
+
 					<br/>
 					<div class="product">
-						<p class="product-title">Spedizione</p>
+						<p class="product-name">Spedizione</p>
 						<p>$ 5.00</p>
 					</div>
 
@@ -112,7 +89,9 @@
         </div>
 
     </main>
-
+	-->
+    
+ 
     <%@ include file="templates/footer.jsp" %>
     
 </body>

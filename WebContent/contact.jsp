@@ -5,6 +5,7 @@
 <head>
     <%@ include file="templates/head.html" %>
     <link rel="stylesheet" type="text/css" href="styles/contact.css">
+    <script src="scripts/contact.js"></script>
 </head>
 <body>
 	
@@ -39,20 +40,20 @@
 	        <form id="contact-form" name="contact-form" method="POST" action="CheckContactForm" novalidate>
 	            <div class="form-item">
 	                <label for="name">Nome: *</label>
-	                <input type="text" name="name" value="<%=name %>" required>
+	                <input type="text" name="name" value="<%=name %>" required data-validation="name">
 	            </div>
 	            <div class="form-item">
 	                <label for="surname">Cognome: *</label>
-	                <input type="text" name="surname" value="<%=surname %>" required>
+	                <input type="text" name="surname" value="<%=surname %>" required data-validation="surname">
 	            </div>
 	            <div class="form-item">
 	                <label for="email">Email: *</label>
-	                <input type="email" name="email" value="<%=email %>" required>
+	                <input type="email" name="email" value="<%=email %>" required data-validation="email">
 	            </div>
 	            <div class="form-item">
 	                <label for="subject">Oggetto: *</label>
 	                <select name="subject" required>
-				        <option value="">Seleziona un motivo:</option>
+				        <option value="" disabled selected>Seleziona un motivo:</option>
 				        <option value="general" <%= subject.equals("general") ? "selected" : "" %>>Domanda generale</option>
 				        <option value="product" <%= subject.equals("product") ? "selected" : "" %>>Informazioni sul prodotto</option>
 				        <option value="billing" <%= subject.equals("billing") ? "selected" : "" %>>Questioni di fatturazione</option>
@@ -64,7 +65,7 @@
 	            </div>
 	            <div class="form-item">
 	                <label for="message">Messaggio: *</label>
-	                <textarea name="message" required><%=message %></textarea>
+	                <textarea name="message" required data-validation="message"><%=message %></textarea>
 	            </div>
 	            <div class="form-item">
 	                <input id="submit" type="submit" value="Invia">
@@ -84,6 +85,7 @@
     </main>
 
 	<%@ include file="templates/footer.jsp" %>
+	
 
 </body>
 </html>

@@ -7,6 +7,7 @@
 <head>
 	<%@ include file="templates/head.html" %>
     <link rel="stylesheet" type="text/css" href="styles/product-details.css">
+    <script src="scripts/cart.js"></script>
 </head>
 <body>
 
@@ -36,7 +37,7 @@
 			        <div class="description">
 			          	<p><%= product.getDescription() %></p>
 			        </div>
-			        <button class="add-to-cart">Aggiungi al carrello</button>
+			        <button class="add-to-cart" onclick="addToCart(<%= product.getId() %>)">Aggiungi al carrello</button>
 		      	</div>
 			</div>
 		</div>

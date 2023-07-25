@@ -10,13 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/CheckContactForm")
 public class CheckContactForm extends HttpServlet {
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
+	private static final long serialVersionUID = 1L;
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Ottenere i valori dei campi del modulo
+		
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/contact.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+		// Ottenere i valori dei campi del modulo
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
         String email = request.getParameter("email");
@@ -24,13 +29,13 @@ public class CheckContactForm extends HttpServlet {
         String message = request.getParameter("message");
         String error = ""; 
         
-        if (name == null || name.trim().equals("")) {
+        if (name == null || name.trim().equals("") || !name.matches("^[a-zA-Z\\s]+$")) {
 			error += "Inserisci nome<br>";
 		} else {
 			request.setAttribute("name", name);
 		}
 
-		if (surname == null || surname.trim().equals("")) {
+		if (surname == null || surname.trim().equals("") || !surname.matches("^[a-zA-Z\\s]+$")) {
 			error += "Inserisci cognome<br>";
 		} else {
 			request.setAttribute("surname", surname);
@@ -42,7 +47,7 @@ public class CheckContactForm extends HttpServlet {
 			request.setAttribute("email", email);
 		}
 		
-		if (subject.isEmpty()) {
+		if (subject==null || subject.isEmpty()) {
             error += "Seleziona un motivo dall'elenco<br>";
         } else {
 			request.setAttribute("subject", subject);
@@ -64,12 +69,6 @@ public class CheckContactForm extends HttpServlet {
 
             response.sendRedirect("contact-success.jsp");
 		}
-    }
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		doGet(request, response);
 	}
 
     // Verifica se l'indirizzo email è valido utilizzando una semplice espressione regolare

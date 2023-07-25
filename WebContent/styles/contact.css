@@ -59,9 +59,10 @@ div.error {
 	color: red;
 }
 
-div.message {
-	color: green;
+.error {
+	border: 1px solid red !important;
 }
+
 
 
 @media only screen and (max-width: 768px) {

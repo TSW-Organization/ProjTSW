@@ -44,7 +44,7 @@
 	                            <div class="product-price">
 	                                $ <%= product.getPrice() %>
 	                            </div>
-	                            <button class="add-to-cart">Add to cart</button>
+	                            <!--<a href="add-to-cart?id=<%= product.getId() %>" class="add-to-cart" onclick="addToCart(<%= product.getId() %>)">Add to cart</a>-->
 	                        </div>  
                     	</div>
 				<%} %>
