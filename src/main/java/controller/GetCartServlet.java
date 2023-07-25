@@ -25,10 +25,21 @@ public class GetCartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession(true);
+		
+		Gson gson = new Gson();
+		response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
 
         // Recupera la lista dei prodotti aggiunti al carrello dalla sessione
         List<Integer> cartItemsId = (List<Integer>) session.getAttribute("cartItemsId");
         List<Product> cartItems = new ArrayList<>();
+        
+        if (cartItemsId == null || cartItemsId.isEmpty()) {
+
+            String json = gson.toJson(cartItems);
+            response.getWriter().write(json);
+            return;
+        }
         
         ProductDAO productDAO = new ProductDAO();
         
@@ -37,12 +48,8 @@ public class GetCartServlet extends HttpServlet {
         	cartItems.add(productDAO.getProductById(id));
         }
         
-        Gson gson = new Gson();
+        gson = new Gson();
         String json = gson.toJson(cartItems);
-
-        // Imposta i corretti header della risposta
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
 
         // Scrivi il JSON come risposta alla chiamata GET
         response.getWriter().write(json);

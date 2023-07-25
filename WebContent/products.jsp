@@ -56,9 +56,9 @@
 					            <%= product.getName() %>
 					        </a>
                             <div class="product-price">
-                                $ <%= product.getPrice() %>
+                                € <%= String.format("%.2f", product.getPrice()) %>
                             </div>
-                            <button class="add-to-cart">Add to cart</button>
+                            <!--<button class="add-to-cart">Add to cart</button>-->
                         </div>  
                    	</div>
 				<%} %>

@@ -30,14 +30,14 @@
 		      	</div>
 		      	<div class="product-info">
 			        <h1><%= product.getName() %></h1>
-			        <p class="price">$ <%= product.getPrice() %></p>
+			        <p class="price">€ <%= String.format("%.2f", product.getPrice()) %></p>
 			        <p>Venditore: <%= product.getSeller() %></p>
 			        <p>Quantità disponibile: <%= product.getQuantity() %></p>
 			        <p>Data di inserimento: <%= product.getListingDate() %></p>
 			        <div class="description">
 			          	<p><%= product.getDescription() %></p>
 			        </div>
-			        <button class="add-to-cart" onclick="addToCart(<%= product.getId() %>)">Aggiungi al carrello</button>
+			        <button class="add-to-cart" onclick="addToCart('<%= product.getId() %>')">Aggiungi al carrello</button>
 		      	</div>
 			</div>
 		</div>

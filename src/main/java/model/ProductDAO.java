@@ -232,7 +232,7 @@ public class ProductDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM products WHERE id = ?";
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM products WHERE id = ?";
 	        statement = connection.prepareStatement(query);
 	        
 	        statement.setInt(1, productId);
@@ -240,6 +240,7 @@ public class ProductDAO {
 	        resultSet = statement.executeQuery();
 
 	        if(resultSet.next()) {
+	        	int id = resultSet.getInt("id");
 	        	String name = resultSet.getString("name");
 	            double price = resultSet.getDouble("price");
 	            String seller = resultSet.getString("seller");
@@ -250,6 +251,7 @@ public class ProductDAO {
 	            Date listingDate = resultSet.getDate("listingDate");
 	            String description = resultSet.getString("description");
 
+	            product.setId(id);
 	            product.setName(name);
 	            product.setPrice(price);
 	            product.setSeller(seller);

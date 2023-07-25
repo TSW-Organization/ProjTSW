@@ -17,15 +17,17 @@
     <%@ include file="templates/guestUserbar.jsp" %>
 	<%@ include file="templates/presentationBg.jsp" %>
     
-     
-    <h1>Carrello</h1>
-    
-    <div id="cartList">
-    
-    </div>
-    
-    
-    
+
+
+    <main onclick="closeAll()">
+    	
+    	<h1>Carrello</h1>
+    	
+    	<div id="cartContainer">
+	    	<div id="cartList"></div>
+	    	<div id="cartPayment"></div>
+	   	</div>
+    </main>
     
 
     <%@ include file="templates/footer.jsp" %>

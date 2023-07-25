@@ -42,7 +42,7 @@
 						            <%= product.getName() %>
 						        </a>
 	                            <div class="product-price">
-	                                $ <%= product.getPrice() %>
+	                                € <%= String.format("%.2f", product.getPrice()) %>
 	                            </div>
 	                            <!--<a href="add-to-cart?id=<%= product.getId() %>" class="add-to-cart" onclick="addToCart(<%= product.getId() %>)">Add to cart</a>-->
 	                        </div>  

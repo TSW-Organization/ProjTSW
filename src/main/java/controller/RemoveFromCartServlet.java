@@ -1,7 +1,6 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,37 +11,33 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet("/add-to-cart")
-public class AddToCartServlet extends HttpServlet {
+@WebServlet("/remove-from-cart")
+public class RemoveFromCartServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
        
-	
+    
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String productIdStr = request.getParameter("productId");
-		int productId = Integer.parseInt(productIdStr);
+        int productId = Integer.parseInt(productIdStr);
 
         // Ottieni la sessione corrente o crea una nuova sessione
         HttpSession session = request.getSession(true);
-        
+
         List<Integer> cartItemsId = (List<Integer>) session.getAttribute("cartItemsId");
         if (cartItemsId == null) {
-            // Se la lista non esiste ancora nella sessione, crea una nuova lista
-            cartItemsId = new ArrayList<>();
+            // Se la lista non esiste nella sessione, non c'è niente da rimuovere
+            return;
         }
 
-        if (!cartItemsId.contains(productId)) {
-            cartItemsId.add(productId);
-           
-        } else {
-            //TODO se il prodotto è già presente
-        }
-      
+        if (cartItemsId.contains(productId)) {
+            cartItemsId.remove(Integer.valueOf(productId));
+        } 
+
         // Aggiorna la lista del carrello nella sessione
         session.setAttribute("cartItemsId", cartItemsId);
-			
 	}
 
 }
