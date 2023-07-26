@@ -26,8 +26,8 @@
     <script src="scripts/script.js"></script>
 </head>
 <body>
-    <%@ include file="src/header.jsp"%>
-    <%@ include file="src/sidebar.jsp"%>
+    <%@ include file="../src/header.jsp"%>
+    <%@ include file="../src/sidebar.jsp"%>
     <div id="userbar">
         <ul>
             <li>
@@ -76,6 +76,6 @@
             </div>
         </div>
     </main>
-    <%@ include file="src/footer.jsp" %>
+    <%@ include file="../src/footer.jsp" %>
 </body>
 </html>

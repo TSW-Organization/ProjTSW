@@ -12,13 +12,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Header</title>
-<link rel="stylesheet" type="text/css" href="../styles/header.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/header.css">
 </head>
 <body>
 	<header>
         
         <a id="logoContainer" href="home">
-        	<img src="../imgs/logo2.png">
+			<img src="${pageContext.request.contextPath}/imgs/logo2.png">
         	<span>WorldCrafters</span>
         </a>
         

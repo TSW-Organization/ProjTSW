@@ -11,7 +11,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Sidebar</title>
-<link rel="stylesheet" type="text/css" href="../styles/sidebar.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/styles/sidebar.css">
 </head>
 <body>
 	<div id="sidebar">
