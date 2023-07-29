@@ -1,8 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Product {
+public class Product implements Serializable{
+	private static final long serialVersionUID = 1L;
 	
 	private int id;
 	private String name;
@@ -16,20 +18,28 @@ public class Product {
 	private String description;
 	
 	
-	public Product() {
-		
+	public Product() {}
+	
+	public Product(int id, String name, double price, String seller, String imgSrc, Category category, int quantity, int favorites, Date listingDate, String description) {
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.seller = seller;
+		this.imgSrc = imgSrc;
+		this.category = category;
+		this.quantity = quantity;
+		this.favorites = favorites;
+		this.listingDate = listingDate;
+		this.description = description;
 	}
 
 
 	public int getId() {
 		return id;
 	}
-
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public String getName() {
 		return name;

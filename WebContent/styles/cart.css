@@ -8,6 +8,10 @@ main {
     border-radius: 15px;
 }
 
+button {
+	background-color: white;
+}
+
 /* CART CONTAINER */
 
 #cartContainer {

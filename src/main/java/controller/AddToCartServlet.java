@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.CartItem;
+import model.Product;
+import model.ProductDAO;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
+//QUESTA SERVLET SERVE ANCHE AD AGGIORNARE LA QUANTITÀ NEL CARRELLO
 @WebServlet("/add-to-cart")
 public class AddToCartServlet extends HttpServlet {
 	
@@ -21,28 +25,40 @@ public class AddToCartServlet extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String productIdStr = request.getParameter("productId");
-		int productId = Integer.parseInt(productIdStr);
-
-        // Ottieni la sessione corrente o crea una nuova sessione
+		int productId = Integer.parseInt(request.getParameter("productId"));
+		int selectedQuantity = Integer.parseInt(request.getParameter("selectedQuantity"));
+		
+		ProductDAO productDAO = new ProductDAO();
+		Product product = productDAO.getProductById(productId);
+		
+		
         HttpSession session = request.getSession(true);
         
-        List<Integer> cartItemsId = (List<Integer>) session.getAttribute("cartItemsId");
-        if (cartItemsId == null) {
+        List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
+        if (cartItems == null) {
             // Se la lista non esiste ancora nella sessione, crea una nuova lista
-            cartItemsId = new ArrayList<>();
+            cartItems = new ArrayList<>();
         }
-
-        if (!cartItemsId.contains(productId)) {
-            cartItemsId.add(productId);
-           
-        } else {
-            //TODO se il prodotto è già presente
+        
+        boolean found = false;
+        for (CartItem cartItem : cartItems) {
+            if (cartItem.getId() == productId) {
+            	// Aggiorna la quantità se il prodotto è già presente
+            	cartItem.setSelectedQuantity(selectedQuantity);
+            	found = true;
+                break;
+            }
         }
-      
+        
+        if(!found) {
+        	CartItem cartItem = new CartItem(product, selectedQuantity);
+        	cartItems.add(cartItem);
+        }
+        
         // Aggiorna la lista del carrello nella sessione
-        session.setAttribute("cartItemsId", cartItemsId);
-			
+        session.setAttribute("cartItems", cartItems);
+        
+        response.sendRedirect("cart");
 	}
 
 }

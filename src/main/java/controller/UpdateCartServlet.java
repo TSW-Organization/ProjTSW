@@ -1,13 +1,9 @@
 package controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.Gson;
-
-import model.Product;
-import model.ProductDAO;
-
+import model.CartItem;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebServlet("/get-cart")
-public class GetCartServlet extends HttpServlet {
+@WebServlet("/update-cart")
+public class UpdateCartServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
        
@@ -31,24 +27,15 @@ public class GetCartServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         // Recupera la lista dei prodotti aggiunti al carrello dalla sessione
-        List<Integer> cartItemsId = (List<Integer>) session.getAttribute("cartItemsId");
-        List<Product> cartItems = new ArrayList<>();
+        List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
         
-        if (cartItemsId == null || cartItemsId.isEmpty()) {
+        if (cartItems == null || cartItems.isEmpty()) {
 
             String json = gson.toJson(cartItems);
             response.getWriter().write(json);
             return;
         }
         
-        ProductDAO productDAO = new ProductDAO();
-        
-        for(Integer id : cartItemsId) {
-        	
-        	cartItems.add(productDAO.getProductById(id));
-        }
-        
-        gson = new Gson();
         String json = gson.toJson(cartItems);
 
         // Scrivi il JSON come risposta alla chiamata GET

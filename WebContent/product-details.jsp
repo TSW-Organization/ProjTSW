@@ -37,7 +37,18 @@
 			        <div class="description">
 			          	<p><%= product.getDescription() %></p>
 			        </div>
+			        
+			        
+			        <label for="quantity">Quantità:</label>
+	                <select id="quantity">
+	                <% int maxOptions = Math.min(8, product.getQuantity()); %>
+	                    <% for (int i = 1; i <= maxOptions; i++) { %>
+	                        <option value="<%= i %>"><%= i %></option>
+	                    <% } %>
+	                </select>
+	                
 			        <button class="add-to-cart" onclick="addToCart('<%= product.getId() %>')">Aggiungi al carrello</button>
+			        
 		      	</div>
 			</div>
 		</div>
