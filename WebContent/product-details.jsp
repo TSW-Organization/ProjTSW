@@ -41,7 +41,7 @@
 			        
 			        <label for="quantity">Quantità:</label>
 	                <select id="quantity">
-	                <% int maxOptions = Math.min(8, product.getQuantity()); %>
+	                <% int maxOptions = Math.min(10, product.getQuantity()); %>
 	                    <% for (int i = 1; i <= maxOptions; i++) { %>
 	                        <option value="<%= i %>"><%= i %></option>
 	                    <% } %>

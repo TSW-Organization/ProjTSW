@@ -36,6 +36,12 @@ header a {
 	flex-basis: 4%;
 }
 
+#cartQuantity {
+	font-weight: bold;
+	font-size: 18px;
+	color: orange;
+}
+
 #searchbar-form {
     flex-basis: 40%;
     display: flex;

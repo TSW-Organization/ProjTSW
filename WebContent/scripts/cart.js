@@ -52,6 +52,7 @@ function updateCart() {
             var cartList = $("#cartList");
             var cartPayment = $("#cartPayment");
             var totalPrice = 0;
+            var totalQuantity = 0;
 
             cartList.empty();
             cartPayment.empty();
@@ -71,7 +72,7 @@ function updateCart() {
                 $.each(cartItems, function (index, item) {
                     
                     var priceForQuantity = item.price * item.selectedQuantity;
-                    var maxOptions = Math.min(8, item.quantity);
+                    var maxOptions = Math.min(10, item.quantity);
                     
                     // Utilizza template string per creare l'HTML dinamico per cartList
                     listHtml += `
@@ -113,6 +114,7 @@ function updateCart() {
                     
                     //Aggiorna il totale del prezzo a ogni ciclo
                     totalPrice += priceForQuantity;
+                    totalQuantity += item.selectedQuantity;
                     
                 });
                 
@@ -142,8 +144,14 @@ function updateCart() {
 
                 cartList.append(listHtml);
                 cartPayment.append(paymentHtml);
+                
+                var quantityHeader = document.getElementById("cartQuantity");
+                quantityHeader.innerHTML = totalQuantity;
+                
             } else {
                 cartList.append("<p>Il carrello è vuoto</p>");
+                var quantityHeader = document.getElementById("cartQuantity");
+                quantityHeader.innerHTML = "";
             }
         },
         error: function (xhr, status, error) {
