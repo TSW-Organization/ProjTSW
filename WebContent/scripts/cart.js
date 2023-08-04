@@ -137,7 +137,7 @@ function updateCart() {
                 
                 paymentHtml += `
                     <br>
-		            <a id="checkout" href="#">Vai al checkout</a>
+		            <a id="checkout" href="checkout.jsp">Vai al checkout</a>
 	                <br><br>
 	                <button id="back" onclick="goBack()">Continua gli acquisti</button> 
                 `;

@@ -55,7 +55,7 @@
 }
 
 /* CHECK FORM */
-div.error {
+.error-message {
 	color: red;
 }
 

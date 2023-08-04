@@ -8,6 +8,7 @@
 <head>
     <%@ include file="templates/head.html" %>
     <link rel="stylesheet" type="text/css" href="styles/home.css">
+    <script src="scripts/checkout.js"></script>
 </head>
 <body>
     
@@ -19,7 +20,6 @@
     	<%@ include file="templates/presentationBg.jsp" %>
     	<p>Fatti ispirare dalle tradizioni<br>artigianali di tutto<br>il mondo</p>
     </div>
-    
     
     <main onclick="closeAll()">
 

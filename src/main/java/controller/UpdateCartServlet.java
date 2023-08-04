@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.Gson;
 import model.CartItem;
@@ -31,14 +32,13 @@ public class UpdateCartServlet extends HttpServlet {
         
         if (cartItems == null || cartItems.isEmpty()) {
 
-            String json = gson.toJson(cartItems);
+        	cartItems = new ArrayList<>();
+        	String json = gson.toJson(cartItems);
             response.getWriter().write(json);
             return;
         }
         
         String json = gson.toJson(cartItems);
-
-        // Scrivi il JSON come risposta alla chiamata GET
         response.getWriter().write(json);
          
 	}

@@ -76,7 +76,7 @@
 	        String error = (String)request.getAttribute("error");
 			if(error != null) {
 			%>
-			<div class="error"><%=error %></div>
+			<div class="error-message"><%=error %></div>
 			<%
 			}
 			%>
