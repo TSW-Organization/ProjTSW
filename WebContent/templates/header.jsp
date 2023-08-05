@@ -5,8 +5,10 @@
 <head>
     <link rel="stylesheet" type="text/css" href="styles/header.css">
     <script src="scripts/cart.js"></script>
+    <script src="scripts/header.js"></script>
 </head>
 <body>
+	
 	<header>
         
         <a id="logoContainer" href="home">
@@ -16,10 +18,11 @@
         
         <a class="link" id="categoriesButton" onclick="toggleSidebar()"><i class="fa fa-bars" aria-hidden="true"></i></a>
         
-        <form id="searchbar-form">
+        <div id="searchbar">
 		    <input type="text" id="searchInput" placeholder="Cerca...">
-		    <button type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-		</form>
+		    <ul id="searchResults"></ul>
+		    <button id="searchButton"><i class="fa fa-search" aria-hidden="true"></i></button>
+		</div>
     	
         <a class="link" id="homeButton" href="home">Home</a>
         <!-- <a class="topnav" href="#"><i class="fa fa-heart fa-xl" aria-hidden="true"></i></a>-->

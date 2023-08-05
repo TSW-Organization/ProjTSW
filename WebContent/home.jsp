@@ -8,7 +8,6 @@
 <head>
     <%@ include file="templates/head.html" %>
     <link rel="stylesheet" type="text/css" href="styles/home.css">
-    <script src="scripts/checkout.js"></script>
 </head>
 <body>
     

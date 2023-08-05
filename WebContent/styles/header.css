@@ -8,9 +8,9 @@ header {
     padding: 20px;
     position: fixed;
     box-shadow: 0px 16px 15px -10px rgba(0,0,0,0.6);
-    overflow: hidden;
+    overflow: visible;
     background-color: #8cada7;
-    z-index: 99;
+    z-index: 98;
 }
 
 header i {
@@ -42,26 +42,46 @@ header a {
 	color: orange;
 }
 
-#searchbar-form {
-    flex-basis: 40%;
+#searchbar {
     display: flex;
     justify-content: space-between;
+    flex-basis: 40%;
     background-color:antiquewhite;
-    border-radius: 20px;
-    padding: 5px;
+    border-radius: 5px;
+    padding: 5px 1px;
+   	position: relative;
 }
 
-#searchbar-form input {
-    flex-basis: 95%;
+#searchInput {
     background-color: transparent;
+    flex-basis: 90%;
     border: none;
     outline: none;
     padding: 5px;
     font-size: 20px;
 }
 
-#searchbar-form button {
-    flex-basis: 5%;
+#searchResults {
+  position: absolute;
+  background-color:white;
+  width: 100%;
+  margin-top: 36px;
+  list-style: none;
+  padding: 0;
+}
+
+#searchResults li {
+  padding: 5px;
+  cursor: pointer;
+  color: black;
+}
+
+#searchResults li:hover {
+  background-color: #f0f0f0;
+}
+
+#searchbar button {
+    text-align: right;
     border: none;
     background-color: transparent;
     cursor: pointer;
@@ -80,6 +100,10 @@ header a {
     width: 100vw;
     height: 70px;
 }
+
+
+
+/*******************************************/
 
 @media only screen and (max-width: 768px) {
 	

@@ -4,4 +4,5 @@
     background-size: cover;
     height: 600px;
     overflow: hidden;
+    z-index: 0;
 }

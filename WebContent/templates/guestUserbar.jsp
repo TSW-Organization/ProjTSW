@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="styles/guestUserbar.css">
+    <link rel="stylesheet" type="text/css" href="styles/userbar.css">
     <script src="scripts/sidebar-userbar.js"></script>
     <script src="scripts/log-reg.js"></script>
 </head>
