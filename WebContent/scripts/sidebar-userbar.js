@@ -60,6 +60,6 @@ function closeAll() {
 // FUNZIONE PER LA CREAZIONE DELLE PAGINE DEI PRODOTTI IN BASE ALLA CATEGORIA CLICCATA NELLA SIDEBAR
 function categoryClick(category) {
 	
-    var url = 'products?category=' + encodeURIComponent(category) + '&page=1';
+    var url = 'products?category=' + encodeURIComponent(category);
     window.location.href = url;
 }

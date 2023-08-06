@@ -71,13 +71,17 @@ header a {
 }
 
 #searchResults li {
-  padding: 5px;
+  padding: 10px;
   cursor: pointer;
   color: black;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #searchResults li:hover {
   background-color: #f0f0f0;
+  text-decoration: underline;
 }
 
 #searchbar button {

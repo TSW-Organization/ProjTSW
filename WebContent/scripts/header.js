@@ -1,63 +1,80 @@
-// Dati di esempio, puoi sostituirli con i tuoi dati o caricarli da un'API
-const dati = [
-  'Apple',
-  'Banana',
-  'Cherry',
-  'Date',
-  'Grape',
-  'Lemon',
-  'Mango',
-  'Orange',
-  'Pineapple',
-  'Strawberry',
-  'Appli',
-  'Applo',
-  'Applu'
-];
-
-
-window.addEventListener("DOMContentLoaded", function() {
-    const searchInput = document.getElementById('searchInput');
-    searchInput.addEventListener('input', updateSearchResults);
-    searchInput.addEventListener('blur', clearSearchResults);
-});
-
-window.addEventListener("DOMContentLoaded", function() {
-    const searchButton = document.getElementById('searchButton');
-    searchButton.addEventListener('click', performSearch);
-});
-
-
-function performSearch() {
-  const searchText = searchInput.value.toLowerCase();
-  const filteredResults = dati.filter(item => item.toLowerCase().includes(searchText));
-  displayResults(filteredResults);
-}
-
-
-function updateSearchResults() {
-    const searchResults = document.getElementById('searchResults');
-    searchResults.innerHTML = '';
-    
-    const searchInput = document.getElementById('searchInput');
-    const searchText = searchInput.value.toLowerCase();
-    const filteredResults = dati.filter(item => item.toLowerCase().includes(searchText));
-    displayResults(filteredResults);
-}
-
-
-function displayResults(results) {
-	const searchResults = document.getElementById('searchResults');
+document.addEventListener("DOMContentLoaded", function() {
 	
-	searchResults.innerHTML = '';
-	results.forEach(result => {
-		const li = document.createElement('li');
-		li.textContent = result;
-		searchResults.appendChild(li);
-	});
-}
+	const searchInput = document.getElementById('searchInput');
+	const searchButton = document.getElementById('searchButton');
+	const searchResults = document.getElementById('searchResults');
+	const maxResults = 10; // Imposta il numero massimo di risultati da mostrare
 
-function clearSearchResults() {
-    const searchResults = document.getElementById('searchResults');
-    searchResults.innerHTML = '';
-}
+ 	searchButton.addEventListener('click', performSearch);
+  	searchInput.addEventListener('input', updateSearchResults);
+  	document.addEventListener('click', hideSearchResults);
+  	searchInput.addEventListener('keydown', function (event) {
+  		if (event.key === 'Enter') {
+			performSearch();
+  		}
+	});
+
+  	function performSearch() {
+		const searchText = searchInput.value.toLowerCase();
+	  
+	  	if (searchText.trim() === '') {
+	    	searchResults.style.display = 'none';
+	    	return;
+	  	}
+	  	const url = `/WorldCrafters/products?search=${encodeURIComponent(searchText)}`;
+	  	console.log(url);
+
+	  	// Reindirizza alla pagina di ricerca
+	  	window.location.href = url;
+	}
+
+
+	function updateSearchResults() {
+	  	const searchText = searchInput.value.toLowerCase();
+	
+	  	if (searchText.trim() === '') {
+	    	searchResults.style.display = 'none';
+	    	return;
+	    }
+	
+	  	fetch(`/WorldCrafters/api/search?q=${encodeURIComponent(searchText)}`)
+	    .then(response => {
+	    	if (!response.ok) {
+	        	throw new Error('Errore nella richiesta');
+	      	}
+	      	return response.json();
+	    })
+	    .then(data => {
+	      	const filteredResults = data.filter(item => typeof item.name === 'string' && item.name.toLowerCase().includes(searchText));
+	      	const limitedResults = filteredResults.slice(0, maxResults);
+	      	displayResults(limitedResults);
+	    })
+	    .catch(error => {
+	      console.error('Errore durante la richiesta dei dati:', error);
+	    });
+	}
+
+
+	function displayResults(results) {
+	  	if (results.length > 0 && searchInput.value.trim() !== '') {
+	    	searchResults.innerHTML = '';
+	    	results.forEach(result => {
+		      	const li = document.createElement('li');
+		      	li.textContent = result.name; // Mostra solo il campo "name" dell'oggetto JSON
+		      	li.onclick = () => {
+		        	location.href = `/WorldCrafters/product?id=${result.id}`;
+				};
+	      		searchResults.appendChild(li);
+	    	});
+		searchResults.style.display = 'block';
+	  	} else {
+	    	searchResults.style.display = 'none';
+	  	}
+	}
+
+  	function hideSearchResults(event) {
+    	if (event.target !== searchInput && event.target !== searchButton) {
+        	searchResults.style.display = 'none';
+    	}
+  	}
+});

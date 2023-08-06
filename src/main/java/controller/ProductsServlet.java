@@ -13,26 +13,31 @@ import model.Product;
 import model.ProductDAO;
 
 
-@WebServlet("/products")
+@WebServlet(urlPatterns = {"/products", "/search"})
 public class ProductsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String category = request.getParameter("category");
-	    ProductDAO productDAO = new ProductDAO();
+        String search = request.getParameter("search");
+        ProductDAO productDAO = new ProductDAO();
 
-	    List<Product> products = productDAO.getProductsByCategory(category);
-		
-		request.setAttribute("products", products);
-			
-		request.getRequestDispatcher("products.jsp").forward(request, response);
-	}
+        List<Product> products;
 
+        if (category != null) {
+            // Se è presente il parametro "category", ottieni prodotti in base alla categoria
+            products = productDAO.getProductsByCategory(category);
+        } else if (search != null) {
+            // Se è presente il parametro "search", ottieni prodotti in base al testo di ricerca
+            products = productDAO.getProductsBySearch(search);
+        } else {
+            // Se nessun parametro è presente, ottieni tutti i prodotti
+            products = productDAO.getAllProducts();
+        }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		doGet(request, response);
+        request.setAttribute("products", products);
+        request.getRequestDispatcher("products.jsp").forward(request, response);
 	}
 
 }

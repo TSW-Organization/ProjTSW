@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-/**
- * Servlet implementation class HomeServlet
- */
+
 @WebServlet(urlPatterns = {"", "/home"})
 public class HomeServlet extends HttpServlet {
 	

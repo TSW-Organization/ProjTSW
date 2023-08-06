@@ -55,7 +55,7 @@
 			        	<div class="row">
 			          		<div class="col-50">
 					            <h3>Indirizzo di fatturazione</h3><br/>
-					            <label for="fullName"><i class="fa fa-user"></i> Nome completo</label>
+					            <label for="fullName"><i class="fa fa-user"></i> Nome e cognome</label>
 					            <input type="text" id="fullName" name="fullName" value="<%=fullName %>" required data-validation="fullName">
 					            <label for="email"><i class="fa fa-envelope"></i> Email</label>
 					            <input type="text" id="email" name="email" value="<%=email %>" required data-validation="email">
