@@ -21,7 +21,7 @@ public class ProductDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM products WHERE (quantity>0)";
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE (quantity>0)";
 	        statement = connection.prepareStatement(query);
 	        resultSet = statement.executeQuery();
 
@@ -82,7 +82,7 @@ public class ProductDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM products WHERE (quantity>0) ORDER BY favorites DESC";
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE (quantity>0) ORDER BY favorites DESC";
 	        statement = connection.prepareStatement(query);
 	        resultSet = statement.executeQuery();
 
@@ -143,7 +143,7 @@ public class ProductDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM products WHERE (quantity>0) AND (category=? OR category=? OR category=? OR category=?)";
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE (quantity>0) AND (category=? OR category=? OR category=? OR category=?)";
 	        statement = connection.prepareStatement(query);
 	        
 	        if (chosenCategory.equals("arte")) {
@@ -232,7 +232,7 @@ public class ProductDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM products WHERE id = ?";
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE id = ?";
 	        statement = connection.prepareStatement(query);
 	        
 	        statement.setInt(1, productId);
@@ -294,7 +294,7 @@ public class ProductDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM products WHERE (quantity>0) AND (name LIKE ?)";
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE (quantity>0) AND (name LIKE ?)";
 	        statement = connection.prepareStatement(query);
 
 	        statement.setString(1, searchTerm);
@@ -348,7 +348,7 @@ public class ProductDAO {
 	    return products;
     }
     
-public List<Product> getProductsBySearch(String search) {
+    public List<Product> getProductsBySearch(String search) {
         
         List<Product> products = new ArrayList<>();
         
@@ -358,7 +358,7 @@ public List<Product> getProductsBySearch(String search) {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM products WHERE (quantity > 0) AND (LOWER(name) LIKE ? OR LOWER(category) LIKE ? OR LOWER(description) LIKE ?)";
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE (quantity > 0) AND (LOWER(name) LIKE ? OR LOWER(category) LIKE ? OR LOWER(description) LIKE ?)";
 	        statement = connection.prepareStatement(query);
 	        String searchParam = "%" + search.toLowerCase() + "%";
 	        statement.setString(1, searchParam);
@@ -412,5 +412,41 @@ public List<Product> getProductsBySearch(String search) {
 
 	    return products;
     }
-       
+    
+    public void decreaseProductQuantity(int id, int selectedQuantity) {
+        
+        Connection connection = null;
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
+
+        try {
+	        connection = DriverManagerConnectionPool.getConnection();
+	        String query = "UPDATE product SET quantity = quantity - ? WHERE id = ?";
+	        statement = connection.prepareStatement(query);
+	        statement.setInt(1, selectedQuantity);
+	        statement.setInt(2, id);
+	        statement.executeUpdate();
+	        
+	        connection.commit();
+
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (resultSet != null) {
+	                resultSet.close();
+	            }
+	            if (statement != null) {
+	                statement.close();
+	            }
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+    }
+    
 }

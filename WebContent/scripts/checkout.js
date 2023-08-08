@@ -31,8 +31,8 @@ window.onload = function() {
     };
 };
 
-///////////////////////////////////////////
 
+//FUNZIONE PER CONTROLLO FORM LATO CLIENT
 $(document).ready(function () {
     // Aggiungi un listener per l'evento di cambio nei campi di input
     $('input[data-validation]').on('input', function () {
@@ -58,10 +58,10 @@ $(document).ready(function () {
 		        isValid = /^\d{5}$/.test(value); // Codice numerico di 5 cifre
 		        break;
 		    case 'cardNumber':
-		        isValid = /^\d{16}$/.test(value); // Numero della carta di 16 cifre
+		        isValid = /^\d{4}-?\d{4}-?\d{4}-?\d{4}.*$/.test(value); // Numero della carta di 16 cifre
 		        break;
 		    case 'expDate':
-		        isValid = /^(0[1-9]|1[0-2])\/\d{4}$/.test(value); // Data nel formato MM/YYYY
+		        isValid = /^\d{2}\/\d{2}$/.test(value); // Data nel formato MM/YYYY
 		        break;
 		    case 'cvv':
 		        isValid = /^\d{3}$/.test(value); // Codice numerico di tre cifre
@@ -71,10 +71,76 @@ $(document).ready(function () {
 		}
 
         // Aggiungi o rimuovi la classe 'error' in base alla validità
-        if (isValid) {
+        if (isValid || value=='') {
             $(this).removeClass('error');
         } else {
             $(this).addClass('error');
         }
     });
 });
+
+//FUNZIONI DI FORMATTAZIONE
+document.addEventListener("DOMContentLoaded", function() {
+
+	//per cardNumber
+	const cardNumber = document.getElementById("cardNumber");
+	cardNumber.addEventListener("input", function() {
+		var v = this.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+	    var matches = v.match(/\d{4,16}/g);
+	    var match = matches && matches[0] || '';
+	    var parts = [];
+	    for (i=0, len=match.length; i<len; i+=4) {
+	        parts.push(match.substring(i, i+4));
+	    }
+	    if (parts.length) {
+	        this.value =  parts.join('-');
+	    } else {
+	        this.value = value;
+	    }
+	});
+	
+	//per expDate
+	const expDate = document.getElementById("expDate");		
+	expDate.addEventListener("input", function() {
+		var v = this.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+        var matches = v.match(/\d{2,4}/g);
+        var match = matches && matches[0] || '';
+        var parts = [];
+        for (i=0, len=match.length; i<len; i+=2) {
+            parts.push(match.substring(i, i+2));
+        }
+        if (parts.length) {
+            this.value = parts.join('/');
+        } else {
+            this.value = value;
+        }
+	});
+	
+	//per cvv
+	const cvv = document.getElementById("cvv");	
+	cvv.addEventListener("input", function() {
+		const maxLength = 3;
+		const regex = /^\d*$/;
+		if (!regex.test(this.value)) {
+			this.value = this.value.replace(/\D/g, '');
+		}
+		if (this.value.length > maxLength) {
+			this.value = this.value.slice(0, maxLength);
+		}
+	});
+	
+	//per zipCode
+	const zipCode = document.getElementById("zipCode");	
+	zipCode.addEventListener("input", function() {
+		const maxLength = 5;
+		const regex = /^\d*$/;  	
+		if (!regex.test(this.value)) {
+			this.value = this.value.replace(/\D/g, '');
+		}
+		if (this.value.length > maxLength) {
+			this.value = this.value.slice(0, maxLength);
+		}
+	});
+
+});
+

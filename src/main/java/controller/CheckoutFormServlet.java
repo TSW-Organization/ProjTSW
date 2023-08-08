@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
@@ -11,8 +12,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/CheckCheckoutForm")
-public class CheckCheckoutFormServlet extends HttpServlet {
+import model.CartItem;
+import model.ProductDAO;
+
+@WebServlet("/CheckoutForm")
+public class CheckoutFormServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
@@ -87,14 +91,14 @@ public class CheckCheckoutFormServlet extends HttpServlet {
         }
 
         // Convalida cardNumber
-        if (cardNumber == null || !Pattern.matches("^\\d{16}$", cardNumber)) {
+        if (cardNumber == null || !Pattern.matches("^\\d{4}-?\\d{4}-?\\d{4}-?\\d{4}$", cardNumber)) {
             error += "Inserisci un numero di carta valido<br>";
         } else {
             request.setAttribute("cardNumber", cardNumber);
         }
 
         // Convalida expDate
-        if (expDate == null || !Pattern.matches("^(0[1-9]|1[0-2])\\/\\d{4}$", expDate)) {
+        if (expDate == null || !Pattern.matches("^\\d{2}\\/\\d{2}$", expDate)) {
             error += "Inserisci una data di scadenza valida (MM/YYYY)<br>";
         } else {
             request.setAttribute("expDate", expDate);
@@ -114,11 +118,25 @@ public class CheckCheckoutFormServlet extends HttpServlet {
             // I campi sono validi, puoi inviare i dati al server
             // Aggiungi qui la logica per elaborare i dati inviati dal modulo
 
+        
         	HttpSession session = request.getSession();
+        	
+        	//Aggiorno le quantità disponibili nel database
+        	ProductDAO productDAO = new ProductDAO();
+        	
+        	@SuppressWarnings("unchecked")
+			List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
+        	
+        	for(CartItem item : cartItems) {
+        		productDAO.decreaseProductQuantity(item.getId(),item.getSelectedQuantity());
+        	}
+        	
+        	
             session.removeAttribute("cartItems");
         	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/checkout-success.jsp");
             dispatcher.forward(request, response);
         }
+        
 	}
 	
 }

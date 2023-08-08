@@ -50,7 +50,7 @@
 			<div class="col-75">
 		    	<div class="container">
 		      		
-		      		<form id="checkout-form" name="checkout-form" method="POST" action="CheckCheckoutForm" novalidate>
+		      		<form id="checkout-form" name="checkout-form" method="POST" action="CheckoutForm" novalidate>
 		
 			        	<div class="row">
 			          		<div class="col-50">
@@ -91,7 +91,7 @@
 				            <div class="row">
 				            	<div class="col-50">
 				                	<label for="expDate">Data di scadenza</label>
-				            		<input type="text" id="expDate" name="expDate" placeholder="00/0000" value="<%=expDate %>" required data-validation="expDate">
+				            		<input type="text" id="expDate" name="expDate" placeholder="00/00" value="<%=expDate %>" required data-validation="expDate">
 				              	</div>
 				              	<div class="col-50">
 				                	<label for="cvv">CVV</label>
@@ -122,7 +122,6 @@
 	</main>
 
 	<%@ include file="templates/footer.jsp" %>
-	
-	
+		
 </body>
 </html>
