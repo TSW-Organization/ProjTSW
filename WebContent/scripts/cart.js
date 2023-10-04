@@ -139,7 +139,7 @@ function updateCart() {
                     <br>
 		            <a id="checkout" href="checkout.jsp">Vai al checkout</a>
 	                <br><br>
-	                <button id="back" onclick="goBack()">Continua gli acquisti</button> 
+	                <button id="back" onclick="goBack()">Continua gli acquisti</button>
                 `;
 
                 cartList.append(listHtml);

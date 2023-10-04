@@ -19,6 +19,7 @@
                 <!-- Finestra modale di registrazione -->
                 <div id="registerModal" class="modal"></div>
             </li>
+            <li><a href="orders.jsp">Ordini effettuati<br></a></li>
             <li><a href="contact.jsp">Assistenza<br></a></li>
         </ul>
     </div>

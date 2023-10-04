@@ -413,7 +413,7 @@ public class ProductDAO {
 	    return products;
     }
     
-    public void decreaseProductQuantity(int id, int selectedQuantity) {
+    public void sellProduct(int id, int selectedQuantity) {
         
         Connection connection = null;
 	    PreparedStatement statement = null;
@@ -421,10 +421,11 @@ public class ProductDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "UPDATE product SET quantity = quantity - ? WHERE id = ?";
+	        String query = "UPDATE product SET quantity=quantity-?, favorites=favorites+? WHERE id=?";
 	        statement = connection.prepareStatement(query);
 	        statement.setInt(1, selectedQuantity);
-	        statement.setInt(2, id);
+	        statement.setInt(2, selectedQuantity);
+	        statement.setInt(3, id);
 	        statement.executeUpdate();
 	        
 	        connection.commit();
