@@ -33,11 +33,11 @@ public class PurchasesServlet extends HttpServlet {
 	    PurchaseItemDAO purchaseItemDAO = new PurchaseItemDAO();
 
 
-	    List<Purchase> purchases = purchaseDAO.getPurchasesByCustomerId(1);
+	    List<Purchase> purchases = purchaseDAO.getPurchasesByUserId(1);
 	    
 	    /*
 	    for(Purchase purchase : purchases) {
-	    	Payment payment = paymentDAO.getPaymentByPurchaseIdAndCustomerId();
+	    	Payment payment = paymentDAO.getPaymentByPurchaseIdAndUserId();
 	    }
 	    */
 	    

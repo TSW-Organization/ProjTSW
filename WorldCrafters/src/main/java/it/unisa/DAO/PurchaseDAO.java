@@ -14,7 +14,7 @@ import it.unisa.utils.DriverManagerConnectionPool;
 
 public class PurchaseDAO {
 	
-	public int setPurchase(Date date, double amount, int customerId, int paymentId) {
+	public int setPurchase(Date date, double amount, int userId, int paymentId) {
 		
 		Connection connection = null;
 	    PreparedStatement statement = null;
@@ -23,13 +23,13 @@ public class PurchaseDAO {
 
 	    try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "INSERT INTO purchase (date, amount, customer_id, payment_id) VALUES (?, ?, ?, ?);";
+	        String query = "INSERT INTO purchase (date, amount, user_id, payment_id) VALUES (?, ?, ?, ?);";
 
 	        // Passiamo il flag Statement.RETURN_GENERATED_KEYS al PreparedStatement
 	        statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 	        statement.setDate(1, date);
 	        statement.setDouble(2, amount);
-	        statement.setInt(3, customerId);
+	        statement.setInt(3, userId);
 	        statement.setInt(4, paymentId);
 	        statement.executeUpdate();
 
@@ -61,7 +61,7 @@ public class PurchaseDAO {
 	    return generatedId; // Ritorniamo l'ID generato
 	}
 	
-	public List<Purchase> getPurchasesByCustomerId(int customerId) {
+	public List<Purchase> getPurchasesByUserId(int userId) {
 		
 		List<Purchase> purchases = new ArrayList<>();
 		
@@ -71,9 +71,9 @@ public class PurchaseDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, date, amount, payment_id FROM purchase WHERE (customer_id = ?)";
+	        String query = "SELECT id, date, amount, payment_id FROM purchase WHERE (user_id = ?)";
 	        statement = connection.prepareStatement(query);
-	        statement.setInt(1, customerId);
+	        statement.setInt(1, userId);
 	        resultSet = statement.executeQuery();
 
 	        while (resultSet.next()) {

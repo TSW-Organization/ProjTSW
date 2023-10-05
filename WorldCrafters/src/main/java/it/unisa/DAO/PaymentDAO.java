@@ -13,7 +13,7 @@ import java.sql.Date;
 
 public class PaymentDAO {
 	
-	public int setPayment(Date date, Time time, double amount, int customerId) {
+	public int setPayment(Date date, Time time, double amount, int userId) {
 		
 		Connection connection = null;
 	    PreparedStatement statement = null;
@@ -22,14 +22,14 @@ public class PaymentDAO {
 
 	    try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "INSERT INTO payment (date, time, amount, customer_id) VALUES (?, ?, ?, ?);";
+	        String query = "INSERT INTO payment (date, time, amount, user_id) VALUES (?, ?, ?, ?);";
 
 	        // Passiamo il flag Statement.RETURN_GENERATED_KEYS al PreparedStatement
 	        statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 	        statement.setDate(1, date);
 	        statement.setTime(2, time);
 	        statement.setDouble(3, amount);
-	        statement.setInt(4, customerId);
+	        statement.setInt(4, userId);
 	        statement.executeUpdate();
 
 	        // Otteniamo l'ID generato

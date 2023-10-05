@@ -7,8 +7,9 @@ public class Purchase {
 	private int id;
 	private Date date;
 	private double amount;
-	private int customerId;
+	private int userId;
 	private int paymentId;
+	
 	
 	public int getId() {
 		return id;
@@ -28,11 +29,11 @@ public class Purchase {
 	public void setAmount(double amount) {
 		this.amount = amount;
 	}
-	public int getCustomerId() {
-		return customerId;
+	public int getUserId() {
+		return userId;
 	}
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 	public int getPaymentId() {
 		return paymentId;
@@ -40,6 +41,8 @@ public class Purchase {
 	public void setPaymentId(int paymentId) {
 		this.paymentId = paymentId;
 	}
+	
+	
 	
 		
 }
