@@ -1,0 +1,136 @@
+/* CONTACT CONTAINER */
+#contactContainer {
+    width: 50%;
+    margin-left: 25%;
+    margin-top: -550px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    min-height: 700px;
+}
+
+#contactContainer h1 {
+    text-align: center;
+}
+
+#contactContainer .form-item {
+    margin-bottom: 20px;
+}
+
+#contactContainer label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#contactContainer input[type="text"], input[type="email"], textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+#contactContainer select {
+    font-size: 16px;
+}
+
+#contactContainer textarea {
+    height: 200px;
+    resize:none;
+}
+
+#contactContainer input[type="submit"] {
+    background-color: orange;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#contactContainer input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* CHECK FORM */
+.error-message {
+	color: red;
+}
+
+.error {
+	border: 1px solid red !important;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+	
+	/* BACKGROUND IMAGE */
+	#background {
+	    background-image: url(../imgs/presentation-bg2.jpg);
+	    background-position: center;
+	    background-size: cover;
+	    height: 300px;
+	}
+	
+	/* CONTACT CONTAINER */
+	#contactContainer {
+	    width: 90%;
+	    margin-left: 5%;
+	    margin-top: -250px;
+	    background-color: white;
+	    padding: 10px;
+	    border-radius: 15px;
+	    min-height: 500px;
+	}
+	
+	#contactContainer h1 {
+	    text-align: center;
+	    font-size: 15px;
+	}
+	
+	#contactContainer .form-item {
+	    margin-bottom: 20px;
+	}
+	
+	#contactContainer label {
+	    display: block;
+	    font-weight: bold;
+	    margin-bottom: 5px;
+	    font-size: 13px;
+	}
+	
+	#contactContainer input[type="text"], input[type="email"], textarea {
+	    width: 100%;
+	    padding: 10px;
+	    font-size: 16px;
+	    border-radius: 4px;
+	    border: 1px solid #ccc;
+	    font-size: 11px;
+	}
+	
+	#contactContainer select {
+	    font-size: 11px;
+	}
+	
+	#contactContainer textarea {
+	    height: 150px;
+	    resize:none;
+	}
+	
+	#contactContainer input[type="submit"] {
+	    background-color: orange;
+	    color: #fff;
+	    padding: 10px 20px;
+	    font-size: 16px;
+	    border: none;
+	    border-radius: 4px;
+	    cursor: pointer;
+	}
+	
+	#contactContainer input[type="submit"]:hover {
+	    background-color: orange;
+	}
+}
