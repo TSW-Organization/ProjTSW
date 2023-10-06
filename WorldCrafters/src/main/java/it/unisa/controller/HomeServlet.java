@@ -26,10 +26,8 @@ public class HomeServlet extends HttpServlet {
 
 	    // Chiama il metodo getAllProducts() per ottenere la lista di prodotti
 	    List<Product> products = productDAO.getFavoritesProducts();
-		
-		
-		request.setAttribute("products", products);
-			
+	    
+		request.setAttribute("products", products);	
 		request.getRequestDispatcher("home.jsp").forward(request, response);
 	}
 

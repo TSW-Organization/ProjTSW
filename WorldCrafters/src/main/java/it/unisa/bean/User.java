@@ -12,6 +12,8 @@ public class User {
 	private String city;
 	private String state;
 	private String zipCode;
+	private String confirmError;
+	
 	
 	public int getId() {
 		return id;
@@ -91,6 +93,14 @@ public class User {
 	
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
+	}
+	
+	public String getConfirmError() {
+		return confirmError;
+	}
+	
+	public void setConfirmError(String confirmError) {
+		this.confirmError = confirmError;
 	}
 	
 }

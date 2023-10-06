@@ -4,7 +4,7 @@
 <html>
 <head>
 	<%@ include file="templates/head.html" %>
-    <link rel="stylesheet" type="text/css" href="styles/register.css">
+    <link rel="stylesheet" type="text/css" href="styles/log-reg.css">
 </head>
 <body>
 	<div class="modal-overlay">
@@ -13,8 +13,12 @@
 			<h2 class="form-title">Sign up</h2>
 			<form method="post" action="registration" id="signup-form">
 				<div class="form-group">
-					<label for="username">Username:</label> <input type="text"
-						name="username" id="username" placeholder="Your Name" required />
+					<label for="firstName">First name:</label> 
+					<input type="text" name="firstName" id="firstName" placeholder="First name" required />
+				</div>
+				<div class="form-group">
+					<label for="lastName">Last name:</label> 
+					<input type="text" name="lastName" id="lastName" placeholder="Last name" required />
 				</div>
 				<div class="form-group">
 					<label for="email">Email:</label> <input type="email" name="email"
@@ -48,6 +52,12 @@
 
 		</div>
 	</div>
+	
+	<script>
+		function closeModal() {
+			history.back();
+		}
+	</script>
 	
 </body>
 </html>

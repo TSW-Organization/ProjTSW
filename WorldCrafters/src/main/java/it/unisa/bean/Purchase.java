@@ -10,7 +10,6 @@ public class Purchase {
 	private int userId;
 	private int paymentId;
 	
-	
 	public int getId() {
 		return id;
 	}
@@ -41,8 +40,6 @@ public class Purchase {
 	public void setPaymentId(int paymentId) {
 		this.paymentId = paymentId;
 	}
-	
-	
 	
 		
 }
