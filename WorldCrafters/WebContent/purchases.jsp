@@ -30,6 +30,7 @@
                 	
                 	<% @SuppressWarnings("unchecked")
                    	List<Purchase> purchases = (List<Purchase>) request.getAttribute("purchases"); %>
+                   	<% if(purchases.size()!=0) { %>
 					<% for (int i = 0; i < purchases.size(); i++) { %>
 						<% Purchase purchase = purchases.get(i); %>
 				        	<div class="purchase">
@@ -40,7 +41,12 @@
 	                        
 	                        </div>
 
-					<%} %>
+						<%} %>
+					<% } else {%>
+							<div class="purchase">
+	                        	<p>Non hai effettuato nessun ordine</p>
+	                        </div>
+					<% } %>
 
 				</div>
 			</div>

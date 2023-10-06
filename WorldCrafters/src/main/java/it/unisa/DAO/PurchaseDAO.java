@@ -71,7 +71,7 @@ public class PurchaseDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, date, amount, payment_id FROM purchase WHERE (user_id = ?)";
+	        String query = "SELECT id, date, amount, payment_id FROM purchase WHERE (user_id = ?);";
 	        statement = connection.prepareStatement(query);
 	        statement.setInt(1, userId);
 	        resultSet = statement.executeQuery();

@@ -42,7 +42,7 @@ public class PurchasesServlet extends HttpServlet {
 	    */
 	    
 	       
-		request.setAttribute("purchases", purchases);	
+		request.setAttribute("purchases", purchases);
 		request.getRequestDispatcher("purchases.jsp").forward(request, response);
 	}
 

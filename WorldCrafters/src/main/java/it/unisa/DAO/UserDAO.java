@@ -11,27 +11,24 @@ import it.unisa.utils.DriverManagerConnectionPool;
 
 public class UserDAO {
 
-    public boolean authenticate(String email, String password) {
+    public int authenticate(String email, String password) {
             
         Connection connection = null;
 	    PreparedStatement statement = null;
 	    ResultSet resultSet = null;
+	    int generatedId = -1; // Inizializziamo con un valore di errore
 
         try {
-	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT * FROM user WHERE ( email=? AND password=? )";
+        	connection = DriverManagerConnectionPool.getConnection();
+	        String query = "SELECT id FROM user WHERE ( email=? AND password=?);";
 	        statement = connection.prepareStatement(query);
 	        statement.setString(1, email);
 	        statement.setString(2, password);
 	        resultSet = statement.executeQuery();
 
 	        if (resultSet.next()) {
-                // L'utente è autenticato correttamente
-                resultSet.close();
-                statement.close();
-                connection.close();
-                return true;
-            }
+	            generatedId = resultSet.getInt("id");
+	        }
 	        
 	    } catch (SQLException e) {
 	        e.printStackTrace();
@@ -51,7 +48,7 @@ public class UserDAO {
 	        }
 	    }
 
-	    return false;
+	    return generatedId;
     }
     
     public int registerUser(String firstName, String lastName, String email, String password) {

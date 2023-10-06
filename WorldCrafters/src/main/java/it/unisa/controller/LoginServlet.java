@@ -20,21 +20,21 @@ public class LoginServlet extends HttpServlet {
         
 		String email = request.getParameter("email");
         String password = request.getParameter("password");
+        int userId;
         
         // Effettua la logica di autenticazione nel database e restituisce true se le credenziali sono corrette
         UserDAO userDAO = new UserDAO();
            
-        boolean isValidUser = false;
-		isValidUser = userDAO.authenticate(email, password);
+		userId = userDAO.authenticate(email, password);
 		
         
-        if (isValidUser) {
+        if (userId != -1) {
             HttpSession session = request.getSession();
-            session.setAttribute("authenticated", true);
+            session.setAttribute("userId", userId);
             response.sendRedirect("home");
         } else {
         	HttpSession session = request.getSession();
-            session.setAttribute("authenticated", false);
+            session.setAttribute("userId", userId);
         	response.sendRedirect("login.jsp"); // Reindirizza alla pagina di login con un messaggio di errore
         }
     }

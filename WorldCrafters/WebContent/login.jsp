@@ -20,8 +20,8 @@
 					<input type="text" name="email" id="email" placeholder="La tua email" /> <!-- Aggiorna il placeholder -->
 				</div>
 				<div class="form-group">
-					<label for="password">Password:</label> <input type="password"
-						name="password" id="password" placeholder="Password" />
+					<label for="password">Password:</label> 
+					<input type="password" name="password" id="password" placeholder="Password" />
 				</div>
 				<div class="form-group form-button">
 					<input type="submit" name="signin" id="signin" value="Accedi" />
@@ -47,6 +47,7 @@
 	
 	<script>
 		function closeModal() {
+			history.back();
 			history.back();
 		}
 	</script>

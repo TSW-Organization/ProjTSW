@@ -126,6 +126,7 @@ public class CheckoutFormServlet extends HttpServlet {
 
         
         	HttpSession session = request.getSession();
+        	int userId = (int) session.getAttribute("userId");
         	@SuppressWarnings("unchecked")
         	List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
         	ProductDAO productDAO = new ProductDAO();
@@ -143,14 +144,14 @@ public class CheckoutFormServlet extends HttpServlet {
             Time currentTime = new Time(currentTimeMillis);
         	
         	PaymentDAO paymentDAO = new PaymentDAO();
-        	int generatedPaymentId = paymentDAO.setPayment(currentDate, currentTime, amount, 1);      	
+        	int generatedPaymentId = paymentDAO.setPayment(currentDate, currentTime, amount, userId);      	
         	
         	//Creo un order
         	currentTimeMillis = System.currentTimeMillis();
             currentDate = new Date(currentTimeMillis);
         	
         	PurchaseDAO purchaseDAO = new PurchaseDAO();
-        	int generatedPurchaseId = purchaseDAO.setPurchase(currentDate, amount, 1, generatedPaymentId);
+        	int generatedPurchaseId = purchaseDAO.setPurchase(currentDate, amount, userId, generatedPaymentId);
         	
 
         	//Aggiungo gli orderItem nel db e li collego all'order
