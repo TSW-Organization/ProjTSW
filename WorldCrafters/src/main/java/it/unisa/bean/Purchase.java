@@ -42,7 +42,5 @@ public class Purchase {
 		this.paymentId = paymentId;
 	}
 	
-	
-	
-		
+
 }

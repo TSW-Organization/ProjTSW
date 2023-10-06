@@ -1,5 +1,6 @@
 //FUNZIONE PER FINESTRA DI LOGIN
   // Funzione per aprire la finestra modale e caricare la login.jsp
+/*
 function openModal(modalId, pageUrl) {
     var modal = document.getElementById(modalId);
     modal.style.display = "block";
@@ -13,13 +14,10 @@ function openModal(modalId, pageUrl) {
     xhr.open("GET", pageUrl, true);
     xhr.send();
 }
-
+*/
 // Funzione per chiudere la finestra modale
 function closeModal() {
-    var modals = document.getElementsByClassName("modal");
-    for (var i = 0; i < modals.length; i++) {
-        modals[i].style.display = "none";
-    }
+	history.back();
 }
 /*
 function closeModal() {

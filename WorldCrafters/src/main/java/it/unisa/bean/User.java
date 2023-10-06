@@ -5,13 +5,14 @@ public class User {
 	private int id;
 	private String firstName;
 	private String lastName;
-	private String username;
 	private String email;
 	private String password;
 	private String address;
 	private String city;
 	private String state;
 	private String zipCode;
+	private String confirmError;
+	
 	
 	public int getId() {
 		return id;
@@ -35,14 +36,6 @@ public class User {
 	
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-	
-	public String getUsername() {
-		return username;
-	}
-	
-	public void setUsername(String username) {
-		this.username = username;
 	}
 	
 	public String getEmail() {
@@ -91,6 +84,14 @@ public class User {
 	
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
+	}
+	
+	public String getConfirmError() {
+		return confirmError;
+	}
+	
+	public void setConfirmError(String confirmError) {
+		this.confirmError = confirmError;
 	}
 	
 }

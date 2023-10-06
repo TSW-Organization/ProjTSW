@@ -16,9 +16,8 @@
 			<!-- Aggiorna il testo del titolo -->
 			<form method="post" action="login" id="login-form">
 				<div class="form-group">
-					<label for="username">Username:</label> <input type="text"
-						name="username" id="username" placeholder="Il tuo nome" />
-					<!-- Aggiorna il placeholder -->
+					<label for="email">Email:</label> 
+					<input type="text" name="email" id="email" placeholder="La tua email" /> <!-- Aggiorna il placeholder -->
 				</div>
 				<div class="form-group">
 					<label for="password">Password:</label> <input type="password"
@@ -45,6 +44,13 @@
 		</div>
 			
 	</div>
+	
+	<script>
+		function closeModal() {
+			history.back();
+		}
+	</script>
+	
 	
 </body>
 </html>

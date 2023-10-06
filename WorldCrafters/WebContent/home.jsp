@@ -13,7 +13,7 @@
     
     <%@ include file="templates/header.jsp" %>
     <%@ include file="templates/sidebar.jsp" %>
-    <%@ include file="templates/guestUserbar.jsp" %>
+    <%@ include file="templates/userbar.jsp" %>
     
     <div id="presentationContainer" onclick="closeAll()">
     	<%@ include file="templates/presentationBg.jsp" %>

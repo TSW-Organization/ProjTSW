@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="javax.servlet.http.HttpSession" %>
 
 <!DOCTYPE html>
 <html>
@@ -8,11 +9,26 @@
     <script src="scripts/log-reg.js"></script>
 </head>
 <body>
-	<div id="userbar">
-        <ul>
-            <li><a href="orders.jsp">Ordini effettuati<br></a></li>
-            <li><a href="contact.jsp">Assistenza<br></a></li>
-        </ul>
-    </div>
+	
+    <% HttpSession sessione = request.getSession();%>
+    <% boolean authenticated = (sessione.getAttribute("authenticated") != null && (boolean) sessione.getAttribute("authenticated")); %>
+	<% if(authenticated) { %>
+    	<div id="userbar">
+	        <ul>
+	            <li><a href="purchases">Ordini effettuati<br></a></li>
+	            <li><a href="contact.jsp">Assistenza<br></a></li>
+	            <li><a href="logout">Logout<br></a></li>
+	        </ul>
+	    </div>
+	<% } else { %>
+    	<div id="userbar">
+	        <ul>
+	            <li><a href="login.jsp">Sign in</a></li>
+	            <li><a href="register.jsp">Register</a></li>
+	            <li><a href="contact.jsp">Assistenza<br></a></li>
+	        </ul>
+	    </div>
+	<% } %>
+	
 </body>
 </html>
