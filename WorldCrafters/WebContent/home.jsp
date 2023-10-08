@@ -8,18 +8,31 @@
 <html lang="it">
 <head>
     <%@ include file="templates/head.html" %>
-    <link rel="stylesheet" type="text/css" href="styles/home.css">
+    <link rel="stylesheet" type="text/css" href="styles/home.css">	
+	<link rel="stylesheet" type="text/css" href="styles/log-reg.css">
+	<script src="scripts/log-reg.js"></script>
+	<script src="scripts/script.js"></script>
+	
 </head>
 <body>
     
     <%@ include file="templates/header.jsp" %>
     <%@ include file="templates/sidebar.jsp" %>
-    
-
     <%@ include file="templates/userbar.jsp" %>
+	<!-- contenuto in overlay sulla home -->
+<!-- Overlay per register.jsp -->
+<div id="register-overlay" style="display: none;">
+    <div id="register-overlay-content">
+    </div>
+</div>
 
-    
-    <div id="presentationContainer" onclick="closeAll()">
+<!-- Overlay per login.jsp -->
+<div id="login-overlay" style="display: none;">
+    <div id="login-overlay-content">
+    </div>
+</div>
+
+	<div id="presentationContainer" onclick="closeAll()">
     	<%@ include file="templates/presentationBg.jsp" %>
     	<p>Fatti ispirare dalle tradizioni<br>artigianali di tutto<br>il mondo</p>
     </div>

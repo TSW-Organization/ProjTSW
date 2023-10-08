@@ -23,9 +23,9 @@
 	<% } else { %>
     	<div id="userbar">
 	        <ul>
-	            <li><a href="login.jsp">Sign in</a></li>
-	            <li><a href="register.jsp">Register</a></li>
-	            <li><a href="contact.jsp">Assistenza<br></a></li>
+			<li><a href="#" onclick="openOverlay('login-overlay', 'login.jsp')">Login</a></li>
+			<li><a href="#" onclick="openOverlay('register-overlay', 'register.jsp')">Register</a></li>
+     	    <li><a href="contact.jsp">Assistenza<br></a></li>
 	        </ul>
 	    </div>
 	<% } %>
