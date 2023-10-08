@@ -14,11 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import it.unisa.DAO.CartDAO;
+import it.unisa.DAO.CartItemDAO;
 import it.unisa.DAO.PaymentDAO;
 import it.unisa.DAO.ProductDAO;
 import it.unisa.DAO.PurchaseDAO;
 import it.unisa.DAO.PurchaseItemDAO;
 import it.unisa.bean.CartItem;
+import it.unisa.bean.Product;
 
 
 @WebServlet("/CheckoutForm")
@@ -128,12 +131,26 @@ public class CheckoutFormServlet extends HttpServlet {
         	HttpSession session = request.getSession();
         	int userId = (int) session.getAttribute("userId");
         	@SuppressWarnings("unchecked")
-        	List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
+        	List<Product> productList = (List<Product>) session.getAttribute("productList");
         	ProductDAO productDAO = new ProductDAO();
         	double amount = 0.0;
         	
+        	//Elimino i cartItem associati al cart dell'utente dal db
+        	CartItemDAO cartItemDAO = new CartItemDAO();
+        	CartDAO cartDAO = new CartDAO();
+        	int cartId = cartDAO.getCartByUserId(userId);
+        	
+        	for(Product item : productList) {
+        		productDAO.sellProduct(item.getId(),item.getSelectedQuantity());
+        		cartItemDAO.deleteCartItem(cartId, item.getId());
+        	}
+        	
+        	//Elimino il cart dell'utente dal db
+        	cartDAO.deleteCart(cartId);
+        	
+        	
         	//Aggiorno quantity e favorites di product
-        	for(CartItem item : cartItems) {
+        	for(Product item : productList) {
         		productDAO.sellProduct(item.getId(),item.getSelectedQuantity());
         		amount += item.getSelectedQuantity() * item.getPrice();
         	}
@@ -144,7 +161,7 @@ public class CheckoutFormServlet extends HttpServlet {
             Time currentTime = new Time(currentTimeMillis);
         	
         	PaymentDAO paymentDAO = new PaymentDAO();
-        	int generatedPaymentId = paymentDAO.setPayment(currentDate, currentTime, amount, userId);      	
+        	int generatedPaymentId = paymentDAO.setPayment(currentDate, currentTime, amount, userId);
         	
         	//Creo un order
         	currentTimeMillis = System.currentTimeMillis();
@@ -156,13 +173,12 @@ public class CheckoutFormServlet extends HttpServlet {
 
         	//Aggiungo gli orderItem nel db e li collego all'order
         	PurchaseItemDAO purchaseItemDAO = new PurchaseItemDAO();
-        	for(CartItem item : cartItems) {
+        	for(Product item : productList) {
         		purchaseItemDAO.setOrderItem(item.getSelectedQuantity(), item.getPrice(), item.getId(), generatedPurchaseId);
         	}
         	
-        	
 
-            session.removeAttribute("cartItems");
+            session.removeAttribute("productList");
         	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/checkout-success.jsp");
             dispatcher.forward(request, response);
         }

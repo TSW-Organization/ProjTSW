@@ -173,6 +173,42 @@ public class CartDAO {
 	    return productList;
 		
 	}
+	
+	public void deleteCart(int cartId) {
+		
+		Connection connection = null;
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
+
+	    try {
+	        connection = DriverManagerConnectionPool.getConnection();
+	        String query = "DELETE FROM cart WHERE id = ?;";
+
+	        // Passiamo il flag Statement.RETURN_GENERATED_KEYS al PreparedStatement
+	        statement = connection.prepareStatement(query);
+	        statement.setInt(1, cartId);
+	        statement.executeUpdate();
+
+	        connection.commit();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (resultSet != null) {
+	                resultSet.close();
+	            }
+	            if (statement != null) {
+	                statement.close();
+	            }
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+
+	}
 		
 	
 }
