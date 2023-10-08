@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import it.unisa.bean.CartItem;
+import it.unisa.DAO.CartDAO;
+import it.unisa.DAO.CartItemDAO;
+import it.unisa.bean.Product;
 
 
 
@@ -23,25 +25,48 @@ public class RemoveFromCartServlet extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
         int productId = Integer.parseInt(request.getParameter("productId"));
+        CartItemDAO cartItemDAO= new CartItemDAO();
+		
+		HttpSession session = request.getSession();
+		int userId;
+		int cartId;
+		
+		if(session.getAttribute("userId") != null) {
+			
+			userId = (int) session.getAttribute("userId");
+			//salvare nel database
+			CartDAO cartDAO = new CartDAO();
+			
+			cartId = cartDAO.getCartByUserId(userId);
+			
+			cartItemDAO.deleteCartItem(cartId, productId);
+			
+			//session.setAttribute("productList", productList);
+	        
+	        //response.sendRedirect("cart");
 
-        HttpSession session = request.getSession(true);
 
-        List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
-        if (cartItems == null) {
-            // Se la lista non esiste nella sessione, non c'è niente da rimuovere
-            return;
-        }
-        
-        for (CartItem cartItem : cartItems) {  
-        	if (cartItem.getId() == productId) {    
-        		cartItems.remove(cartItem);
-        		break;	   
-            }
-        }
+		} else {
+			//sessione non persistente
 
-        // Aggiorna la lista del carrello nella sessione
-        session.setAttribute("cartItems", cartItems);
+	        List<Product> productList = (List<Product>) session.getAttribute("productList");
+	        if (productList == null) {
+	            // Se la lista non esiste nella sessione, non c'è niente da rimuovere
+	            return;
+	        }
+	        
+	        for (Product item : productList) {  
+	        	if (item.getId() == productId) {    
+	        		productList.remove(item);
+	        		break;	   
+	            }
+	        }
+
+	        // Aggiorna la lista del carrello nella sessione
+	        //session.setAttribute("productList", productList);
+		}
 	}
 
 }

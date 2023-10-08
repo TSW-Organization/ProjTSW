@@ -19,7 +19,7 @@ public class PurchaseItemDAO {
 
 	    try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "INSERT INTO purchase_item (quantity, price, product_id, purchase_id) VALUES (?, ?, ?, ?);";
+	        String query = "INSERT INTO purchase_item (quantity, price, productId, purchaseId) VALUES (?, ?, ?, ?);";
 
 	        // Passiamo il flag Statement.RETURN_GENERATED_KEYS al PreparedStatement
 	        statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);

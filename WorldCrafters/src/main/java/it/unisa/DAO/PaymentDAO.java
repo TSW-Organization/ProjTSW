@@ -22,7 +22,7 @@ public class PaymentDAO {
 
 	    try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "INSERT INTO payment (date, time, amount, user_id) VALUES (?, ?, ?, ?);";
+	        String query = "INSERT INTO payment (date, time, amount, userId) VALUES (?, ?, ?, ?);";
 
 	        // Passiamo il flag Statement.RETURN_GENERATED_KEYS al PreparedStatement
 	        statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);

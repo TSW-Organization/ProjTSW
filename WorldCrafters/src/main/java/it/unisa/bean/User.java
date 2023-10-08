@@ -1,5 +1,6 @@
 package it.unisa.bean;
 
+
 public class User {
 	
 	private int id;

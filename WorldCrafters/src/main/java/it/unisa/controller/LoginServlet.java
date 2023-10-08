@@ -29,12 +29,18 @@ public class LoginServlet extends HttpServlet {
 		
         
         if (userId != -1) {
+            HttpSession oldSession = request.getSession(false);
+            if(oldSession != null) {
+            	oldSession.invalidate();
+            }
+            
             HttpSession session = request.getSession();
             session.setAttribute("userId", userId);
+            //session.setMaxInactiveInterval(5*60);  //imposta tempo inattività a 60 minuti
+
             response.sendRedirect("home");
         } else {
-        	HttpSession session = request.getSession();
-            session.setAttribute("userId", userId);
+        	
         	response.sendRedirect("login.jsp"); // Reindirizza alla pagina di login con un messaggio di errore
         }
     }

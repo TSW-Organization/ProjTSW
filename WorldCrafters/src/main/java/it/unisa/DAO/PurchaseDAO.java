@@ -23,7 +23,7 @@ public class PurchaseDAO {
 
 	    try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "INSERT INTO purchase (date, amount, user_id, payment_id) VALUES (?, ?, ?, ?);";
+	        String query = "INSERT INTO purchase (date, amount, userId, paymentId) VALUES (?, ?, ?, ?);";
 
 	        // Passiamo il flag Statement.RETURN_GENERATED_KEYS al PreparedStatement
 	        statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -71,7 +71,7 @@ public class PurchaseDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, date, amount, payment_id FROM purchase WHERE (user_id = ?);";
+	        String query = "SELECT id, date, amount, paymentId FROM purchase WHERE (userId = ?);";
 	        statement = connection.prepareStatement(query);
 	        statement.setInt(1, userId);
 	        resultSet = statement.executeQuery();
@@ -80,7 +80,7 @@ public class PurchaseDAO {
 	        	int id = resultSet.getInt("id");
 	        	Date date = resultSet.getDate("date");
 	            double amount = resultSet.getDouble("amount");
-	            int paymentId = resultSet.getInt("payment_id");
+	            int paymentId = resultSet.getInt("paymentId");
 
 	            Purchase purchase = new Purchase();
 	            purchase.setId(id);

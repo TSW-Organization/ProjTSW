@@ -13,23 +13,13 @@
     <% HttpSession sessione = request.getSession();%>
     <% if(sessione.getAttribute("userId")!=null) { %>
 	    <% int userId = (int) sessione.getAttribute("userId");%>
-		<% if(userId != -1) { %>
-	    	<div id="userbar">
-		        <ul>
-		            <li><a href="purchases">Ordini effettuati<br></a></li>
-		            <li><a href="contact.jsp">Assistenza<br></a></li>
-		            <li><a href="logout">Logout<br></a></li>
-		        </ul>
-		    </div>
-		<% } else {%>
-			<div id="userbar">
-		        <ul>
-		            <li><a href="login.jsp">Sign in</a></li>
-		            <li><a href="register.jsp">Register</a></li>
-		            <li><a href="contact.jsp">Assistenza<br></a></li>
-		        </ul>
-		    </div>
-		<% } %>
+    	<div id="userbar">
+	        <ul>
+	            <li><a href="purchases">Ordini effettuati<br></a></li>
+	            <li><a href="contact.jsp">Assistenza<br></a></li>
+	            <li><a href="logout">Logout<br></a></li>
+	        </ul>
+	    </div>
 	<% } else { %>
     	<div id="userbar">
 	        <ul>

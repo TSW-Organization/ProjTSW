@@ -8,6 +8,7 @@
 <head>
     <%@ include file="templates/head.html" %>
     <link rel="stylesheet" type="text/css" href="styles/home.css">
+    <script src="scripts/home.js"></script>
 </head>
 <body>
     
@@ -53,6 +54,7 @@
     </main>
     
     <%@ include file="templates/footer.jsp" %>
-    
+
+
 </body>
 </html>
