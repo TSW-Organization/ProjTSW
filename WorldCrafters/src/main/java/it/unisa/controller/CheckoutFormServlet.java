@@ -168,7 +168,7 @@ public class CheckoutFormServlet extends HttpServlet {
             currentDate = new Date(currentTimeMillis);
         	
         	PurchaseDAO purchaseDAO = new PurchaseDAO();
-        	int generatedPurchaseId = purchaseDAO.setPurchase(currentDate, amount, userId, generatedPaymentId);
+        	int generatedPurchaseId = purchaseDAO.setPurchase(currentDate, currentTime, amount, userId, generatedPaymentId);
         	
 
         	//Aggiungo gli orderItem nel db e li collego all'order

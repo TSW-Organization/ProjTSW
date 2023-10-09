@@ -8,11 +8,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import it.unisa.DAO.UserDAO;
 import it.unisa.bean.User;
@@ -32,14 +34,76 @@ public class RegistrationServlet extends HttpServlet {
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        
-        int userID = userDAO.registerUser(firstName, lastName, email, password);
-        
-        response.sendRedirect("login.jsp");
-        
-    }
+        String confirmPassword = request.getParameter("confirmPassword");
+        String error = ""; 
+        	
+        if (firstName == null || firstName.trim().equals("") || !firstName.matches("^[a-zA-Z\\s]+$")) {
+			error += "Inserisci nome valido<br>";
+		} else {
+			request.setAttribute("firstName", firstName);
+		}
 
-    
+		if (lastName == null || lastName.trim().equals("") || !lastName.matches("^[a-zA-Z\\s]+$")) {
+			error += "Inserisci cognome valido<br>";
+		} else {
+			request.setAttribute("lastName", lastName);
+		}
+        
+        if (!isValidEmail(email)) {
+			error += "Inserisci email valida<br>";
+		} else {
+			request.setAttribute("email", email);
+		}
+        
+        if(!isValidPassword(password)) {
+        	error += "La password deve contenere almeno 8 caratteri, una lettera maiuscola, una cifra e un simbolo<br>";
+        } else {
+        	if(!password.equals(confirmPassword)) {
+            	error += "Le password non corrispondono<br>";
+            }
+        }
+        
+		if (!error.equals("")) {
+			request.setAttribute("error", error);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/register.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			int userID = userDAO.registerUser(firstName, lastName, email, password);
+	        response.sendRedirect("login.jsp");
+		}
+		
+    }
+        
+
+	//Verifica se l'indirizzo email è valido utilizzando una semplice espressione regolare
+	private boolean isValidEmail(String email) {
+	    String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
+	    return email.matches(emailRegex);
+	}
+	
+	private boolean isValidPassword(String password) {
+	    // Verifica se la password ha almeno 8 caratteri
+	    if (password.length() < 8) {
+	        return false;
+	    }
+
+	    // Verifica se la password contiene almeno una lettera maiuscola
+	    if (!password.matches(".*[A-Z].*")) {
+	        return false;
+	    }
+
+	    // Verifica se la password contiene almeno una cifra
+	    if (!password.matches(".*\\d.*")) {
+	        return false;
+	    }
+
+	    // Verifica se la password contiene almeno un simbolo
+	    if (!password.matches(".*[!@#$%^&*].*")) {
+	        return false;
+	    }
+
+	    return true;
+	}
 
     private String hashPassword(String password) {
         try {

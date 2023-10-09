@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import it.unisa.DAO.PaymentDAO;
 import it.unisa.DAO.ProductDAO;
@@ -31,9 +32,10 @@ public class PurchasesServlet extends HttpServlet {
 		PurchaseDAO purchaseDAO = new PurchaseDAO();
 	    PaymentDAO paymentDAO = new PaymentDAO();
 	    PurchaseItemDAO purchaseItemDAO = new PurchaseItemDAO();
+	    HttpSession session = request.getSession(false);
 
-
-	    List<Purchase> purchases = purchaseDAO.getPurchasesByUserId(1);
+	    int userId = (int) session.getAttribute("userId");
+	    List<Purchase> purchases = purchaseDAO.getPurchasesByUserId(userId);
 	    
 	    /*
 	    for(Purchase purchase : purchases) {
