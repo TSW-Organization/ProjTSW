@@ -16,7 +16,7 @@ import it.unisa.DAO.ProductDAO;
 import it.unisa.bean.Product;
 
 
-@WebServlet("/add-to-cart")
+@WebServlet("/addToCart")
 public class AddToCartServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;

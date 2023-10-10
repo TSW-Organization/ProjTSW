@@ -1,6 +1,6 @@
 package it.unisa.bean;
 
-public class User {
+public class Admin {
 	
 	private int id;
 	private String firstName;

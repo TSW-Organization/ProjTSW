@@ -13,7 +13,7 @@ function addToCart(productId) {
     
     $.ajax({
         type: "POST",
-        url: "add-to-cart",
+        url: "addToCart",
         data: { productId: productId, selectedQuantity: selectedQuantity },
         success: function(response) {
             updateCart();
@@ -28,7 +28,7 @@ function removeFromCart(productId) {
 	
     $.ajax({
         type: "POST",
-        url: "remove-from-cart",
+        url: "removeFromCart",
         data: { productId: productId },
         success: function(response) {
             updateCart();
@@ -39,10 +39,30 @@ function removeFromCart(productId) {
     });
 }
 
+function emptyCart() {
+    var allXButtons = document.getElementsByClassName("removeFromCartButton");
+    
+    for (var i = 0; i < allXButtons.length; i++) {
+        var productId = allXButtons[i].getAttribute("data-product-id");
+        
+        $.ajax({
+            type: "POST",
+            url: "removeFromCart",
+            data: { productId: productId },
+            success: function(response) {
+                updateCart();
+            },
+            error: function(xhr, status, error) {
+                console.log("Errore durante la rimozione dal carrello: " + error);
+            }
+        });
+    }
+}
+
 function updateCart() {
     $.ajax({
         type: "GET",
-        url: "update-cart",
+        url: "updateCart",
         dataType: "json",
         success: function(response) {
             
@@ -69,6 +89,9 @@ function updateCart() {
                     </div>   
                 `;
 
+                
+                listHtml += `<button id="emptyCartButton" onclick="emptyCart()">Svuota il carrello</button>`;
+                
                 $.each(cartItems, function (index, item) {
                     
                     var priceForQuantity = item.price * item.selectedQuantity;
@@ -97,7 +120,7 @@ function updateCart() {
                                     
                     listHtml += `   
                             </select>
-                            <button onclick="removeFromCart('${item.id}')"><i class="fa fa-close fa-xl"></i></button><br>
+                            <button class="removeFromCartButton" data-product-id="${item.id}" onclick="removeFromCart('${item.id}')"><i class="fa fa-close fa-xl"></i></button><br>
                         </div>
                     `;
 

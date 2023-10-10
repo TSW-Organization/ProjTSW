@@ -16,7 +16,7 @@ import it.unisa.bean.Product;
 
 
 
-@WebServlet("/remove-from-cart")
+@WebServlet("/removeFromCart")
 public class RemoveFromCartServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;

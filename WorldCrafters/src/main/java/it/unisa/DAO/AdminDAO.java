@@ -9,7 +9,7 @@ import java.sql.Statement;
 import it.unisa.utils.DriverManagerConnectionPool;
 
 
-public class UserDAO {
+public class AdminDAO {
 
     public int authenticate(String email, String password) {
             
@@ -100,7 +100,7 @@ public class UserDAO {
 
     }  
     
-    public boolean verifyEmail(String email) {
+public boolean verifyEmail(String email) {
         
         Connection connection = null;
 	    PreparedStatement statement = null;
@@ -109,7 +109,7 @@ public class UserDAO {
 
         try {
         	connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id FROM user WHERE ( email=? );";
+	        String query = "SELECT id FROM admin WHERE ( email=? );";
 	        statement = connection.prepareStatement(query);
 	        statement.setString(1, email);
 	        resultSet = statement.executeQuery();
@@ -138,5 +138,4 @@ public class UserDAO {
 
 	    return verifyEmail;
     }
-    
 }

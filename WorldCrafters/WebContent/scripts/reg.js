@@ -1,5 +1,5 @@
 function closeModal() {
-	history.back();
+	window.location.href = "/WorldCrafters/home";
 }
 
 $(document).ready(function () {

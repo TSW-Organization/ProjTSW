@@ -101,6 +101,19 @@ button {
     cursor: pointer;
 }
 
+#emptyCartButton {
+	width: 100%;
+	text-align: right;
+	text-decoration: underline;
+	color: rgb(136, 8, 8);
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
+#emptyCartButton:hover {
+	color: red;
+}
+
 
 @media only screen and (max-width: 768px) {
 	

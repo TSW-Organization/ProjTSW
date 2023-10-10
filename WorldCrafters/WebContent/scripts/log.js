@@ -17,7 +17,7 @@ function openModal(modalId, pageUrl) {
 */
 // Funzione per chiudere la finestra modale
 function closeModal() {
-	history.back();
+	window.location.href = "/WorldCrafters/home";
 }
 
 //Invalidare la sessione lato client

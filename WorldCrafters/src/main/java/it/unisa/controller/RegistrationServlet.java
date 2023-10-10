@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import it.unisa.DAO.AdminDAO;
 import it.unisa.DAO.UserDAO;
 import it.unisa.bean.User;
 import it.unisa.utils.DriverManagerConnectionPool;
@@ -29,13 +30,22 @@ public class RegistrationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
 		UserDAO userDAO = new UserDAO();
+		AdminDAO adminDAO = new AdminDAO();
 
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
-        String error = ""; 
+        String error = "";
+        
+        //Controllare che l'email non sia già presente in user o admin
+		boolean userValid = userDAO.verifyEmail(email);
+		boolean adminValid = adminDAO.verifyEmail(email);
+		
+		if(!(userValid && adminValid)) {
+			error += "Email non disponibile<br>";
+		}
         	
         if (firstName == null || firstName.trim().equals("") || !firstName.matches("^[a-zA-Z\\s]+$")) {
 			error += "Inserisci nome valido<br>";
@@ -68,8 +78,11 @@ public class RegistrationServlet extends HttpServlet {
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/register.jsp");
 			dispatcher.forward(request, response);
 		} else {
-			int userID = userDAO.registerUser(firstName, lastName, email, password);
+
+			//Dopo il controllo viene registrato in database
+			userDAO.registerUser(firstName, lastName, email, password);
 	        response.sendRedirect("login.jsp");
+		
 		}
 		
     }
