@@ -20,6 +20,12 @@ function closeModal() {
 	history.back();
 }
 
+//Invalidare la sessione lato client
+function invalidateSession() {
+	window.sessionStorage.clear();
+}
+
+//Controlli del form di login
 $(document).ready(function () {
     // Aggiungi un listener per l'evento di cambio nei campi di input
     $('input[data-validation]').on('input', function () {

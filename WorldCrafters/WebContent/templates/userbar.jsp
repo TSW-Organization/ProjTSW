@@ -6,18 +6,18 @@
 <head>
     <link rel="stylesheet" type="text/css" href="styles/userbar.css">
     <script src="scripts/sidebar-userbar.js"></script>
-    <script src="scripts/log-reg.js"></script>
+    <script src="scripts/log.js"></script>
 </head>
 <body>
 	
-    <% HttpSession sessione = request.getSession();%>
-    <% if(sessione.getAttribute("userId")!=null) { %>
-	    <% int userId = (int) sessione.getAttribute("userId");%>
+    <% HttpSession session1 = request.getSession();%>
+    <% if(session1.getAttribute("userId")!=null) { %>
+	    <% int userId = (int) session1.getAttribute("userId");%>
     	<div id="userbar">
 	        <ul>
 	            <li><a href="purchases">Ordini effettuati<br></a></li>
 	            <li><a href="contact.jsp">Assistenza<br></a></li>
-	            <li><a href="logout">Logout<br></a></li>
+	            <li><a href="logout" onclick="invalidateSession()">Logout<br></a></li>
 	        </ul>
 	    </div>
 	<% } else { %>

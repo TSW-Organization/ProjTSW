@@ -33,19 +33,23 @@ public class PurchasesServlet extends HttpServlet {
 	    PaymentDAO paymentDAO = new PaymentDAO();
 	    PurchaseItemDAO purchaseItemDAO = new PurchaseItemDAO();
 	    HttpSession session = request.getSession(false);
-
-	    int userId = (int) session.getAttribute("userId");
-	    List<Purchase> purchases = purchaseDAO.getPurchasesByUserId(userId);
+	    int userId=-1;
 	    
-	    /*
-	    for(Purchase purchase : purchases) {
-	    	Payment payment = paymentDAO.getPaymentByPurchaseIdAndUserId();
+	    if(session.getAttribute("userId")!=null) {
+	    	userId = (int) session.getAttribute("userId");
+	    	List<Purchase> purchases = purchaseDAO.getPurchasesByUserId(userId);
+		    
+		    /*
+		    for(Purchase purchase : purchases) {
+		    	Payment payment = paymentDAO.getPaymentByPurchaseIdAndUserId();
+		    }
+		    */
+		    
+			request.setAttribute("purchases", purchases);
+			request.getRequestDispatcher("purchases.jsp").forward(request, response);
+	    } else {
+	    	response.sendRedirect("login.jsp");
 	    }
-	    */
-	    
-	       
-		request.setAttribute("purchases", purchases);
-		request.getRequestDispatcher("purchases.jsp").forward(request, response);
 	}
 
 

@@ -1,4 +1,5 @@
 // CONTACT
+/*
 window.onload = function() {
     var form = document.getElementById("contact-form");
     var isFormSubmitted = false;
@@ -29,7 +30,7 @@ window.onload = function() {
         history.pushState(null, null, location.href);
     };
 };
-
+*/
 ///////////////////////////////////////////
 
 $(document).ready(function () {
