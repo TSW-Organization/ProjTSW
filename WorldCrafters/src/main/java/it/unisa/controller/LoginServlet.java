@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import it.unisa.DAO.AdminDAO;
 import it.unisa.DAO.UserDAO;
 
 
@@ -23,44 +24,74 @@ public class LoginServlet extends HttpServlet {
 		String email = request.getParameter("email");
         String password = request.getParameter("password");
         int userId;
-        String error = ""; 
+        String error = "";
+        UserDAO userDAO = new UserDAO();
+        AdminDAO adminDAO = new AdminDAO();
         	
-		if (!isValidEmail(email)) {
-			error += "Inserisci email valida<br>";
-		} else {
-			request.setAttribute("email", email);
-		}
-
-		if (!error.equals("")) {
-			request.setAttribute("error", error);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
-			dispatcher.forward(request, response);
-		} else {
-			// I campi sono validi, puoi inviare i dati al server
-            // Aggiungi qui la logica per elaborare i dati inviati dal modulo
-
-			// Effettua la logica di autenticazione nel database e restituisce true se le credenziali sono corrette
-	        UserDAO userDAO = new UserDAO();
-	           
-			userId = userDAO.authenticate(email, password);
+		//Se è admin
+        if(adminDAO.authenticateEmail(email)==true) {
 			
-	        
-	        if (userId != -1) {
-	            HttpSession oldSession = request.getSession(false);
+        	request.setAttribute("email", email);
+        	if(adminDAO.authenticate(email, password)==true) {
+        		HttpSession oldSession = request.getSession(false);
 	            if(oldSession != null) {
 	            	oldSession.invalidate();
 	            }
 	            
 	            HttpSession session = request.getSession();
-	            session.setAttribute("userId", userId);
+	            session.setAttribute("isAdmin", true);
 	            //session.setMaxInactiveInterval(5*60);  //imposta tempo inattività a 60 minuti
 
 	            response.sendRedirect("home");
-	        } else {
-	        	
-	        	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
-				dispatcher.forward(request, response); // Reindirizza alla pagina di login con un messaggio di errore
-	        }
+        	} else {
+        		error += "Password errata<br>";
+        		request.setAttribute("error", error);
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+				dispatcher.forward(request, response);
+        	}
+
+		
+		//Se è user
+		} else {
+			
+			if (!isValidEmail(email)) {
+				error += "Inserisci email valida<br>";
+			} else if(userDAO.authenticateEmail(email)==false){	
+				error += "Email inesistente<br>";
+			} else {
+				request.setAttribute("email", email);
+			}
+			
+			if (!error.equals("")) {
+				request.setAttribute("error", error);
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+				dispatcher.forward(request, response);
+			} else {
+				// I campi sono validi, puoi inviare i dati al server
+	            // Aggiungi qui la logica per elaborare i dati inviati dal modulo
+
+				// Effettua la logica di autenticazione nel database e restituisce true se le credenziali sono corrette
+		           
+				userId = userDAO.authenticate(email,password);
+				
+		        
+		        if (userId != -1) {
+		            HttpSession oldSession = request.getSession(false);
+		            if(oldSession != null) {
+		            	oldSession.invalidate();
+		            }
+		            
+		            HttpSession session = request.getSession();
+		            session.setAttribute("userId", userId);
+		            //session.setMaxInactiveInterval(5*60);  //imposta tempo inattività a 60 minuti
+
+		            response.sendRedirect("home");
+		        } else {
+		        	
+		        	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
+					dispatcher.forward(request, response); // Reindirizza alla pagina di login con un messaggio di errore
+		        }
+			}
 		}
 
     }

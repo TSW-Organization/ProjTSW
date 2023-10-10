@@ -20,6 +20,12 @@
 	            <li><a href="logout" onclick="invalidateSession()">Logout<br></a></li>
 	        </ul>
 	    </div>
+	<% } else if(session1.getAttribute("isAdmin")!=null && session1.getAttribute("isAdmin").toString().equals("true")) { %>
+		<div id="userbar">
+	        <ul>
+	            <li><a href="logout" onclick="invalidateSession()">Logout<br></a></li>
+	        </ul>
+	    </div>
 	<% } else { %>
     	<div id="userbar">
 	        <ul>
