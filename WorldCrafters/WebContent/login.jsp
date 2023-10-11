@@ -5,6 +5,8 @@
 <head>
 	<%@ include file="templates/head.html" %>
     <link rel="stylesheet" type="text/css" href="styles/log-reg.css">
+    <script src="scripts/script.js"></script>
+    
 </head>
 <body>
 	<!-- Aggiungi il wrapper per la finestra di login -->
@@ -19,10 +21,16 @@
 					<label for="email">Email:</label> 
 					<input type="text" name="email" id="email" placeholder="La tua email" /> <!-- Aggiorna il placeholder -->
 				</div>
-				<div class="form-group">
-					<label for="password">Password:</label> <input type="password"
-						name="password" id="password" placeholder="Password" />
-				</div>
+<div class="form-group">
+    <label for="password">Password:</label>
+    <div class="password-container">
+        <input type="password" name="password" id="password" placeholder="Password" required />
+        <button class="password-toggle" type="button" onclick="togglePasswordVisibility('password')">
+            <img src="images/hide.png" alt="Show Password" class="show-password" />
+        </button>
+    </div>
+</div>
+
 				<div class="form-group form-button">
 					<input type="submit" name="signin" id="signin" value="Accedi" />
 					<!-- Aggiorna il testo del pulsante di accesso -->

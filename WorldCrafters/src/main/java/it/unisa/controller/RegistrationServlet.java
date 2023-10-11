@@ -25,36 +25,38 @@ public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-		UserDAO userDAO = new UserDAO();
+	    UserDAO userDAO = new UserDAO();
 
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        
-        int userID = userDAO.registerUser(firstName, lastName, email, password);
-        
-        response.sendRedirect("login.jsp");
-        
-    }
+	    String firstName = request.getParameter("firstName");
+	    String lastName = request.getParameter("lastName");
+	    String email = request.getParameter("email");
+	    String password = request.getParameter("password");
+	    String confirmPassword = request.getParameter("confirm-password"); // Aggiunto per la conferma
 
-    
+	 
 
-    private String hashPassword(String password) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hashedBytes = md.digest(password.getBytes());
+	    // Ora procedi con l'hashing della password e la registrazione
+	    String hashedPassword = hashPassword(password);
+	    int userID = userDAO.registerUser(firstName, lastName, email, hashedPassword);
 
-            StringBuilder result = new StringBuilder();
-            for (byte b : hashedBytes) {
-                result.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
-            }
+	    response.sendRedirect("login.jsp");
+	}
 
-            return result.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-}
+	private String hashPassword(String password) {
+	    try {
+	        MessageDigest md = MessageDigest.getInstance("SHA-256");
+	        byte[] hashedBytes = md.digest(password.getBytes());
+
+	        StringBuilder result = new StringBuilder();
+	        for (byte b : hashedBytes) {
+	            result.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
+	        }
+
+	        return result.toString();
+	    } catch (NoSuchAlgorithmException e) {
+	        e.printStackTrace();
+	        return null;
+	    }
+	   
+	} 
+	}

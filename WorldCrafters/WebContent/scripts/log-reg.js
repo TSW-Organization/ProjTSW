@@ -19,3 +19,4 @@ function closeOverlay(overlayId) {
   var overlay = document.getElementById(overlayId);
   overlay.style.display = "none";
 }
+
