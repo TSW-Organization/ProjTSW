@@ -41,11 +41,11 @@
 				</div>
 				<div class="form-group">
 					<label for="password">Password:</label> 
-					<input type="password"name="password" id="password" placeholder="Password" required />
+					<input type="password" name="password" id="password" data-validation="password" placeholder="Password" required />
 				</div>
 				<div class="form-group">
 					<label for="confirmPassword">Confirm Password:</label> 
-					<input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required />
+					<input type="password" name="confirmPassword" id="confirmPassword" data-validation="confirmPassword" placeholder="Confirm Password" required />
 				</div>
 				<%
 		        String error = (String)request.getAttribute("error");

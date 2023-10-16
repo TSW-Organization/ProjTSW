@@ -35,7 +35,7 @@ $(document).ready(function () {
         }
 
         // Aggiungi o rimuovi la classe 'error' in base alla validità
-        if (isValid || value=='') {
+        if (isValid) {
             $(this).removeClass('error');
         } else {
             $(this).addClass('error');

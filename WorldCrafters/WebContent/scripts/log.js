@@ -25,6 +25,7 @@ function invalidateSession() {
 	window.sessionStorage.clear();
 }
 
+
 //Controlli del form di login
 $(document).ready(function () {
     // Aggiungi un listener per l'evento di cambio nei campi di input
@@ -38,15 +39,19 @@ $(document).ready(function () {
             case 'email':
                 isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value); // Valida l'indirizzo email
                 break;
+            case 'password':
+				isValid = value!=='';
+				break;
             default:
                 isValid = true; // Se non è specificato alcun tipo di validazione, è valido
         }
 
         // Aggiungi o rimuovi la classe 'error' in base alla validità
-        if (isValid || value=='') {
+        if (isValid || $(this)=='') {
             $(this).removeClass('error');
         } else {
             $(this).addClass('error');
         }
+            
     });
 });

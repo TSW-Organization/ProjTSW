@@ -96,7 +96,7 @@ public class AdminDAO {
 	    Connection connection = null;
 	    PreparedStatement statement = null;
 	    ResultSet resultSet = null;
-	    boolean verifyEmail = false;
+	    boolean isValid = true;
 	
 	    try {
 	    	connection = DriverManagerConnectionPool.getConnection();
@@ -106,7 +106,7 @@ public class AdminDAO {
 	        resultSet = statement.executeQuery();
 	
 	        if (resultSet.next()) {
-	            verifyEmail=true;
+	            isValid=false;
 	        }
 	        
 	    } catch (SQLException e) {
@@ -127,6 +127,6 @@ public class AdminDAO {
 	        }
 	    }
 	
-	    return verifyEmail;
+	    return isValid;
 	}
 }
