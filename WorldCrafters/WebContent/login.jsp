@@ -25,7 +25,8 @@
 			<form method="post" action="login" id="login-form">
 				<div class="form-group">
 					<label for="email">Email:</label> 
-					<input type="text" name="email" id="email" required value="<%=email %>" data-validation="email" placeholder="La tua email" /> <!-- Aggiorna il placeholder -->
+					<input type="text" name="email" id="email" required value="<%=email %>" data-validation="email" placeholder="La tua email" />
+					<div id="errorMessageEmail"></div>
 				</div>
 				<div class="form-group">
 					<label for="password">Password:</label> 
@@ -40,8 +41,10 @@
 				<%
 				}
 				%>
+				
+				
 				<div class="form-group form-button">
-					<input type="submit" name="signin" id="signin" value="Accedi" />
+					<input type="submit" name="signin" id="signin" value="Accedi" disabled/>
 					<!-- Aggiorna il testo del pulsante di accesso -->
 				</div>
 			</form>

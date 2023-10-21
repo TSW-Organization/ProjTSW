@@ -61,7 +61,7 @@ $(document).ready(function () {
 		        isValid = /^\d{4}-?\d{4}-?\d{4}-?\d{4}.*$/.test(value); // Numero della carta di 16 cifre
 		        break;
 		    case 'expDate':
-		        isValid = /^\d{2}\/\d{2}$/.test(value); // Data nel formato MM/YYYY
+		        isValid = /^\d{2}\/\d{4}$/.test(value); // Data nel formato MM/YYYY
 		        break;
 		    case 'cvv':
 		        isValid = /^\d{3}$/.test(value); // Codice numerico di tre cifre
@@ -114,6 +114,32 @@ document.addEventListener("DOMContentLoaded", function() {
         } else {
             this.value = value;
         }
+	});
+	
+	//per expMonth
+	const expMonth = document.getElementsByName("expMonth")[0];
+	expMonth.addEventListener("input", function() {
+		const maxLength = 2;
+		const regex = /^\d*$/;
+		if (!regex.test(this.value)) {
+			this.value = this.value.replace(/\D/g, '');
+		}
+		if (this.value.length > maxLength) {
+			this.value = this.value.slice(0, maxLength);
+		}
+	});
+	
+	//per expYear
+	const expYear = document.getElementsByName("expYear")[0];
+	expYear.addEventListener("input", function() {
+		const maxLength = 4;
+		const regex = /^\d*$/;
+		if (!regex.test(this.value)) {
+			this.value = this.value.replace(/\D/g, '');
+		}
+		if (this.value.length > maxLength) {
+			this.value = this.value.slice(0, maxLength);
+		}
 	});
 	
 	//per cvv

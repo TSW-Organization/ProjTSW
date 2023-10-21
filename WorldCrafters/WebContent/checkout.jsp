@@ -38,8 +38,11 @@
 		String cardNumber = (String)request.getAttribute("cardNumber");
 		if(cardNumber == null) cardNumber = "";
 		
-		String expDate = (String)request.getAttribute("expDate");
-		if(expDate == null) expDate = "";
+		String expMonth = (String)request.getAttribute("expMonth");
+		if(expMonth == null) expMonth = "";
+		
+		String expYear = (String)request.getAttribute("expYear");
+		if(expYear == null) expYear = "";
 		
 		String cvv = (String)request.getAttribute("cvv");
 		if(cvv == null) cvv = "";
@@ -91,8 +94,12 @@
 				            <div class="row">
 				            	<div class="col-50">
 				                	<label for="expDate">Data di scadenza</label>
-				            		<input type="text" id="expDate" name="expDate" placeholder="00/00" value="<%=expDate %>" required data-validation="expDate">
+				            		<div id="expDate">
+				            			<input type="text" id="expDate" name="expMonth" placeholder="00" value="<%=expMonth %>" required data-validation="expDate">
+				            			<input type="text" id="expDate" name="expYear" placeholder="0000" value="<%=expYear %>" required data-validation="expDate">
+				            		</div>
 				              	</div>
+				              	
 				              	<div class="col-50">
 				                	<label for="cvv">CVV</label>
 				                	<input type="text" id="cvv" name="cvv" placeholder="000" value="<%=cvv %>" required data-validation="cvv">

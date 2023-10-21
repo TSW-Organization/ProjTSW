@@ -46,7 +46,8 @@ public class CheckoutFormServlet extends HttpServlet {
         String zipCode = request.getParameter("zipCode");
         String accountholder = request.getParameter("accountholder");
         String cardNumber = request.getParameter("cardNumber");
-        String expDate = request.getParameter("expDate");
+        String expMonth = request.getParameter("expMonth");
+        String expYear = request.getParameter("expYear");
         String cvv = request.getParameter("cvv");
         String error = "";
 /*
@@ -105,13 +106,27 @@ public class CheckoutFormServlet extends HttpServlet {
         } else {
             request.setAttribute("cardNumber", cardNumber);
         }
-
-        // Convalida expDate
-        if (expDate == null || !Pattern.matches("^\\d{2}\\/\\d{2}$", expDate)) {
-            error += "Inserisci una data di scadenza valida (MM/YYYY)<br>";
-        } else {
-            request.setAttribute("expDate", expDate);
-        }
+*/     
+        //Convalida mese di scadenza
+        if (expMonth == null || !Pattern.matches("^(0[1-9]|1[0-2])$", expMonth)) {
+		    error += "Inserisci un mese di scadenza valido (01-12)<br>";
+		} else {
+		    request.setAttribute("expMonth", expMonth);
+		}
+		
+		// Convalida anno di scadenza (expYear)	
+		if (expYear == null || !Pattern.matches("^\\d{4}$", expYear)) {
+		    error += "Inserisci un anno di scadenza valido (formato: 2023)<br>";
+		} else {
+		    // Puoi aggiungere ulteriori controlli sull'anno, ad esempio, se è futuro o non scaduto.
+		    int year = Integer.parseInt(expYear);
+		    int currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
+		    if (year < currentYear) {
+		        error += "L'anno di scadenza non è valido<br>";
+		    } else {
+		        request.setAttribute("expYear", expYear);
+		    }
+		}
 
         // Convalida cvv
         if (cvv == null || !Pattern.matches("^\\d{3}$", cvv)) {
@@ -119,7 +134,7 @@ public class CheckoutFormServlet extends HttpServlet {
         } else {
             request.setAttribute("cvv", cvv);
         }
-*/
+
         if (!error.equals("")) {
             request.setAttribute("error", error);
             request.getRequestDispatcher("/checkout.jsp").forward(request, response);
@@ -161,14 +176,14 @@ public class CheckoutFormServlet extends HttpServlet {
             Time currentTime = new Time(currentTimeMillis);
         	
         	PaymentDAO paymentDAO = new PaymentDAO();
-        	int generatedPaymentId = paymentDAO.setPayment(currentDate, currentTime, amount, userId);
+        	int generatedPaymentId = paymentDAO.setPayment(currentDate, currentTime, amount, userId, accountholder, cardNumber, Integer.parseInt(expMonth), Integer.parseInt(expYear), Integer.parseInt(cvv));
         	
         	//Creo un order
         	currentTimeMillis = System.currentTimeMillis();
             currentDate = new Date(currentTimeMillis);
         	
         	PurchaseDAO purchaseDAO = new PurchaseDAO();
-        	int generatedPurchaseId = purchaseDAO.setPurchase(currentDate, currentTime, amount, userId, generatedPaymentId);
+        	int generatedPurchaseId = purchaseDAO.setPurchase(currentDate, currentTime, amount, userId, generatedPaymentId, fullName, address, city, state, zipCode);
         	
 
         	//Aggiungo gli orderItem nel db e li collego all'order

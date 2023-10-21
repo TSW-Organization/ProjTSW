@@ -30,22 +30,27 @@
 				<div class="form-group">
 					<label for="firstName">First name:</label> 
 					<input type="text" name="firstName" id="firstName" value="<%= firstName %>" data-validation="firstName" placeholder="First name" required />
+					<div id="errorMessageFirstName"></div>
 				</div>
 				<div class="form-group">
 					<label for="lastName">Last name:</label> 
 					<input type="text" name="lastName" id="lastName" value="<%= lastName %>" data-validation="lastName" placeholder="Last name" required />
+					<div id="errorMessageLastName"></div>
 				</div>
 				<div class="form-group">
 					<label for="email">Email:</label> 
 					<input type="email" name="email" id="email" value="<%= email %>" data-validation="email" placeholder="Your Email" required />
+					<div id="errorMessageEmail"></div>
 				</div>
 				<div class="form-group">
 					<label for="password">Password:</label> 
 					<input type="password" name="password" id="password" data-validation="password" placeholder="Password" required />
+					<div id="errorMessagePassword"></div>
 				</div>
 				<div class="form-group">
 					<label for="confirmPassword">Confirm Password:</label> 
 					<input type="password" name="confirmPassword" id="confirmPassword" data-validation="confirmPassword" placeholder="Confirm Password" required />
+					<div id="errorMessageConfirmPassword"></div>
 				</div>
 				<%
 		        String error = (String)request.getAttribute("error");

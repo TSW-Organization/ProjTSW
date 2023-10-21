@@ -16,7 +16,7 @@ import it.unisa.utils.DriverManagerConnectionPool;
 
 public class PurchaseDAO {
 	
-	public int setPurchase(Date date, Time time, double amount, int userId, int paymentId) {
+	public int setPurchase(Date date, Time time, double amount, int userId, int paymentId, String fullName, String address, String city, String state, String zipCode) {
 		
 		Connection connection = null;
 	    PreparedStatement statement = null;
@@ -25,7 +25,7 @@ public class PurchaseDAO {
 
 	    try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "INSERT INTO purchase (date, time, amount, userId, paymentId) VALUES (?, ?, ?, ?, ?);";
+	        String query = "INSERT INTO purchase (date, time, amount, userId, paymentId, fullName, address, city, state, zipCode) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
 	        // Passiamo il flag Statement.RETURN_GENERATED_KEYS al PreparedStatement
 	        statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -34,6 +34,11 @@ public class PurchaseDAO {
 	        statement.setDouble(3, amount);
 	        statement.setInt(4, userId);
 	        statement.setInt(5, paymentId);
+	        statement.setString(6, fullName);
+	        statement.setString(7, address);
+	        statement.setString(8, city);
+	        statement.setString(9, state);
+	        statement.setString(10, zipCode);
 	        statement.executeUpdate();
 
 	        // Otteniamo l'ID generato
@@ -74,7 +79,7 @@ public class PurchaseDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, date, time, status, amount, estimatedDate, paymentId FROM purchase WHERE (userId = ?) ORDER BY date DESC, time DESC;";
+	        String query = "SELECT id, date, time, status, amount, estimatedDate, paymentId, fullName, address, city, state, zipCode FROM purchase WHERE (userId = ?) ORDER BY date DESC, time DESC;";
 	        statement = connection.prepareStatement(query);
 	        statement.setInt(1, userId);
 	        resultSet = statement.executeQuery();
@@ -87,6 +92,12 @@ public class PurchaseDAO {
 	            double amount = resultSet.getDouble("amount");
 	            Date estimatedDate = resultSet.getDate("estimatedDate");
 	            int paymentId = resultSet.getInt("paymentId");
+	            String fullName = resultSet.getString("fullName");
+	            String address = resultSet.getString("address");
+	            String city = resultSet.getString("city");
+	            String state = resultSet.getString("state");
+	            String zipCode = resultSet.getString("zipCode");
+	            
 
 	            Purchase purchase = new Purchase();
 	            purchase.setId(id);
@@ -96,7 +107,12 @@ public class PurchaseDAO {
 	            purchase.setAmount(amount);
 	            purchase.setEstimatedDate(estimatedDate);
 	            purchase.setPaymentId(paymentId);
-
+	            purchase.setFullName(fullName);
+	            purchase.setAddress(address);
+	            purchase.setCity(city);
+	            purchase.setState(state);
+	            purchase.setZipCode(zipCode);
+	            
 	            purchases.add(purchase);
 	        }
 	    } catch (SQLException e) {
@@ -120,7 +136,5 @@ public class PurchaseDAO {
 	    return purchases;
 
 	}
-	
-	
 	
 }

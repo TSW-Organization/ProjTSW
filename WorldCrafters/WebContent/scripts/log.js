@@ -27,7 +27,7 @@ function invalidateSession() {
 
 
 //Controlli del form di login
-$(document).ready(function () {
+window.addEventListener('DOMContentLoaded', function() {
     // Aggiungi un listener per l'evento di cambio nei campi di input
     $('input[data-validation]').on('input', function () {
         var validationType = $(this).data('validation');
@@ -47,11 +47,51 @@ $(document).ready(function () {
         }
 
         // Aggiungi o rimuovi la classe 'error' in base alla validità
-        if (isValid || $(this)=='') {
+        if (isValid || value=='') {
             $(this).removeClass('error');
         } else {
             $(this).addClass('error');
         }
             
     });
+});
+
+//
+window.addEventListener('DOMContentLoaded', function() {
+	const emailInput = document.getElementById('email');
+	const passwordInput = document.getElementById('password');
+	const submitButton = document.getElementById('signin');
+	const errorMessageEmail = document.getElementById('errorMessageEmail');
+	
+	emailInput.addEventListener('focusout', validateEmail);
+	passwordInput.addEventListener('focusout', validatePassword);
+	
+	function validateEmail() {
+		const emailPattern = /^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+	  	const emailValue = emailInput.value;
+	
+	  	if(emailPattern.test(emailValue) || emailValue=='') {
+			errorMessageEmail.innerHTML = '';
+		} else {
+			errorMessageEmail.innerHTML = 'Indirizzo email non valido';
+		}
+	  	  		
+	  	if (emailPattern.test(emailValue)) {
+			submitButton.disabled = false;
+	  	} else {
+	    	submitButton.disabled = true;
+	  	}
+	}
+	
+	//validatePassword utilizzata per riconoscere email anche dopo che la servlet ha impostato il value email
+	function validatePassword() {
+	  	const passwordValue = passwordInput.value;
+		  		
+	  	if (passwordValue!='') {
+			submitButton.disabled = false;
+	  	} else {
+	    	submitButton.disabled = true;
+	  	}
+	}
+	
 });
