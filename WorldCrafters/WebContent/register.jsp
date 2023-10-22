@@ -3,7 +3,9 @@
 <head>
     <%@ include file="templates/head.html" %>
     <link rel="stylesheet" type="text/css" href="styles/log-reg.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="scripts/script.js"></script>
+    
 </head>
 <body>
     <div class="modal-overlay">
@@ -19,9 +21,11 @@
                     <label for="lastName">Last name:</label> 
                     <input type="text" name="lastName" id="lastName" placeholder="Last name" required />
                 </div>
+
                 <div class="form-group">
-                    <label for="email">Email:</label> <input type="email" name="email"
-                        id="email" placeholder="Your Email" required />
+                    <label for="email">Email:</label> 
+                    <input type="email" name="email" id="email" placeholder="Your Email" required />
+                    <div id="email-error" style="color: red;"><%= (request.getAttribute("emailError") != null) ? request.getAttribute("emailError") : "" %></div>
                 </div>
 
                 <div class="form-group">
@@ -46,6 +50,9 @@
 
                 <!-- Aggiungi un messaggio di errore per la validazione della password -->
                 <div id="password-error" style="color: red;"></div>
+
+                <input type="hidden" id="redirectCode" name="redirectCode" value="<%= (request.getAttribute("redirectCode") != null) ? request.getAttribute("redirectCode") : -1 %>" />
+                <input type="hidden" id="redirectURL" name="redirectURL" value="<%= (request.getAttribute("redirectURL") != null) ? request.getAttribute("redirectURL") : "" %>" />
 
                 <div class="form-group form-button">
                     <input type="submit" name="signup" id="signup" value="Registrati"/>

@@ -25,22 +25,28 @@ public class RegistrationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    UserDAO userDAO = new UserDAO();
+        UserDAO userDAO = new UserDAO();
 
-	    String firstName = request.getParameter("firstName");
-	    String lastName = request.getParameter("lastName");
-	    String email = request.getParameter("email");
-	    String password = request.getParameter("password");
-	    String confirmPassword = request.getParameter("confirm-password"); // Aggiunto per la conferma
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String confirmPassword = request.getParameter("confirm-password");
 
-	 
+        if (userDAO.isEmailRegistered(email)) {
+            request.setAttribute("emailError", "L'email è già in uso");
+            request.setAttribute("redirectCode", 0);  // Codice 0 per errore
+            request.setAttribute("redirectURL", "login.jsp");
+        } else {
+            String hashedPassword = hashPassword(password);
+            int userID = userDAO.registerUser(firstName, lastName, email, hashedPassword);
+            request.setAttribute("redirectCode", 1);  // Codice 1 per successo
+            request.setAttribute("redirectURL", "login.jsp");
+        }
 
-	    // Ora procedi con l'hashing della password e la registrazione
-	    String hashedPassword = hashPassword(password);
-	    int userID = userDAO.registerUser(firstName, lastName, email, hashedPassword);
-
-	    response.sendRedirect("login.jsp");
-	}
+        // Esegue il reindirizzamento dalla servlet
+        request.getRequestDispatcher("register.jsp").forward(request, response);
+    }
 
 	private String hashPassword(String password) {
 	    try {

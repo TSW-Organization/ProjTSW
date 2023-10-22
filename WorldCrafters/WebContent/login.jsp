@@ -21,15 +21,15 @@
 					<label for="email">Email:</label> 
 					<input type="text" name="email" id="email" placeholder="La tua email" /> <!-- Aggiorna il placeholder -->
 				</div>
-<div class="form-group">
-    <label for="password">Password:</label>
-    <div class="password-container">
-        <input type="password" name="password" id="password" placeholder="Password" required />
-        <button class="password-toggle" type="button" onclick="togglePasswordVisibility('password')">
-            <img src="images/hide.png" alt="Show Password" class="show-password" />
-        </button>
-    </div>
-</div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <div class="password-container">
+                        <input type="password" name="password" id="password" placeholder="Password" required />
+                        <button class="password-toggle" type="button" onclick="togglePasswordVisibility('password')">
+                            <img src="images/hide.png" alt="Show Password" class="show-password" />
+                        </button>
+                    </div>
+                </div>
 
 				<div class="form-group form-button">
 					<input type="submit" name="signin" id="signin" value="Accedi" />

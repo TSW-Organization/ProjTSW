@@ -54,3 +54,19 @@ function validatePassword(password) {
     // Altrimenti, la password è valida
     return true;
 }
+
+// Controlla se ci sono attributi di reindirizzamento e gestisci il reindirizzamento
+function handleRedirect() {
+   const redirectCode = parseInt(document.getElementById('redirectCode').value);
+    const redirectURL = document.getElementById('redirectURL').value;
+    if (redirectCode === 0) {
+        alert("Errore: " + document.getElementById('email-error').textContent);
+    } else if (redirectCode === 1) {
+        window.location.href = redirectURL;
+    }
+}
+
+// Chiamata alla funzione quando la pagina si carica
+window.onload = function() {
+    handleRedirect();
+};
