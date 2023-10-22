@@ -61,8 +61,13 @@
 					    	<% } %>
 					    	
 					    	<% String status = purchase.getStatus().toString(); %>
-					    	<% if(status!="consegnato" && status!="annullato") { %>
-					    		<p>Annulla ordine</p>
+					    	<% boolean deleteRequest = purchase.getDeleteRequest(); %>
+					    	<% if(deleteRequest==false) {%>
+					    		<% if(status!="consegnato" && status!="annullato") { %>
+					    			<p id="deleteRequest" onclick="deleteRequest('<%=purchase.getId()%>')">Annulla ordine</p>
+					    		<% } %>
+					    	<% } else {%>
+					    		<p>Richiesta di annullamento effettuata</p>
 					    	<% } %>
 					    	
 					    </div>
@@ -80,6 +85,32 @@
     </main>
     
     <%@ include file="templates/footer.jsp" %>
+    
+    <script>
+	    function deleteRequest(purchaseId) {
+	    	$.ajax({
+		        url: "DeletePurchaseRequestServlet", // URL della tua servlet
+		        type: "POST",
+		        data: { purchaseId: purchaseId }, // Dati da inviare
+		        success: function(response) {
+		            // Gestisci la risposta JSON dal server
+		            if (response.success) {
+		                // Operazione completata con successo
+		                alert("La richiesta è stata effettuata");
+		                $("#deleteRequest").hide();
+		                
+		            } else {
+		                // Operazione fallita
+		                alert("Si è verificato un errore durante l'annullamento dell'ordine.");
+		            }
+		        },
+		        error: function() {
+		            // Gestisci gli errori di connessione o altri errori
+		            alert("Si è verificato un errore durante la richiesta.");
+		        }
+		    });
+	    }
+    </script>
     
 </body>
 </html>

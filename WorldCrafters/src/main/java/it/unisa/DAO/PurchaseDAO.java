@@ -79,7 +79,7 @@ public class PurchaseDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, date, time, status, amount, estimatedDate, paymentId, fullName, address, city, state, zipCode FROM purchase WHERE (userId = ?) ORDER BY date DESC, time DESC;";
+	        String query = "SELECT id, date, time, status, amount, estimatedDate, paymentId, fullName, address, city, state, zipCode, deleteRequest FROM purchase WHERE (userId = ?) ORDER BY date DESC, time DESC;";
 	        statement = connection.prepareStatement(query);
 	        statement.setInt(1, userId);
 	        resultSet = statement.executeQuery();
@@ -97,6 +97,7 @@ public class PurchaseDAO {
 	            String city = resultSet.getString("city");
 	            String state = resultSet.getString("state");
 	            String zipCode = resultSet.getString("zipCode");
+	            boolean deleteRequest = resultSet.getBoolean("deleteRequest");
 	            
 
 	            Purchase purchase = new Purchase();
@@ -112,6 +113,7 @@ public class PurchaseDAO {
 	            purchase.setCity(city);
 	            purchase.setState(state);
 	            purchase.setZipCode(zipCode);
+	            purchase.setDeleteRequest(deleteRequest);
 	            
 	            purchases.add(purchase);
 	        }
@@ -136,5 +138,43 @@ public class PurchaseDAO {
 	    return purchases;
 
 	}
+	
+	public void setDeleteRequestStatus(int purchaseId, boolean status) {
+		
+		Connection connection = null;
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
+
+	    try {
+	        connection = DriverManagerConnectionPool.getConnection();
+	        String query = "UPDATE purchase SET deleteRequest=? WHERE id=?;";
+
+	        statement = connection.prepareStatement(query);
+	        statement.setBoolean(1, status);
+	        statement.setInt(2, purchaseId);
+	        statement.executeUpdate();
+
+	        connection.commit();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (resultSet != null) {
+	                resultSet.close();
+	            }
+	            if (statement != null) {
+	                statement.close();
+	            }
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }		
+		
+	}
+	
+	
 	
 }

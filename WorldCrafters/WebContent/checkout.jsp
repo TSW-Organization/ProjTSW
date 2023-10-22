@@ -95,8 +95,8 @@
 				            	<div class="col-50">
 				                	<label for="expDate">Data di scadenza</label>
 				            		<div id="expDate">
-				            			<input type="text" id="expDate" name="expMonth" placeholder="00" value="<%=expMonth %>" required data-validation="expDate">
-				            			<input type="text" id="expDate" name="expYear" placeholder="0000" value="<%=expYear %>" required data-validation="expDate">
+				            			<input type="text" id="expDate" name="expMonth" placeholder="00" value="<%=expMonth %>" required data-validation="expMonth">
+				            			<input type="text" id="expDate" name="expYear" placeholder="0000" value="<%=expYear %>" required data-validation="expYear">
 				            		</div>
 				              	</div>
 				              	

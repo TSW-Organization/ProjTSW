@@ -55,3 +55,13 @@ h1 {
   font-size: 18px;
   font-weight: normal;
 }
+
+#deleteRequest {	
+	color: brown;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+#deleteRequest:hover {	
+	color: red;
+}

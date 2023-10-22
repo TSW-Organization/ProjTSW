@@ -60,9 +60,12 @@ $(document).ready(function () {
 		    case 'cardNumber':
 		        isValid = /^\d{4}-?\d{4}-?\d{4}-?\d{4}.*$/.test(value); // Numero della carta di 16 cifre
 		        break;
-		    case 'expDate':
-		        isValid = /^\d{2}\/\d{4}$/.test(value); // Data nel formato MM/YYYY
-		        break;
+		    case 'expMonth':
+			    isValid = /^(0[1-9]|1[0-2])$/.test(value); // Formato MM (da 01 a 12)
+			    break;
+			case 'expYear':
+			    isValid = /^(20\d{2}|2\d{3})$/.test(value); // Formato YYYY (da 2000 a 2999)
+			    break;
 		    case 'cvv':
 		        isValid = /^\d{3}$/.test(value); // Codice numerico di tre cifre
 		        break;

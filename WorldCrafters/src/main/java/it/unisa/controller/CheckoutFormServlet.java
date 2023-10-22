@@ -106,7 +106,7 @@ public class CheckoutFormServlet extends HttpServlet {
         } else {
             request.setAttribute("cardNumber", cardNumber);
         }
-*/     
+    
         //Convalida mese di scadenza
         if (expMonth == null || !Pattern.matches("^(0[1-9]|1[0-2])$", expMonth)) {
 		    error += "Inserisci un mese di scadenza valido (01-12)<br>";
@@ -134,7 +134,7 @@ public class CheckoutFormServlet extends HttpServlet {
         } else {
             request.setAttribute("cvv", cvv);
         }
-
+*/
         if (!error.equals("")) {
             request.setAttribute("error", error);
             request.getRequestDispatcher("/checkout.jsp").forward(request, response);

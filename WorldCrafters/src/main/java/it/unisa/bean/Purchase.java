@@ -18,8 +18,17 @@ public class Purchase {
 	private String city;
 	private String state;
 	private String zipCode;
+	private boolean deleteRequest;
 	
 	
+	public boolean getDeleteRequest() {
+		return deleteRequest;
+	}
+
+	public void setDeleteRequest(boolean deleteRequest) {
+		this.deleteRequest = deleteRequest;
+	}
+
 	public String getFullName() {
 		return fullName;
 	}
