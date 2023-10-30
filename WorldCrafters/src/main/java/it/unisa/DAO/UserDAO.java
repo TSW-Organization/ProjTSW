@@ -136,4 +136,42 @@ public class UserDAO {
         return false;
     }
 
+    public boolean isAdminUser(String email) {
+        Connection connection = null;
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        boolean isAdmin = false;
+
+        try {
+            connection = DriverManagerConnectionPool.getConnection();
+            String query = "SELECT isAdmin FROM user WHERE email = ?";
+            statement = connection.prepareStatement(query);
+            statement.setString(1, email);
+            resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                isAdmin = resultSet.getBoolean("isAdmin");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (statement != null) {
+                    statement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return isAdmin;
+    }
+
+
 }

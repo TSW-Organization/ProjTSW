@@ -13,6 +13,7 @@ public class Product implements Serializable {
 	private String imgSrc;
 	private Category category;
 	private int quantity;
+	private int selectedQuantity;
 	private int favorites;
 	private Date listingDate;
 	private String description;
@@ -99,8 +100,17 @@ public class Product implements Serializable {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	
+	public int getSelectedQuantity() {
+		return selectedQuantity;
+	}
 
 
+	public void setSelectedQuantity(int selectedQuantity) {
+		this.selectedQuantity = selectedQuantity;
+	}
+
+	
 	public int getFavorites() {
 		return favorites;
 	}

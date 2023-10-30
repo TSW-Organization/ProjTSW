@@ -1,7 +1,7 @@
 package it.unisa.controller;
 
 import java.io.IOException;
-import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,23 +13,23 @@ import it.unisa.bean.Product;
 
 
 
-@WebServlet(urlPatterns = {"", "/home"})
-public class HomeServlet extends HttpServlet {
+@WebServlet("/product")
+public class ProductDetailsServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-    	
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// Crea un'istanza di ProductDAO
-	    ProductDAO productDAO = new ProductDAO();
+		String productIdStr = request.getParameter("id");
+		int productId = Integer.parseInt(productIdStr);
+	    
+		ProductDAO productDAO = new ProductDAO();
 
-	    // Chiama il metodo getAllProducts() per ottenere la lista di prodotti
-	    List<Product> products = productDAO.getFavoritesProducts();
+	    Product product = productDAO.getProductById(productId);
 		
-		
-		request.setAttribute("products", products);	
-		request.getRequestDispatcher("home.jsp").forward(request, response);
+		request.setAttribute("product", product);
+			
+		request.getRequestDispatcher("product-details.jsp").forward(request, response);
 	}
 
 

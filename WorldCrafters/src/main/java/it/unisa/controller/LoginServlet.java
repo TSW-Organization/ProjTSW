@@ -33,9 +33,18 @@ public class LoginServlet extends HttpServlet {
         isValidUser = userDAO.authenticate(email, hashedPassword);
 
         if (isValidUser) {
+            boolean isAdmin = userDAO.isAdminUser(email); // Verifica se l'utente è un amministratore
+
             HttpSession session = request.getSession();
             session.setAttribute("authenticated", true);
-            response.sendRedirect("home");
+
+            if (isAdmin) {
+                session.setAttribute("isAdmin", true);
+                response.sendRedirect("Admin.jsp"); // Reindirizza l'amministratore alla pagina Admin.jsp
+            } else {
+            	System.out.println("C'è stato un errore!!!");
+            	response.sendRedirect("home"); // Reindirizza l'utente normale alla pagina home
+            }
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("authenticated", false);
