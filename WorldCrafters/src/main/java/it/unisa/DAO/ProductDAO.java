@@ -24,7 +24,7 @@ public class ProductDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE (quantity>0)";
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE quantity>0 AND status='enabled'";
 	        statement = connection.prepareStatement(query);
 	        resultSet = statement.executeQuery();
 
@@ -85,7 +85,7 @@ public class ProductDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE (quantity>0) ORDER BY favorites DESC";
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE quantity>0 AND status='enabled' ORDER BY favorites DESC";
 	        statement = connection.prepareStatement(query);
 	        resultSet = statement.executeQuery();
 
@@ -146,7 +146,7 @@ public class ProductDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE (quantity>0) AND (category=? OR category=? OR category=? OR category=?)";
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE quantity>0 AND status='enabled' AND (category=? OR category=? OR category=? OR category=?)";
 	        statement = connection.prepareStatement(query);
 	        
 	        if (chosenCategory.equals("arte")) {
@@ -297,7 +297,7 @@ public class ProductDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE (quantity>0) AND (name LIKE ?)";
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE quantity>0 AND status='enabled' AND name LIKE ?";
 	        statement = connection.prepareStatement(query);
 
 	        statement.setString(1, searchTerm);
@@ -361,7 +361,7 @@ public class ProductDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE (quantity > 0) AND (LOWER(name) LIKE ? OR LOWER(category) LIKE ? OR LOWER(description) LIKE ?)";
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE quantity>0 AND status='enabled' AND (LOWER(name) LIKE ? OR LOWER(category) LIKE ? OR LOWER(description) LIKE ?)";
 	        statement = connection.prepareStatement(query);
 	        String searchParam = "%" + search.toLowerCase() + "%";
 	        statement.setString(1, searchParam);

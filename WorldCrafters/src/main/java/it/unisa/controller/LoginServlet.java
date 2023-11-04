@@ -1,6 +1,7 @@
 package it.unisa.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import it.unisa.DAO.AdminDAO;
+import it.unisa.DAO.CartDAO;
+import it.unisa.DAO.CartItemDAO;
 import it.unisa.DAO.UserDAO;
+import it.unisa.bean.Product;
 
 
 @WebServlet("/login")
@@ -19,6 +23,12 @@ public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doPost(request, response);
+	}
+	
+	
+	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
 		String email = request.getParameter("email").trim();
@@ -33,11 +43,7 @@ public class LoginServlet extends HttpServlet {
 			
         	request.setAttribute("email", email);
         	if(adminDAO.authenticate(email, password)==true) {
-        		HttpSession oldSession = request.getSession(false);
-	            if(oldSession != null) {
-	            	oldSession.invalidate();
-	            }
-	            
+        		
 	            HttpSession session = request.getSession();
 	            session.setAttribute("isAdmin", true);
 	            //session.setMaxInactiveInterval(5*60);  //imposta tempo inattività a 60 minuti
@@ -72,15 +78,32 @@ public class LoginServlet extends HttpServlet {
 				userId = userDAO.authenticate(email,password);
 				
 				if (userId != -1) {
-					HttpSession oldSession = request.getSession(false);
-			        if(oldSession != null) {
-			        	oldSession.invalidate();
-			        }
-			            
-			        HttpSession session = request.getSession();
+        
+					HttpSession session = request.getSession();    
 			        session.setAttribute("userId", userId);
 			        //session.setMaxInactiveInterval(5*60);  //imposta tempo inattività a 60 minuti
-	
+			        
+			        CartDAO cartDAO = new CartDAO();
+					CartItemDAO cartItemDAO = new CartItemDAO();
+					int cartId = cartDAO.getCartByUserId(userId);
+					List<Product> productList;
+
+					List<Product> productListDb = cartDAO.getAllCartProducts(cartId);
+					
+					if(productListDb.size()==0) {
+						productList = (List<Product>) session.getAttribute("productList");
+							
+						//Controllo se é già presente un carrello
+						if(cartId == -1) {
+							//creo nuovo carrello
+							cartId = cartDAO.setCart(userId);
+						}
+						for(Product product:productList) {
+							cartItemDAO.setCartItem(cartId, product.getId(), product.getSelectedQuantity());
+						}
+			
+					}
+
 			        response.sendRedirect("home");
 		        } else {
 		        	error += "Password errata<br>";

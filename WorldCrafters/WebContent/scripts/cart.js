@@ -102,8 +102,8 @@ function updateCart() {
                         <div class="cart-list-item">
                             <img src="${item.imgSrc}" />
                             <p class="product-name">${item.name}</p>
-                            <p class="product-price">€ ${item.price.toFixed(2)}</p>   
-                            <select class="quantity" data-product-id="${item.id}">
+                            <p class="product-price">€ ${priceForQuantity.toFixed(2)}</p>   
+                            <select class="product-quantity" data-product-id="${item.id}">
                     `;
                     
                     for (var i = 1; i <= maxOptions; i++) {
@@ -187,14 +187,15 @@ $(document).ready(function() {
     // Chiama la funzione updateCart quando il documento è pronto
     updateCart();
     
-     $(document).on("change", ".quantity", function () {
+    //Funzione che modifica la quantità selezionata di un prodotto
+     $(document).on("change", ".product-quantity", function () {
         var productId = $(this).data("product-id");
         var selectedQuantity = parseInt($(this).val()); // Converte il valore selezionato in un numero intero
 
         // Effettua una richiesta AJAX per aggiornare la quantità del prodotto nel carrello
         $.ajax({
             type: "POST",
-            url: "add-to-cart", // Sostituisci "update-cart-item" con l'URL per aggiornare la quantità nel carrello lato server
+            url: "addToCart", // Sostituisci "update-cart-item" con l'URL per aggiornare la quantità nel carrello lato server
             data: { productId: productId, selectedQuantity: selectedQuantity },
             success: function (response) {
                 // Il carrello è stato aggiornato con successo, quindi aggiorna la visualizzazione del carrello
@@ -205,4 +206,5 @@ $(document).ready(function() {
             }
         });
     });
+    
 });
