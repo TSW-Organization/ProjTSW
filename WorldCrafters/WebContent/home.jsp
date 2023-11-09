@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <title>WorldCrafters</title>
     <%@ include file="templates/head.html" %>
     <link rel="stylesheet" type="text/css" href="styles/home.css">
     <script src="scripts/home.js"></script>
@@ -46,7 +47,7 @@
 				        <div class="product">
 	                        <div class="product-image">
 	                            <a href="product?id=<%= product.getId() %>">
-						            <img src="<%= product.getImgSrc()%>">
+						            <img src="<%= product.getImgSrc()%>" alt="Product Image">
 						        </a>
 	                        </div>
 	                        <div class="product-details">
@@ -55,8 +56,7 @@
 						        </a>
 	                            <div class="product-price">
 	                                € <%= String.format("%.2f", product.getPrice()) %>
-	                            </div>
-	                            <!--<a href="add-to-cart?id=<%= product.getId() %>" class="add-to-cart" onclick="addToCart(<%= product.getId() %>)">Add to cart</a>-->
+	                            </div> 
 	                        </div>  
                     	</div>
 				<%} %>

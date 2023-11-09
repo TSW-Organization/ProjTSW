@@ -5,20 +5,21 @@ function updateCart() {
         dataType: "json",
         success: function(response) {
             
-            var cartItems = response;
+            let cartItems = response;
 
             // Ora puoi utilizzare cartItems per aggiornare il contenuto del carrello nel DOM
-            var cartList = $("#cartList");
-            var cartPayment = $("#cartPayment");
-            var totalPrice = 0;
-            var totalQuantity = 0;
+            let cartList = $("#cartList");
+            let cartPayment = $("#cartPayment");
+            let totalPrice = 0;
+            let totalQuantity = 0;
+            let quantityHeader;
 
             cartList.empty();
             cartPayment.empty();
 
             if (cartItems.length > 0) {
-                var listHtml = "";
-                var paymentHtml = "<h2>Riepilogo</h2>";
+                let listHtml = "";
+                let paymentHtml = "<h2>Riepilogo</h2>";
                 
                 paymentHtml += `
                     <div class="cart-payment-item">
@@ -30,8 +31,8 @@ function updateCart() {
 
                 $.each(cartItems, function (index, item) {
                     
-                    var priceForQuantity = item.price * item.selectedQuantity;
-                    var maxOptions = Math.min(10, item.quantity);
+                    let priceForQuantity = item.price * item.selectedQuantity;
+                    let maxOptions = Math.min(10, item.quantity);
                     
                     // Utilizza template string per creare l'HTML dinamico per cartList
                     listHtml += `
@@ -42,7 +43,7 @@ function updateCart() {
                             <select class="quantity" data-product-id="${item.id}">
                     `;
                     
-                    for (var i = 1; i <= maxOptions; i++) {
+                    for (let i = 1; i <= maxOptions; i++) {
 				        if(i==item.selectedQuantity) {
 							listHtml += `
                         		<option value=${i} selected>${i}</option>
@@ -77,15 +78,6 @@ function updateCart() {
                     
                 });
                 
-                /*
-                paymentHtml += `
-                    <div class="cart-payment-item">
-                    	<strong class="product-name">Spedizione</strong>
-                    	<p class="product-price">€ 5.00</p>
-                    </div>
-                `;
-                */
-                
                 paymentHtml += `
                     <br/>
                     <div class="cart-payment-item" id="total">
@@ -104,12 +96,12 @@ function updateCart() {
                 cartList.append(listHtml);
                 cartPayment.append(paymentHtml);
                 
-                var quantityHeader = document.getElementById("cartQuantity");
+                quantityHeader = document.getElementById("cartQuantity");
                 quantityHeader.innerHTML = totalQuantity;
                 
             } else {
                 cartList.append("<p>Il carrello è vuoto</p>");
-                var quantityHeader = document.getElementById("cartQuantity");
+                quantityHeader = document.getElementById("cartQuantity");
                 quantityHeader.innerHTML = "";
             }
         },

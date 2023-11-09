@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <title>WorldCrafters</title>
     <%@ include file="templates/head.html" %>
     <link rel="stylesheet" type="text/css" href="styles/style.css">
     <link rel="stylesheet" type="text/css" href="styles/cart.css">

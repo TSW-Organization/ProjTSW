@@ -50,9 +50,7 @@ public class AddToCartServlet extends HttpServlet {
 			cartItemDAO.setCartItem(cartId, productId, selectedQuantity);
 			
 			//recuperare prodotti nel carrello
-			List<Product> productList = new ArrayList<>();
-
-			productList = cartDAO.getAllCartProducts(cartId);
+			List<Product> productList = cartDAO.getAllCartProducts(cartId);
 			
 			session.setAttribute("productList", productList);
 	        

@@ -1,10 +1,8 @@
 // FUNZIONE PER SIDEBAR CATEGORIE
-var sidebarOpen = false;
+let sidebarOpen = false;
 function toggleSidebar() {
-    var sidebar = document.getElementById("sidebar");
-    //var main = document.getElementsByTagName("main")[0];
-    //var footer = document.getElementsByTagName("footer")[0];
-    var body = document.getElementsByTagName("body")[0];
+    let sidebar = document.getElementById("sidebar");
+    let body = document.getElementsByTagName("body")[0];
 
     if(sidebarOpen==false) {
         sidebar.style.left = "0px";
@@ -25,10 +23,10 @@ function toggleSidebar() {
 }
 
 // FUNZIONE PER USERBAR
-var userbarOpen = false;
+let userbarOpen = false;
 function toggleUserbar() {
-    var userbar = document.getElementById("userbar");
-    var body = document.getElementsByTagName("body")[0];
+    let userbar = document.getElementById("userbar");
+    let body = document.getElementsByTagName("body")[0];
 
     if(userbarOpen==false) {
         userbar.style.display = "block";
@@ -60,6 +58,6 @@ function closeAll() {
 // FUNZIONE PER LA CREAZIONE DELLE PAGINE DEI PRODOTTI IN BASE ALLA CATEGORIA CLICCATA NELLA SIDEBAR
 function categoryClick(category) {
 	
-    var url = 'products?category=' + encodeURIComponent(category);
+    let url = 'products?category=' + encodeURIComponent(category);
     window.location.href = url;
 }

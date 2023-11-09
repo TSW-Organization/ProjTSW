@@ -11,6 +11,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    <title>WorldCrafters</title>
     <%@ include file="templates/head.html" %>
     <link rel="stylesheet" type="text/css" href="styles/purchases.css">
 </head>
@@ -46,7 +47,7 @@
 					
 					<div class="purchase-img-container">
 				    	<% for(Product product:products) { %>
-				    		<img class="purchase-img" src="<%= product.getImgSrc()%>">
+				    		<img class="purchase-img" src="<%= product.getImgSrc()%>" alt="Purchase Item">
 				    	<% } %>
 			    	</div>
 					
@@ -71,7 +72,6 @@
 				    	<p>Spesa: € <%= String.format("%.2f", purchase.getAmount()) %></p>
 				    	<p>Metodo di pagamento: carta che termina con <%= payment.getCardNumber().substring(15, 19) %></p>
 				    	<p>Stato:  <%= purchase.getStatus() %></p>
-				    	<!-- <a href="contact.jsp">Richiedi assistenza</a> -->
 				    	
 				    		
 				    	<% if(estimatedDateObj!=null) { %>

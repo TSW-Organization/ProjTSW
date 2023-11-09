@@ -9,10 +9,12 @@ public class Cart extends Product implements Serializable{
 	private int id;
 	private int userId;
 	
+	@Override
 	public int getId() {
 		return id;
 	}
 	
+	@Override
 	public void setId(int id) {
 		this.id = id;
 	}

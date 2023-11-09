@@ -11,11 +11,12 @@ public class CartItem extends Product implements Serializable{
 	private int productId;
 	
 	
-	
+	@Override
 	public int getSelectedQuantity() {
 		return selectedQuantity;
 	}
 
+	@Override
 	public void setSelectedQuantity(int selectedQuantity) {
 		this.selectedQuantity = selectedQuantity;
 	}
@@ -40,32 +41,4 @@ public class CartItem extends Product implements Serializable{
 		return serialVersionUID;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	/*
-	int selectedQuantity;
-	
-	public CartItem(Product product, int selectedQuantity) {
-        super(product.getId(), product.getName(), product.getPrice(), product.getSeller(),
-              product.getImgSrc(), product.getCategory(), product.getQuantity(),
-              product.getFavorites(), product.getListingDate(), product.getDescription());
-
-        this.selectedQuantity = selectedQuantity;
-    }
-	
-	
-	public int getSelectedQuantity() {
-		return selectedQuantity;
-	}
-	
-	public void setSelectedQuantity(int selectedQuantity) {
-		this.selectedQuantity = selectedQuantity;
-	}
-	*/
 }

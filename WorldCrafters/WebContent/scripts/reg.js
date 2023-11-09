@@ -5,9 +5,9 @@ function closeModal() {
 window.addEventListener('DOMContentLoaded', function() {
     // Aggiungi un listener per l'evento di cambio nei campi di input
     $('input[data-validation]').on('input', function () {
-        var validationType = $(this).data('validation');
-        var value = $(this).val().trim();
-        var isValid = false;
+        let validationType = $(this).data('validation');
+        let value = $(this).val().trim();
+        let isValid = false;
 
         // Aggiungi qui le tue regole di validazione per ogni campo
         switch (validationType) {
@@ -26,7 +26,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 isValid = value.length >= 8 && /[A-Z]/.test(value) && /\d/.test(value) && /[!@#$%^&*]/.test(value);
                 break;
             case 'confirmPassword':
-                var password = $('#password').val().trim();
+                let password = $('#password').val().trim();
                 // Confronta la "Conferma Password" con la password
                 isValid = value === password;
                 break;
@@ -57,7 +57,7 @@ window.addEventListener('DOMContentLoaded', function() {
 	  const errorMessagePassword = document.getElementById('errorMessagePassword');
 	  const errorMessageConfirmPassword = document.getElementById('errorMessageConfirmPassword');
 	  const namePattern = /^[a-zA-Z ]+$/;
-	  const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*?])[a-zA-Z0-9!@#$%^&*?]{8,}$/;
+	  const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*?])[a-zA-Z0-9!@#$%^&*?]{8,}$/;
 	
 	  let allFieldsValid = false;
 	

@@ -161,10 +161,6 @@ main {
 	}
 	
 	.cart-list-item .product-name {
-	    font-size: 12px;
-	}
-	
-	.cart-list-item .product-name {
 		font-size: 12px;
 	    line-height: 1.2;
 		max-height: 3.6em;

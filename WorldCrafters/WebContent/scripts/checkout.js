@@ -1,8 +1,8 @@
 //CHECKOUT
 
 window.onload = function() {
-    var form = document.getElementById("checkout-form");
-    var isFormSubmitted = false;
+    let form = document.getElementById("checkout-form");
+    let isFormSubmitted = false;
 
     form.addEventListener("submit", function() {
         isFormSubmitted = true;
@@ -18,7 +18,7 @@ window.onload = function() {
     window.addEventListener("popstate", function(event) {
         if (!isFormSubmitted) {
             event.preventDefault();
-            var confirmLeave = confirm("Sei sicuro di voler lasciare questa pagina? Le modifiche non salvate andranno perse.");
+            let confirmLeave = confirm("Sei sicuro di voler lasciare questa pagina? Le modifiche non salvate andranno perse.");
             if (confirmLeave) {
                 history.back();
             }
@@ -36,9 +36,9 @@ window.onload = function() {
 $(document).ready(function () {
     // Aggiungi un listener per l'evento di cambio nei campi di input
     $('input[data-validation]').on('input', function () {
-        var validationType = $(this).data('validation');
-        var value = $(this).val().trim();
-        var isValid = false;
+        let validationType = $(this).data('validation');
+        let value = $(this).val().trim();
+        let isValid = false;
 
         // Aggiungi qui le tue regole di validazione per ogni campo
         switch (validationType) {
@@ -88,11 +88,11 @@ document.addEventListener("DOMContentLoaded", function() {
 	//per cardNumber
 	const cardNumber = document.getElementById("cardNumber");
 	cardNumber.addEventListener("input", function() {
-		var v = this.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-	    var matches = v.match(/\d{4,16}/g);
-	    var match = matches && matches[0] || '';
-	    var parts = [];
-	    for (i=0, len=match.length; i<len; i+=4) {
+		let v = this.value.replace(/\s+/g, '').replace(/\D/gi, '');
+	    let matches = v.match(/\d{4,16}/g);
+	    let match = matches && matches[0] || '';
+	    let parts = [];
+	    for (let i=0, len=match.length; i<len; i+=4) {
 	        parts.push(match.substring(i, i+4));
 	    }
 	    if (parts.length) {
@@ -105,11 +105,11 @@ document.addEventListener("DOMContentLoaded", function() {
 	//per expDate
 	const expDate = document.getElementById("expDate");		
 	expDate.addEventListener("input", function() {
-		var v = this.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
-        var matches = v.match(/\d{2,4}/g);
-        var match = matches && matches[0] || '';
-        var parts = [];
-        for (i=0, len=match.length; i<len; i+=2) {
+		let v = this.value.replace(/\s+/g, '').replace(/\D/gi, '');
+        let matches = v.match(/\d{2,4}/g);
+        let match = matches && matches[0] || '';
+        let parts = [];
+        for (let i=0, len=match.length; i<len; i+=2) {
             parts.push(match.substring(i, i+2));
         }
         if (parts.length) {

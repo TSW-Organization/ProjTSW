@@ -3,8 +3,9 @@
 <%@ page import="it.unisa.bean.Product" %>
 
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
+	<title>WorldCrafters</title>
 	<%@ include file="templates/head.html" %>
     <link rel="stylesheet" type="text/css" href="styles/product-details.css">
     <script src="scripts/cart.js"></script>
