@@ -24,7 +24,7 @@ public class ProductDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE (quantity>0)";
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE quantity>0 AND status='enabled'";
 	        statement = connection.prepareStatement(query);
 	        resultSet = statement.executeQuery();
 
@@ -85,7 +85,7 @@ public class ProductDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE (quantity>0) ORDER BY favorites DESC";
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE quantity>0 AND status='enabled' ORDER BY favorites DESC";
 	        statement = connection.prepareStatement(query);
 	        resultSet = statement.executeQuery();
 
@@ -146,7 +146,7 @@ public class ProductDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE (quantity>0) AND (category=? OR category=? OR category=? OR category=?)";
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE quantity>0 AND status='enabled' AND (category=? OR category=? OR category=? OR category=?)";
 	        statement = connection.prepareStatement(query);
 	        
 	        if (chosenCategory.equals("arte")) {
@@ -297,7 +297,7 @@ public class ProductDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE (quantity>0) AND (name LIKE ?)";
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE quantity>0 AND status='enabled' AND name LIKE ?";
 	        statement = connection.prepareStatement(query);
 
 	        statement.setString(1, searchTerm);
@@ -361,7 +361,7 @@ public class ProductDAO {
 
         try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE (quantity > 0) AND (LOWER(name) LIKE ? OR LOWER(category) LIKE ? OR LOWER(description) LIKE ?)";
+	        String query = "SELECT id, name, price, seller, imgSrc, category, quantity, favorites, listingDate, description FROM product WHERE quantity>0 AND status='enabled' AND (LOWER(name) LIKE ? OR LOWER(category) LIKE ? OR LOWER(description) LIKE ?)";
 	        statement = connection.prepareStatement(query);
 	        String searchParam = "%" + search.toLowerCase() + "%";
 	        statement.setString(1, searchParam);
@@ -452,5 +452,73 @@ public class ProductDAO {
 	    }
 
     }
-    
+
+	public List<Product> getProductsByPurchaseId(int purchaseId) {
+		
+		List<Product> products = new ArrayList<>();
+	    
+	    Connection connection = null;
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
+	
+	    try {
+	        connection = DriverManagerConnectionPool.getConnection();
+	        String query =  "SELECT P.id, P.name, P.price, P.seller, P.imgSrc, P.quantity, P.favorites, P.ListingDate, P.description, P.category " +
+	    			"FROM product P " +
+	    			"JOIN purchase_item ON P.id = purchase_item.productId " +
+	    			"JOIN purchase ON  purchase_item.purchaseId = purchase.id " +
+	    			"WHERE purchase.id = ?";
+	        statement = connection.prepareStatement(query);
+	        statement.setInt(1, purchaseId);
+	        resultSet = statement.executeQuery();
+	
+	        while (resultSet.next()) {
+	        	int id = resultSet.getInt("id");
+	        	String name = resultSet.getString("name");
+	            double price = resultSet.getDouble("price");
+	            String seller = resultSet.getString("seller");
+	            String imgSrc = resultSet.getString("imgSrc");
+	            Category category = Category.valueOf(resultSet.getString("category"));
+	            int quantity = resultSet.getInt("quantity");
+	            int favorites = resultSet.getInt("favorites");
+	            Date listingDate = resultSet.getDate("listingDate");
+	            String description = resultSet.getString("description");
+	
+	            Product product = new Product();
+	            product.setId(id);
+	            product.setName(name);
+	            product.setPrice(price);
+	            product.setSeller(seller);
+	            product.setImgSrc(imgSrc);
+	            product.setCategory(category);
+	            product.setQuantity(quantity);
+	            product.setFavorites(favorites);
+	            product.setListingDate(listingDate);
+	            product.setDescription(description);
+	
+	            products.add(product);
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (resultSet != null) {
+	                resultSet.close();
+	            }
+	            if (statement != null) {
+	                statement.close();
+	            }
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+	
+	    return products;
+	    
+	}
+	
 }
+

@@ -15,11 +15,11 @@ public class PurchaseItemDAO {
 		Connection connection = null;
 	    PreparedStatement statement = null;
 	    ResultSet resultSet = null;
-	    int generatedId = -1; // Inizializziamo con un valore di errore
+	    int generatedId = -1;
 
 	    try {
 	        connection = DriverManagerConnectionPool.getConnection();
-	        String query = "INSERT INTO purchase_item (quantity, price, product_id, purchase_id) VALUES (?, ?, ?, ?);";
+	        String query = "INSERT INTO purchase_item (quantity, price, productId, purchaseId) VALUES (?, ?, ?, ?);";
 
 	        // Passiamo il flag Statement.RETURN_GENERATED_KEYS al PreparedStatement
 	        statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -54,7 +54,7 @@ public class PurchaseItemDAO {
 	        }
 	    }
 
-	    return generatedId; // Ritorniamo l'ID generato
+	    return generatedId;
 		
 		
 	}

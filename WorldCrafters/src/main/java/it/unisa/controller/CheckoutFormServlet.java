@@ -14,11 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import it.unisa.DAO.CartDAO;
+import it.unisa.DAO.CartItemDAO;
 import it.unisa.DAO.PaymentDAO;
 import it.unisa.DAO.ProductDAO;
 import it.unisa.DAO.PurchaseDAO;
 import it.unisa.DAO.PurchaseItemDAO;
 import it.unisa.bean.CartItem;
+import it.unisa.bean.Product;
 
 
 @WebServlet("/CheckoutForm")
@@ -43,10 +46,11 @@ public class CheckoutFormServlet extends HttpServlet {
         String zipCode = request.getParameter("zipCode");
         String accountholder = request.getParameter("accountholder");
         String cardNumber = request.getParameter("cardNumber");
-        String expDate = request.getParameter("expDate");
+        String expMonth = request.getParameter("expMonth");
+        String expYear = request.getParameter("expYear");
         String cvv = request.getParameter("cvv");
         String error = "";
-/*
+
         // Convalida fullName
         if (fullName == null || fullName.trim().equals("") || !Pattern.matches("^[A-Za-z]+\\s+[A-Za-z]+$", fullName)) {
             error += "Inserisci nome valido<br>";
@@ -102,13 +106,27 @@ public class CheckoutFormServlet extends HttpServlet {
         } else {
             request.setAttribute("cardNumber", cardNumber);
         }
-
-        // Convalida expDate
-        if (expDate == null || !Pattern.matches("^\\d{2}\\/\\d{2}$", expDate)) {
-            error += "Inserisci una data di scadenza valida (MM/YYYY)<br>";
-        } else {
-            request.setAttribute("expDate", expDate);
-        }
+    
+        //Convalida mese di scadenza
+        if (expMonth == null || !Pattern.matches("^(0[1-9]|1[0-2])$", expMonth)) {
+		    error += "Inserisci un mese di scadenza valido (01-12)<br>";
+		} else {
+		    request.setAttribute("expMonth", expMonth);
+		}
+		
+		// Convalida anno di scadenza (expYear)	
+		if (expYear == null || !Pattern.matches("^\\d{4}$", expYear)) {
+		    error += "Inserisci un anno di scadenza valido (formato: 2023)<br>";
+		} else {
+		    // Puoi aggiungere ulteriori controlli sull'anno, ad esempio, se è futuro o non scaduto.
+		    int year = Integer.parseInt(expYear);
+		    int currentYear = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
+		    if (year < currentYear) {
+		        error += "L'anno di scadenza non è valido<br>";
+		    } else {
+		        request.setAttribute("expYear", expYear);
+		    }
+		}
 
         // Convalida cvv
         if (cvv == null || !Pattern.matches("^\\d{3}$", cvv)) {
@@ -116,7 +134,7 @@ public class CheckoutFormServlet extends HttpServlet {
         } else {
             request.setAttribute("cvv", cvv);
         }
-*/
+
         if (!error.equals("")) {
             request.setAttribute("error", error);
             request.getRequestDispatcher("/checkout.jsp").forward(request, response);
@@ -128,12 +146,26 @@ public class CheckoutFormServlet extends HttpServlet {
         	HttpSession session = request.getSession();
         	int userId = (int) session.getAttribute("userId");
         	@SuppressWarnings("unchecked")
-        	List<CartItem> cartItems = (List<CartItem>) session.getAttribute("cartItems");
+        	List<Product> productList = (List<Product>) session.getAttribute("productList");
         	ProductDAO productDAO = new ProductDAO();
         	double amount = 0.0;
         	
+        	//Elimino i cartItem associati al cart dell'utente dal db
+        	CartItemDAO cartItemDAO = new CartItemDAO();
+        	CartDAO cartDAO = new CartDAO();
+        	int cartId = cartDAO.getCartByUserId(userId);
+        	
+        	for(Product item : productList) {
+        		productDAO.sellProduct(item.getId(),item.getSelectedQuantity());
+        		cartItemDAO.deleteCartItem(cartId, item.getId());
+        	}
+        	
+        	//Elimino il cart dell'utente dal db
+        	cartDAO.deleteCart(cartId);
+        	
+        	
         	//Aggiorno quantity e favorites di product
-        	for(CartItem item : cartItems) {
+        	for(Product item : productList) {
         		productDAO.sellProduct(item.getId(),item.getSelectedQuantity());
         		amount += item.getSelectedQuantity() * item.getPrice();
         	}
@@ -144,26 +176,26 @@ public class CheckoutFormServlet extends HttpServlet {
             Time currentTime = new Time(currentTimeMillis);
         	
         	PaymentDAO paymentDAO = new PaymentDAO();
-        	int generatedPaymentId = paymentDAO.setPayment(currentDate, currentTime, amount, userId);      	
+        	int generatedPaymentId = paymentDAO.setPayment(currentDate, currentTime, amount, userId, accountholder, cardNumber, Integer.parseInt(expMonth), Integer.parseInt(expYear), Integer.parseInt(cvv));
         	
         	//Creo un order
         	currentTimeMillis = System.currentTimeMillis();
             currentDate = new Date(currentTimeMillis);
         	
         	PurchaseDAO purchaseDAO = new PurchaseDAO();
-        	int generatedPurchaseId = purchaseDAO.setPurchase(currentDate, amount, userId, generatedPaymentId);
+        	int generatedPurchaseId = purchaseDAO.setPurchase(currentDate, currentTime, amount, userId, generatedPaymentId, fullName, address, city, state, zipCode);
         	
 
         	//Aggiungo gli orderItem nel db e li collego all'order
         	PurchaseItemDAO purchaseItemDAO = new PurchaseItemDAO();
-        	for(CartItem item : cartItems) {
+        	for(Product item : productList) {
         		purchaseItemDAO.setOrderItem(item.getSelectedQuantity(), item.getPrice(), item.getId(), generatedPurchaseId);
         	}
         	
-        	
 
-            session.removeAttribute("cartItems");
-        	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/checkout-success.jsp");
+            session.removeAttribute("productList");
+            //request.setAttribute("orderMessage", "Ordine effettuato con successo!");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/checkout-success.jsp");
             dispatcher.forward(request, response);
         }
         

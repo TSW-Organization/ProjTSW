@@ -13,7 +13,7 @@ function addToCart(productId) {
     
     $.ajax({
         type: "POST",
-        url: "add-to-cart",
+        url: "addToCart",
         data: { productId: productId, selectedQuantity: selectedQuantity },
         success: function(response) {
             updateCart();
@@ -28,7 +28,7 @@ function removeFromCart(productId) {
 	
     $.ajax({
         type: "POST",
-        url: "remove-from-cart",
+        url: "removeFromCart",
         data: { productId: productId },
         success: function(response) {
             updateCart();
@@ -39,10 +39,30 @@ function removeFromCart(productId) {
     });
 }
 
+function emptyCart() {
+    var allXButtons = document.getElementsByClassName("removeFromCartButton");
+    
+    for (var i = 0; i < allXButtons.length; i++) {
+        var productId = allXButtons[i].getAttribute("data-product-id");
+        
+        $.ajax({
+            type: "POST",
+            url: "removeFromCart",
+            data: { productId: productId },
+            success: function(response) {
+                updateCart();
+            },
+            error: function(xhr, status, error) {
+                console.log("Errore durante la rimozione dal carrello: " + error);
+            }
+        });
+    }
+}
+
 function updateCart() {
     $.ajax({
         type: "GET",
-        url: "update-cart",
+        url: "updateCart",
         dataType: "json",
         success: function(response) {
             
@@ -69,6 +89,9 @@ function updateCart() {
                     </div>   
                 `;
 
+                
+                listHtml += `<button id="emptyCartButton" onclick="emptyCart()">Svuota il carrello</button>`;
+                
                 $.each(cartItems, function (index, item) {
                     
                     var priceForQuantity = item.price * item.selectedQuantity;
@@ -79,8 +102,8 @@ function updateCart() {
                         <div class="cart-list-item">
                             <img src="${item.imgSrc}" />
                             <p class="product-name">${item.name}</p>
-                            <p class="product-price">€ ${item.price.toFixed(2)}</p>   
-                            <select class="quantity" data-product-id="${item.id}">
+                            <p class="product-price">€ ${priceForQuantity.toFixed(2)}</p>   
+                            <select class="product-quantity" data-product-id="${item.id}">
                     `;
                     
                     for (var i = 1; i <= maxOptions; i++) {
@@ -97,7 +120,7 @@ function updateCart() {
                                     
                     listHtml += `   
                             </select>
-                            <button onclick="removeFromCart('${item.id}')"><i class="fa fa-close fa-xl"></i></button><br>
+                            <button class="removeFromCartButton" data-product-id="${item.id}" onclick="removeFromCart('${item.id}')"><i class="fa fa-close fa-xl"></i></button><br>
                         </div>
                     `;
 
@@ -149,7 +172,7 @@ function updateCart() {
                 quantityHeader.innerHTML = totalQuantity;
                 
             } else {
-                cartList.append("<p>Il carrello è vuoto</p>");
+                cartList.append(`<p id="emptyCart">Il carrello è vuoto</p>`);
                 var quantityHeader = document.getElementById("cartQuantity");
                 quantityHeader.innerHTML = "";
             }
@@ -164,14 +187,15 @@ $(document).ready(function() {
     // Chiama la funzione updateCart quando il documento è pronto
     updateCart();
     
-     $(document).on("change", ".quantity", function () {
+    //Funzione che modifica la quantità selezionata di un prodotto
+     $(document).on("change", ".product-quantity", function () {
         var productId = $(this).data("product-id");
         var selectedQuantity = parseInt($(this).val()); // Converte il valore selezionato in un numero intero
 
         // Effettua una richiesta AJAX per aggiornare la quantità del prodotto nel carrello
         $.ajax({
             type: "POST",
-            url: "add-to-cart", // Sostituisci "update-cart-item" con l'URL per aggiornare la quantità nel carrello lato server
+            url: "addToCart", // Sostituisci "update-cart-item" con l'URL per aggiornare la quantità nel carrello lato server
             data: { productId: productId, selectedQuantity: selectedQuantity },
             success: function (response) {
                 // Il carrello è stato aggiornato con successo, quindi aggiorna la visualizzazione del carrello
@@ -182,4 +206,5 @@ $(document).ready(function() {
             }
         });
     });
+    
 });

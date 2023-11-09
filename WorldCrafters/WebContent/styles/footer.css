@@ -16,13 +16,13 @@ footer {
 }
 
 .carousel-cell h1 {
-    color: white;
+    color: #002642;
     text-align: center;
     font-size: 40px;
 }
 
 .carousel-cell p {
-    color: white;
+    color: #FDF6ED;
     text-align: left;
     font-size: 30px;
     padding: 5px;

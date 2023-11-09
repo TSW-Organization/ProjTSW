@@ -5,8 +5,16 @@
 <head>
 	<%@ include file="templates/head.html" %>
     <link rel="stylesheet" type="text/css" href="styles/log-reg.css">
+    <script src="scripts/log.js"></script>
 </head>
 <body>
+	
+	<%
+		String email = (String)request.getAttribute("email");
+		if(email == null) email = "";
+	%>
+	
+	
 	<!-- Aggiungi il wrapper per la finestra di login -->
 	<div class="modal-overlay">
 		<div class="modal-content">
@@ -17,14 +25,26 @@
 			<form method="post" action="login" id="login-form">
 				<div class="form-group">
 					<label for="email">Email:</label> 
-					<input type="text" name="email" id="email" placeholder="La tua email" /> <!-- Aggiorna il placeholder -->
+					<input type="text" name="email" id="email" required value="<%=email %>" data-validation="email" placeholder="La tua email" />
+					<div id="errorMessageEmail"></div>
 				</div>
 				<div class="form-group">
 					<label for="password">Password:</label> 
-					<input type="password" name="password" id="password" placeholder="Password" />
+					<input type="password" name="password" required id="password" data-validation="password" placeholder="Password" />
 				</div>
+				<%
+		        String error = (String)request.getAttribute("error");
+				if(error != null) {
+				%>
+					<div class="error-message"><%=error %></div>
+					<br/>
+				<%
+				}
+				%>
+				
+				
 				<div class="form-group form-button">
-					<input type="submit" name="signin" id="signin" value="Accedi" />
+					<input type="submit" name="signin" id="signin" value="Accedi" disabled/>
 					<!-- Aggiorna il testo del pulsante di accesso -->
 				</div>
 			</form>
@@ -42,16 +62,8 @@
 				</div>
 			</div>
 		</div>
-			
+	
 	</div>
-	
-	<script>
-		function closeModal() {
-			history.back();
-			history.back();
-		}
-	</script>
-	
-	
+		
 </body>
 </html>

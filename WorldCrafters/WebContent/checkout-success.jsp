@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <%@ include file="templates/head.html" %>
-    <link rel="stylesheet" type="text/css" href="styles/contact-success.css">
+    <link rel="stylesheet" type="text/css" href="styles/checkout-success.css">
 </head>
 <body>
 	
@@ -18,9 +18,11 @@
         <div id="background"></div>
         
         <div id="messageContainer">
-        	<h1>L'ordine è stato completato ed è in attesa di approvazione.<br/>Puoi visualizzare lo stato dell'ordine nell'apposita sezione</h1>
+        	<h1>Ordine effettuato con successo<br/>Puoi visualizzare lo stato dell'ordine nell'apposita sezione</h1>
         	<br><br>
-        	<a href="home">Torna alla home</a>
+        	<div id="linkContainer">
+        		<a href="home">Torna alla home</a>
+        	</div>
         </div>
     </main>
 

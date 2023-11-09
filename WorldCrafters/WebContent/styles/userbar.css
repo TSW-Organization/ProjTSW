@@ -1,6 +1,6 @@
 /* USERBAR*/
 #userbar{
-    background: white;
+    background: #FDF6ED;
     position:fixed;
     right: 0px;
     padding: 20px;
@@ -21,14 +21,14 @@
 #userbar li a {
     display: inline-block;
     padding: 10px;
-    color: #333333;
+    color: #002642;
     text-decoration: none;
     font-size: 14px;
     font-weight: bold;
     border: none;
     background-color: transparent;
     cursor: pointer;
-    height: 25px; /* Altezza fissa dei pulsanti */
+    height: 20px;
 }
 
 #userbar li button:hover,
@@ -40,37 +40,18 @@
 @media only screen and (max-width: 768px) {
     
     #userbar{
-        background: white;
         position: absolute;
-        right: 0px;
         padding: 5px;
-        border-bottom-left-radius: 10px;
         overflow: hidden;
     }
     
-    #userbar li {
-        list-style: none;
-    }
     
     #userbar li button,
 	#userbar li a {
-	    display: inline-block;
-	    padding: 10px;
-	    color: #333333;
-	    text-decoration: none;
-	    font-size: 14px;
-	    font-weight: bold;
-	    border: none;
-	    background-color: transparent;
-	    cursor: pointer;
-	    height: 25px; /* Altezza fissa dei pulsanti */
+	    font-size: 12px;
+	    height: 15px;
 	}
 	
-	#userbar li button:hover,
-	#userbar li a:hover {
-	    text-decoration: underline;
-	}
-    
     .userbar-open {
         overflow: hidden;
     }

@@ -185,3 +185,17 @@ body {
 	text-decoration: none;
 	color: #8cada7;
 }
+
+.error-message {
+	color: red;
+	font-size: 14px;
+}
+
+.error {
+	border: 1px solid red !important;
+}
+
+#errorMessageEmail, #errorMessageFirstName, #errorMessageLastName, #errorMessagePassword, #errorMessageConfirmPassword {
+	font-size: 12px;
+	color: red;
+}

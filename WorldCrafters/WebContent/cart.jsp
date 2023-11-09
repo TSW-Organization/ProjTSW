@@ -7,6 +7,7 @@
 <html lang="it">
 <head>
     <%@ include file="templates/head.html" %>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
     <link rel="stylesheet" type="text/css" href="styles/cart.css">
     <script src="scripts/cart.js"></script>
 </head>

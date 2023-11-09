@@ -1,18 +1,24 @@
 package it.unisa.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import it.unisa.DAO.PaymentDAO;
 import it.unisa.DAO.ProductDAO;
 import it.unisa.DAO.PurchaseDAO;
 import it.unisa.DAO.PurchaseItemDAO;
+import it.unisa.bean.Payment;
+import it.unisa.bean.Product;
 import it.unisa.bean.Purchase;
 
 
@@ -31,19 +37,36 @@ public class PurchasesServlet extends HttpServlet {
 		PurchaseDAO purchaseDAO = new PurchaseDAO();
 	    PaymentDAO paymentDAO = new PaymentDAO();
 	    PurchaseItemDAO purchaseItemDAO = new PurchaseItemDAO();
-
-
-	    List<Purchase> purchases = purchaseDAO.getPurchasesByUserId(1);
+	    HttpSession session = request.getSession(false);
+	    int userId=-1;
+	    Map<Integer, List<Product>> productsByPurchase = new HashMap<>();
 	    
-	    /*
-	    for(Purchase purchase : purchases) {
-	    	Payment payment = paymentDAO.getPaymentByPurchaseIdAndUserId();
+	    if(session.getAttribute("userId")!=null) {
+	    	userId = (int) session.getAttribute("userId");
+	    	List<Purchase> purchases = purchaseDAO.getPurchasesByUserId(userId);
+	    	List<Payment> payments = new ArrayList<>();
+		    
+		    
+		    for(Purchase purchase : purchases) {
+		    	//Prelevo il metodo di pagamento
+		    	int paymentId = purchase.getPaymentId();
+		    	Payment payment = paymentDAO.getPaymentByPaymentId(paymentId);
+		    	payments.add(payment);
+		    	
+		    	//Prelevo i prodotti associati all'ordine
+		    	List<Product> products = productDAO.getProductsByPurchaseId(purchase.getId());
+		    	productsByPurchase.put(purchase.getId(), products);
+		    			
+		    }
+		    
+		    
+			request.setAttribute("purchases", purchases);
+			request.setAttribute("payments", payments);
+			request.setAttribute("productsByPurchase", productsByPurchase);
+			request.getRequestDispatcher("purchases.jsp").forward(request, response);
+	    } else {
+	    	response.sendRedirect("login.jsp");
 	    }
-	    */
-	    
-	       
-		request.setAttribute("purchases", purchases);
-		request.getRequestDispatcher("purchases.jsp").forward(request, response);
 	}
 
 

@@ -37,7 +37,7 @@
 			if(message == null) message = "";
 			%>
     
-	        <form id="contact-form" name="contact-form" method="POST" action="CheckContactForm" novalidate>
+	        <form id="contact-form" name="contact-form" method="POST" action="CheckContactForm">
 	            <div class="form-item">
 	                <label for="name">Nome: *</label>
 	                <input type="text" name="name" value="<%=name %>" required data-validation="name">

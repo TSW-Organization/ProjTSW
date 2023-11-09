@@ -8,6 +8,7 @@
 <head>
     <%@ include file="templates/head.html" %>
     <link rel="stylesheet" type="text/css" href="styles/home.css">
+    <script src="scripts/home.js"></script>
 </head>
 <body>
     
@@ -19,7 +20,19 @@
     	<%@ include file="templates/presentationBg.jsp" %>
     	<p>Fatti ispirare dalle tradizioni<br>artigianali di tutto<br>il mondo</p>
     </div>
-    
+     
+    <%-- Verifica se c'è un messaggio di ordine e mostra un popup 
+	<% String orderMessage = (String) request.getAttribute("orderMessage");
+	   if (orderMessage != null) { %>
+	   <script>
+	      window.onload = function() {
+	         alert('<%= orderMessage %>');
+	      }
+	   </script>
+	   <% request.removeAttribute("orderMessage"); %>
+	<% } %>
+	--%>
+	
     <main onclick="closeAll()">
 
         <div id="showcaseContainer">
@@ -53,6 +66,7 @@
     </main>
     
     <%@ include file="templates/footer.jsp" %>
-    
+
+
 </body>
 </html>
