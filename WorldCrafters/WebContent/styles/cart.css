@@ -145,11 +145,11 @@ main {
 	}
 	
 	h1 {
-		font-size: 20px;
+		font-size: 18px;
 	}
 	
 	h2 {
-		font-size: 18px;
+		font-size: 16px;
 	}
 	
 	#emptyCartButton {
@@ -213,6 +213,10 @@ main {
 	
 	#back {
 	    font-size: 13px;
+	}
+	
+	#emptyCart {
+		font-size: 13px;
 	}
 	
 }

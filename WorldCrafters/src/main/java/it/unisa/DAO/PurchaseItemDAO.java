@@ -15,7 +15,7 @@ public class PurchaseItemDAO {
 		Connection connection = null;
 	    PreparedStatement statement = null;
 	    ResultSet resultSet = null;
-	    int generatedId = -1; // Inizializziamo con un valore di errore
+	    int generatedId = -1;
 
 	    try {
 	        connection = DriverManagerConnectionPool.getConnection();
@@ -54,7 +54,7 @@ public class PurchaseItemDAO {
 	        }
 	    }
 
-	    return generatedId; // Ritorniamo l'ID generato
+	    return generatedId;
 		
 		
 	}

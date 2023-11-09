@@ -46,7 +46,7 @@ public class LoginServlet extends HttpServlet {
         		
 	            HttpSession session = request.getSession();
 	            session.setAttribute("isAdmin", true);
-	            //session.setMaxInactiveInterval(5*60);  //imposta tempo inattività a 60 minuti
+	            session.setMaxInactiveInterval(24*60*60);  //Imposta la durata della sessione a 24 ore
 
 	            response.sendRedirect("home");
         	} else {
@@ -81,8 +81,8 @@ public class LoginServlet extends HttpServlet {
         
 					HttpSession session = request.getSession();    
 			        session.setAttribute("userId", userId);
-			        //session.setMaxInactiveInterval(5*60);  //imposta tempo inattività a 60 minuti
-			        
+			        session.setMaxInactiveInterval(24*60*60);  //Imposta la durata della sessione a 24 ore
+
 			        CartDAO cartDAO = new CartDAO();
 					CartItemDAO cartItemDAO = new CartItemDAO();
 					int cartId = cartDAO.getCartByUserId(userId);

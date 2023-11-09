@@ -6,10 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
-
 import it.unisa.utils.DriverManagerConnectionPool;
-
 import java.sql.Date;
+import it.unisa.bean.Payment;
 
 public class PaymentDAO {
 	
@@ -65,4 +64,52 @@ public class PaymentDAO {
 	    return generatedId; // Ritorniamo l'ID generato
 	}
 	
+
+	public Payment getPaymentByPaymentId(int paymentId) {
+		
+		Payment payment = new Payment();
+		
+		Connection connection = null;
+	    PreparedStatement statement = null;
+	    ResultSet resultSet = null;
+
+	    try {
+	        connection = DriverManagerConnectionPool.getConnection();
+	        String query = "SELECT id, cardNumber FROM payment WHERE id=?";
+
+	        statement = connection.prepareStatement(query);
+	        statement.setInt(1, paymentId);
+	        resultSet = statement.executeQuery();
+
+	        if (resultSet.next()) {   
+	            int id = resultSet.getInt("id");
+	            String cardNumber = resultSet.getString("cardNumber");
+
+	            payment.setId(id);
+	            payment.setCardNumber(cardNumber);
+
+	        }
+
+	        connection.commit();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    } finally {
+	        try {
+	            if (resultSet != null) {
+	                resultSet.close();
+	            }
+	            if (statement != null) {
+	                statement.close();
+	            }
+	            if (connection != null) {
+	                connection.close();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+		
+		return payment;
+	}
 }
+

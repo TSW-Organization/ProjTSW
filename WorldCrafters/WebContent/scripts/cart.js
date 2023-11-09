@@ -172,7 +172,7 @@ function updateCart() {
                 quantityHeader.innerHTML = totalQuantity;
                 
             } else {
-                cartList.append("<p>Il carrello è vuoto</p>");
+                cartList.append(`<p id="emptyCart">Il carrello è vuoto</p>`);
                 var quantityHeader = document.getElementById("cartQuantity");
                 quantityHeader.innerHTML = "";
             }

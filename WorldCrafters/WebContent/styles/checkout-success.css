@@ -2,8 +2,8 @@
 #messageContainer {
     width: 60%;
     margin-left: 20%;
-    margin-top: -400px;
-    background-color: white;
+    margin-top: -450px;
+    background-color: #FDF6ED;
     padding: 20px;
     border-radius: 15px;
     min-height: 500px;
@@ -13,10 +13,21 @@
     text-align: center;
 }
 
-#messageContainer a {
-	display: block;
+#linkContainer {
+	display: flex;
+	justify-content: center;
+    align-items: center;
+}
+
+#linkContainer a {
+	text-align: center;
 	color: blue;
 	text-align: center;
+	text-decoration: underline;
+}
+
+#linkContainer a:hover {
+	color: #007bff;
 }
 
 
@@ -27,22 +38,22 @@
 	    background-image: url(../imgs/presentation-bg2.jpg);
 	    background-position: center;
 	    background-size: cover;
-	    height: 300px;
 	}
 	
-	/* CONTACT CONTAINER */
-	#contactContainer {
+	#messageContainer {
 	    width: 90%;
 	    margin-left: 5%;
-	    margin-top: -250px;
-	    background-color: white;
-	    padding: 10px;
-	    border-radius: 15px;
-	    min-height: 500px;
+	    margin-top: -500px;
+	    padding: 20px;
+	    min-height: 250px;
 	}
 	
-	#contactContainer h1 {
-	    text-align: center;
-	    font-size: 15px;
+	#messageContainer h1 {
+	    font-size: 16px;
 	}
+	
+	#linkContainer a {
+		font-size: 13px;
+	}
+	
 }

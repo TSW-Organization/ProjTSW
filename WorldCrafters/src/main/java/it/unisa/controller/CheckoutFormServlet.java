@@ -50,7 +50,7 @@ public class CheckoutFormServlet extends HttpServlet {
         String expYear = request.getParameter("expYear");
         String cvv = request.getParameter("cvv");
         String error = "";
-/*
+
         // Convalida fullName
         if (fullName == null || fullName.trim().equals("") || !Pattern.matches("^[A-Za-z]+\\s+[A-Za-z]+$", fullName)) {
             error += "Inserisci nome valido<br>";
@@ -134,7 +134,7 @@ public class CheckoutFormServlet extends HttpServlet {
         } else {
             request.setAttribute("cvv", cvv);
         }
-*/
+
         if (!error.equals("")) {
             request.setAttribute("error", error);
             request.getRequestDispatcher("/checkout.jsp").forward(request, response);
@@ -194,7 +194,8 @@ public class CheckoutFormServlet extends HttpServlet {
         	
 
             session.removeAttribute("productList");
-        	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/checkout-success.jsp");
+            //request.setAttribute("orderMessage", "Ordine effettuato con successo!");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/checkout-success.jsp");
             dispatcher.forward(request, response);
         }
         

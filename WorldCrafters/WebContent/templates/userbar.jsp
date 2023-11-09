@@ -6,7 +6,6 @@
 <head>
     <link rel="stylesheet" type="text/css" href="styles/userbar.css">
     <script src="scripts/sidebar-userbar.js"></script>
-    <script src="scripts/log.js"></script>
 </head>
 <body>
 	
