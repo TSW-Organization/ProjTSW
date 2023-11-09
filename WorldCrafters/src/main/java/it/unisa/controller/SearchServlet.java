@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
-import it.unisa.DAO.ProductDAO;
 import it.unisa.bean.Product;
+import it.unisa.dao.ProductDAO;
 
 
 @WebServlet("/api/search")

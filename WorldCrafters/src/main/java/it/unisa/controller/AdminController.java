@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.unisa.DAO.ProductDAO;
 import it.unisa.bean.Product;
+import it.unisa.dao.ProductDAO;
 
 
 public class AdminController extends HttpServlet {

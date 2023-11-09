@@ -14,14 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import it.unisa.DAO.CartDAO;
-import it.unisa.DAO.CartItemDAO;
-import it.unisa.DAO.PaymentDAO;
-import it.unisa.DAO.ProductDAO;
-import it.unisa.DAO.PurchaseDAO;
-import it.unisa.DAO.PurchaseItemDAO;
-import it.unisa.bean.CartItem;
 import it.unisa.bean.Product;
+import it.unisa.dao.CartDAO;
+import it.unisa.dao.CartItemDAO;
+import it.unisa.dao.PaymentDAO;
+import it.unisa.dao.ProductDAO;
+import it.unisa.dao.PurchaseDAO;
+import it.unisa.dao.PurchaseItemDAO;
 
 
 @WebServlet("/CheckoutForm")

@@ -1,4 +1,4 @@
-package it.unisa.DAO;
+package it.unisa.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

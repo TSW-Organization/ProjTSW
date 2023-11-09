@@ -11,9 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import it.unisa.DAO.CartDAO;
-import it.unisa.DAO.CartItemDAO;
 import it.unisa.bean.Product;
+import it.unisa.dao.CartDAO;
 
 
 @WebServlet("/updateCart")
@@ -37,7 +36,6 @@ public class UpdateCartServlet extends HttpServlet {
 					
 				userId = (int) session.getAttribute("userId");
 				CartDAO cartDAO = new CartDAO();
-				CartItemDAO cartItemDAO = new CartItemDAO();
 				cartId = cartDAO.getCartByUserId(userId);
 
 				productList = cartDAO.getAllCartProducts(cartId);
