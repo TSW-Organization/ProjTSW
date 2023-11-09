@@ -1,10 +1,9 @@
-package it.unisa.DAO;
+package it.unisa.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import it.unisa.utils.DriverManagerConnectionPool;
 
@@ -33,15 +32,10 @@ public class AdminDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (resultSet != null) {
-	                resultSet.close();
-	            }
-	            if (statement != null) {
-	                statement.close();
-	            }
-	            if (connection != null) {
-	                connection.close();
-	            }
+            	resultSet.close();
+            	statement.close();
+                connection.close();
+
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -72,16 +66,11 @@ public class AdminDAO {
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    } finally {
-	        try {
-	            if (resultSet != null) {
-	                resultSet.close();
-	            }
-	            if (statement != null) {
-	                statement.close();
-	            }
-	            if (connection != null) {
-	                connection.close();
-	            }
+	    	try {
+            	resultSet.close();
+            	statement.close();
+                connection.close();
+
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -112,16 +101,11 @@ public class AdminDAO {
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    } finally {
-	        try {
-	            if (resultSet != null) {
-	                resultSet.close();
-	            }
-	            if (statement != null) {
-	                statement.close();
-	            }
-	            if (connection != null) {
-	                connection.close();
-	            }
+	    	try {
+            	resultSet.close();
+            	statement.close();
+                connection.close();
+
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }

@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import it.unisa.DAO.AdminDAO;
-import it.unisa.DAO.CartDAO;
-import it.unisa.DAO.CartItemDAO;
-import it.unisa.DAO.UserDAO;
 import it.unisa.bean.Product;
+import it.unisa.dao.AdminDAO;
+import it.unisa.dao.CartDAO;
+import it.unisa.dao.CartItemDAO;
+import it.unisa.dao.UserDAO;
 
 
 @WebServlet("/login")

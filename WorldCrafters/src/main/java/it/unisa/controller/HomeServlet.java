@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.unisa.DAO.ProductDAO;
 import it.unisa.bean.Product;
+import it.unisa.dao.ProductDAO;
 
 
 
@@ -24,7 +24,7 @@ public class HomeServlet extends HttpServlet {
 		// Crea un'istanza di ProductDAO
 	    ProductDAO productDAO = new ProductDAO();
 
-	    // Chiama il metodo getAllProducts() per ottenere la lista di prodotti
+	    // Chiama il metodo getFavoritesProducts() per ottenere la lista di prodotti
 	    List<Product> products = productDAO.getFavoritesProducts();
 		
 		

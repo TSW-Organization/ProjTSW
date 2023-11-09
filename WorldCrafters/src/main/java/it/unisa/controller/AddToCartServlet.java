@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import it.unisa.DAO.CartDAO;
-import it.unisa.DAO.CartItemDAO;
-import it.unisa.DAO.ProductDAO;
 import it.unisa.bean.Product;
+import it.unisa.dao.CartDAO;
+import it.unisa.dao.CartItemDAO;
+import it.unisa.dao.ProductDAO;
 
 
 @WebServlet("/addToCart")

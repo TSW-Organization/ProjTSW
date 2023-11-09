@@ -1,25 +1,15 @@
 package it.unisa.controller;
 
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import it.unisa.DAO.AdminDAO;
-import it.unisa.DAO.UserDAO;
-import it.unisa.bean.User;
-import it.unisa.utils.DriverManagerConnectionPool;
+import it.unisa.dao.AdminDAO;
+import it.unisa.dao.UserDAO;
 
 
 @WebServlet("/registration")
@@ -118,6 +108,7 @@ public class RegistrationServlet extends HttpServlet {
 	    return true;
 	}
 
+	/*
     private String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -134,4 +125,5 @@ public class RegistrationServlet extends HttpServlet {
             return null;
         }
     }
+    */
 }

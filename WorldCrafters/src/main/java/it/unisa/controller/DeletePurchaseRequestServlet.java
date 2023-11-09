@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.JsonObject;
 
-import it.unisa.DAO.PurchaseDAO;
+import it.unisa.dao.PurchaseDAO;
 
 
 @WebServlet("/DeletePurchaseRequestServlet")

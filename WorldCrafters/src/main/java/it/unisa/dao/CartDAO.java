@@ -1,4 +1,4 @@
-package it.unisa.DAO;
+package it.unisa.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -178,7 +178,7 @@ public class CartDAO {
 		
 		Connection connection = null;
 	    PreparedStatement statement = null;
-	    ResultSet resultSet = null;
+
 
 	    try {
 	        connection = DriverManagerConnectionPool.getConnection();
@@ -194,9 +194,6 @@ public class CartDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (resultSet != null) {
-	                resultSet.close();
-	            }
 	            if (statement != null) {
 	                statement.close();
 	            }

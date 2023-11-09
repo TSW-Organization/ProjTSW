@@ -1,4 +1,4 @@
-package it.unisa.DAO;
+package it.unisa.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -33,8 +33,10 @@ public class UserDAO {
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    } finally {
-	        try {
-	            if (resultSet != null) {
+	        
+	    	try {
+	    		statement.close();
+	    		if (resultSet != null) {
 	                resultSet.close();
 	            }
 	            if (statement != null) {
@@ -74,7 +76,8 @@ public class UserDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (resultSet != null) {
+	        	statement.close();
+	        	if (resultSet != null) {
 	                resultSet.close();
 	            }
 	            if (statement != null) {
@@ -122,7 +125,8 @@ public class UserDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (resultSet != null) {
+	        	
+	        	if (resultSet != null) {
 	                resultSet.close();
 	            }
 	            if (statement != null) {
@@ -131,6 +135,7 @@ public class UserDAO {
 	            if (connection != null) {
 	                connection.close();
 	            }
+	            statement.close();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }

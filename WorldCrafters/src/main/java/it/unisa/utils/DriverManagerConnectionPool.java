@@ -5,17 +5,23 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DriverManagerConnectionPool  {
 
+	private DriverManagerConnectionPool() {}
+	
 	private static List<Connection> freeDbConnections;
-
+	private final static Logger logger = Logger.getLogger(DriverManagerConnectionPool.class.getName());
+			
 	static {
 		freeDbConnections = new LinkedList<Connection>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			System.out.println("DB driver not found:"+ e.getMessage());
+			logger.log(Level.WARNING, "DB driver not found:"+ e.getMessage());
+			
 		} 
 	}
 	
@@ -37,7 +43,7 @@ public class DriverManagerConnectionPool  {
 		Connection connection;
 
 		if (!freeDbConnections.isEmpty()) {
-			connection = (Connection) freeDbConnections.get(0);
+			connection = freeDbConnections.get(0);
 			freeDbConnections.remove(0);
 
 			try {

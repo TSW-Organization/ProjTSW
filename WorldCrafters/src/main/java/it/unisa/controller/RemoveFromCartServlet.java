@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import it.unisa.DAO.CartDAO;
-import it.unisa.DAO.CartItemDAO;
 import it.unisa.bean.Product;
+import it.unisa.dao.CartDAO;
+import it.unisa.dao.CartItemDAO;
 
 
 
@@ -43,10 +43,6 @@ public class RemoveFromCartServlet extends HttpServlet {
 			
 			cartItemDAO.deleteCartItem(cartId, productId);
 			
-			//session.setAttribute("productList", productList);
-	        
-	        //response.sendRedirect("cart");
-
 
 		} else {
 			//sessione non persistente
@@ -64,8 +60,6 @@ public class RemoveFromCartServlet extends HttpServlet {
 	            }
 	        }
 
-	        // Aggiorna la lista del carrello nella sessione
-	        //session.setAttribute("productList", productList);
 		}
 	}
 
