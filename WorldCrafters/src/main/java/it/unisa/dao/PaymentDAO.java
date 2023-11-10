@@ -6,11 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import it.unisa.utils.DriverManagerConnectionPool;
 import java.sql.Date;
 import it.unisa.bean.Payment;
 
+
 public class PaymentDAO {
+	
+	private static final Logger logger = Logger.getLogger(PaymentDAO.class.getName());
 	
 	public int setPayment(Date date, Time time, double amount, int userId, String accountholder, String cardNumber, int expMonth, int expYear, int cvv) {
 		
@@ -44,7 +49,7 @@ public class PaymentDAO {
 
 	        connection.commit();
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	    	logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	        	if (statement != null) {
@@ -57,7 +62,7 @@ public class PaymentDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	        	logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 
@@ -92,7 +97,7 @@ public class PaymentDAO {
 
 	        connection.commit();
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	    	logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	        	if (statement != null) {
@@ -105,7 +110,7 @@ public class PaymentDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	        	logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 		

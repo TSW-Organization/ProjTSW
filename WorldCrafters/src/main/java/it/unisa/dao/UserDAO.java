@@ -5,12 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import it.unisa.utils.DriverManagerConnectionPool;
 
 
 public class UserDAO {
 
+	private static final Logger logger = Logger.getLogger(UserDAO.class.getName());
     
 	public boolean authenticateEmail(String email) {
         
@@ -31,7 +33,7 @@ public class UserDAO {
 	        }
 	        
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        
 	    	try {
@@ -45,7 +47,7 @@ public class UserDAO {
 	                connection.close();
 	            } 
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 
@@ -72,7 +74,7 @@ public class UserDAO {
 	        }
 	        
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	        	if (statement != null) {
@@ -85,7 +87,7 @@ public class UserDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 
@@ -120,7 +122,7 @@ public class UserDAO {
 	        connection.commit();
 	        
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {    	
 	        	if (statement != null) {
@@ -133,7 +135,7 @@ public class UserDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
         
@@ -160,7 +162,7 @@ public class UserDAO {
 	        }
 	        
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	        	if (statement != null) {
@@ -173,7 +175,7 @@ public class UserDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 

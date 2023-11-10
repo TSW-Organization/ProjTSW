@@ -23,7 +23,7 @@ public class DriverManagerConnectionPool  {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			logger.log(Level.WARNING, "DB driver not found");
+			logger.log(Level.WARNING, e.getMessage());
 			
 		} 
 	}

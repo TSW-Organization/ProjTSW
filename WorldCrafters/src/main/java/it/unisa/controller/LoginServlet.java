@@ -2,6 +2,8 @@ package it.unisa.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,6 +24,7 @@ import it.unisa.dao.UserDAO;
 public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(LoginServlet.class.getName());
 	
 	private static final String LOGIN = "/login.jsp";
 	private static final String EMAIL = "email";
@@ -32,9 +35,9 @@ public class LoginServlet extends HttpServlet {
 		try {
 			doPost(request, response);
         } catch (ServletException se) {
-    		se.printStackTrace();
+        	logger.log(Level.WARNING, se.getMessage());
     	} catch (IOException e) {
-    		e.printStackTrace();
+    		logger.log(Level.WARNING, e.getMessage());
     	}
 	}
 	
@@ -79,7 +82,7 @@ public class LoginServlet extends HttpServlet {
             try {
             	response.sendRedirect("home");
             } catch (IOException e) {
-        		e.printStackTrace();
+            	logger.log(Level.WARNING, e.getMessage());
         	}
     	} else {
     		error = "Password errata<br>";
@@ -88,9 +91,9 @@ public class LoginServlet extends HttpServlet {
 			try {
 				dispatcher.forward(request, response);
             } catch (ServletException se) {
-        		se.printStackTrace();
+            	logger.log(Level.WARNING, se.getMessage());
         	} catch (IOException e) {
-        		e.printStackTrace();
+        		logger.log(Level.WARNING, e.getMessage());
         	}
     	}
     }
@@ -114,9 +117,9 @@ public class LoginServlet extends HttpServlet {
         	try {
         		dispatcher.forward(request, response);
             } catch (ServletException se) {
-        		se.printStackTrace();
+            	logger.log(Level.WARNING, se.getMessage());
         	} catch (IOException e) {
-        		e.printStackTrace();
+        		logger.log(Level.WARNING, e.getMessage());
         	}
         	isUser = false;
         }
@@ -141,7 +144,7 @@ public class LoginServlet extends HttpServlet {
     	    try {
     	        response.sendRedirect("home");
     	    } catch (IOException e) {
-    	        e.printStackTrace();
+    	    	logger.log(Level.WARNING, e.getMessage());
     	    }
     	    
     	} else {
@@ -151,9 +154,9 @@ public class LoginServlet extends HttpServlet {
     	    try {
     	        dispatcher.forward(request, response); // Reindirizza alla pagina di login con un messaggio di errore
     	    } catch (ServletException se) {
-    	        se.printStackTrace();
+    	    	logger.log(Level.WARNING, se.getMessage());
     	    } catch (IOException e) {
-    	        e.printStackTrace();
+    	    	logger.log(Level.WARNING, e.getMessage());
     	    }
     	}
     	

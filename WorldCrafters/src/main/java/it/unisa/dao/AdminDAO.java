@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import it.unisa.utils.DriverManagerConnectionPool;
 
 
 public class AdminDAO {
+	
+	private static final Logger logger = Logger.getLogger(AdminDAO.class.getName());
 
 	public boolean authenticateEmail(String email) {
         
@@ -29,7 +32,7 @@ public class AdminDAO {
 	        }
 	        
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	        	if (statement != null) {
@@ -42,7 +45,7 @@ public class AdminDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 
@@ -69,7 +72,7 @@ public class AdminDAO {
 	        }
 	        
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	    	try {
 	    		if (statement != null) {
@@ -82,7 +85,7 @@ public class AdminDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 
@@ -109,7 +112,7 @@ public class AdminDAO {
 	        }
 	        
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	    	try {
 	    		if (statement != null) {
@@ -122,7 +125,7 @@ public class AdminDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 	

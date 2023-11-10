@@ -5,10 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import it.unisa.utils.DriverManagerConnectionPool;
 
 public class PurchaseItemDAO {
+	
+	private static final Logger logger = Logger.getLogger(PurchaseItemDAO.class.getName());
 	
 	public int setOrderItem(int quantity, double price, int productId, int orderId) {
 		
@@ -37,7 +40,7 @@ public class PurchaseItemDAO {
 
 	        connection.commit();
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	    	logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	        	if (statement != null) {
@@ -50,7 +53,7 @@ public class PurchaseItemDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	        	logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 

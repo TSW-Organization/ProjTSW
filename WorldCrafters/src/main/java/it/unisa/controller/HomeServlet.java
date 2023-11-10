@@ -2,6 +2,9 @@ package it.unisa.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +20,8 @@ import it.unisa.dao.ProductDAO;
 public class HomeServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	
+	private static final Logger logger = Logger.getLogger(HomeServlet.class.getName());
     	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,9 +38,9 @@ public class HomeServlet extends HttpServlet {
 		try {
 			request.getRequestDispatcher("home.jsp").forward(request, response);
     	} catch (ServletException se) {
-    		se.printStackTrace();
+    		logger.log(Level.WARNING, se.getMessage());
     	} catch (IOException e){
-    		e.printStackTrace();
+    		logger.log(Level.WARNING, e.getMessage());
     	}
 	}
 
@@ -44,9 +49,9 @@ public class HomeServlet extends HttpServlet {
 		try {
 			doGet(request, response);
     	} catch (ServletException se) {
-    		se.printStackTrace();
+    		logger.log(Level.WARNING, se.getMessage());
     	} catch (IOException e){
-    		e.printStackTrace();
+    		logger.log(Level.WARNING, e.getMessage());
     	}
 	}
 

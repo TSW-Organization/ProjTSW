@@ -3,10 +3,13 @@ package it.unisa.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import it.unisa.utils.DriverManagerConnectionPool;
 
 public class CartItemDAO {
+	
+	private static final Logger logger = Logger.getLogger(CartItemDAO.class.getName());
 
 	public void setCartItem(int cartId, int productId, int selectedQuantity) {
 	    
@@ -28,14 +31,14 @@ public class CartItemDAO {
 	        connection.commit();
 	        
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	        // Gestire eccezioni e rollback in caso di errore.
 	        try {
 	            if (connection != null) {
 	                connection.rollback();
 	            }
 	        } catch (SQLException ex) {
-	            ex.printStackTrace();
+	        	logger.log(Level.WARNING, ex.getMessage());
 	        }
 	    } finally {
 	        try {
@@ -46,7 +49,7 @@ public class CartItemDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 	}
@@ -68,14 +71,14 @@ public class CartItemDAO {
 	        connection.commit();
 	        
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	        // Gestire eccezioni e rollback in caso di errore.
 	        try {
 	            if (connection != null) {
 	                connection.rollback();
 	            }
 	        } catch (SQLException ex) {
-	            ex.printStackTrace();
+	        	logger.log(Level.WARNING, ex.getMessage());
 	        }
 	    } finally {
 	        try {
@@ -86,7 +89,7 @@ public class CartItemDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 	}

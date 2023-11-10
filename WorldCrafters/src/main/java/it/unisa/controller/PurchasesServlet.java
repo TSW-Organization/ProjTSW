@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +27,7 @@ import it.unisa.dao.PurchaseDAO;
 public class PurchasesServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(PurchasesServlet.class.getName());
        
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -62,15 +65,15 @@ public class PurchasesServlet extends HttpServlet {
 			try {
 				request.getRequestDispatcher("purchases.jsp").forward(request, response);
 	    	} catch (ServletException se) {
-	    		se.printStackTrace();
+	    		logger.log(Level.WARNING, se.getMessage());
 	    	} catch (IOException e) {
-	    		e.printStackTrace();
+	    		logger.log(Level.WARNING, e.getMessage());
 	    	}
 	    } else {
 	    	try {
 	    		response.sendRedirect("login.jsp");
 	    	} catch (IOException e) {
-	    		e.printStackTrace();
+	    		logger.log(Level.WARNING, e.getMessage());
 	    	}
 	    }
 	}
@@ -80,9 +83,9 @@ public class PurchasesServlet extends HttpServlet {
 		try {
 			doGet(request, response);
     	} catch (ServletException se) {
-    		se.printStackTrace();
+    		logger.log(Level.WARNING, se.getMessage());
     	} catch (IOException e) {
-    		e.printStackTrace();
+    		logger.log(Level.WARNING, e.getMessage());
     	}
 	}
 
