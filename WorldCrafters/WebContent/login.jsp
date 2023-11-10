@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
+	<title>WorldCrafters</title>
 	<%@ include file="templates/head.html" %>
     <link rel="stylesheet" type="text/css" href="styles/log-reg.css">
     <script src="scripts/log.js"></script>

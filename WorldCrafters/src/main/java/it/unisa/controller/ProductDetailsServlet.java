@@ -18,24 +18,42 @@ public class ProductDetailsServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String productIdStr = request.getParameter("id");
-		int productId = Integer.parseInt(productIdStr);
+		int productId = -1;
+		
+		try {
+			productId = Integer.parseInt(productIdStr);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		}
 	    
 		ProductDAO productDAO = new ProductDAO();
 
 	    Product product = productDAO.getProductById(productId);
 		
 		request.setAttribute("product", product);
-			
-		request.getRequestDispatcher("product-details.jsp").forward(request, response);
+		
+		try {
+			request.getRequestDispatcher("product-details.jsp").forward(request, response);
+        } catch (ServletException se) {
+    		se.printStackTrace();
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
 	}
 
-
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		doGet(request, response);
+		try {
+			doGet(request, response);
+        } catch (ServletException se) {
+    		se.printStackTrace();
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
 	}
 
 }

@@ -1,6 +1,6 @@
 // CART
 function goBack() {
-    var previousPage = document.referrer;
+    let previousPage = document.referrer;
     window.location.href = previousPage; // Imposta l'URL della pagina precedente come destinazione
 }
 
@@ -8,8 +8,8 @@ function goBack() {
 //AGGIUNTA E RIMOZIONE DEI PRODOTTI DEL CARRELLO
 function addToCart(productId) {
     
-    var quantityElement = document.getElementById("quantity");
-    var selectedQuantity = quantityElement.value;
+    let quantityElement = document.getElementById("quantity");
+    let selectedQuantity = quantityElement.value;
     
     $.ajax({
         type: "POST",
@@ -40,46 +40,53 @@ function removeFromCart(productId) {
 }
 
 function emptyCart() {
-    var allXButtons = document.getElementsByClassName("removeFromCartButton");
-    
-    for (var i = 0; i < allXButtons.length; i++) {
-        var productId = allXButtons[i].getAttribute("data-product-id");
-        
-        $.ajax({
-            type: "POST",
-            url: "removeFromCart",
-            data: { productId: productId },
-            success: function(response) {
-                updateCart();
-            },
-            error: function(xhr, status, error) {
-                console.log("Errore durante la rimozione dal carrello: " + error);
-            }
-        });
-    }
+    const allXButtons = document.getElementsByClassName("removeFromCartButton");
+
+	for (const button of allXButtons) {
+	  // Get the product ID from the data-product-id attribute
+	  const productId = button.getAttribute("data-product-id");
+	
+	  // Make an AJAX request to the removeFromCart endpoint
+	  $.ajax({
+	    type: "POST",
+	    url: "removeFromCart",
+	    data: { productId: productId },
+	    success: function (response) {
+	      // Update the cart after the product has been removed
+	      updateCart();
+	    },
+	    error: function (xhr, status, error) {
+	      // Log an error message to the console if the request fails
+	      console.log("Errore durante la rimozione dal carrello: " + error);
+	    },
+	  });
+	}
 }
 
 function updateCart() {
+    
+    
     $.ajax({
         type: "GET",
         url: "updateCart",
         dataType: "json",
         success: function(response) {
             
-            var cartItems = response;
+            let cartItems = response;
 
             // Ora puoi utilizzare cartItems per aggiornare il contenuto del carrello nel DOM
-            var cartList = $("#cartList");
-            var cartPayment = $("#cartPayment");
-            var totalPrice = 0;
-            var totalQuantity = 0;
+            let cartList = $("#cartList");
+            let cartPayment = $("#cartPayment");
+            let totalPrice = 0;
+            let totalQuantity = 0;
+            let quantityHeader;
 
             cartList.empty();
             cartPayment.empty();
 
             if (cartItems.length > 0) {
-                var listHtml = "";
-                var paymentHtml = "<h2>Riepilogo</h2>";
+                let listHtml = "";
+                let paymentHtml = "<h2>Riepilogo</h2>";
                 
                 paymentHtml += `
                     <div class="cart-payment-item">
@@ -94,8 +101,8 @@ function updateCart() {
                 
                 $.each(cartItems, function (index, item) {
                     
-                    var priceForQuantity = item.price * item.selectedQuantity;
-                    var maxOptions = Math.min(10, item.quantity);
+                    let priceForQuantity = item.price * item.selectedQuantity;
+                    let maxOptions = Math.min(10, item.quantity);
                     
                     // Utilizza template string per creare l'HTML dinamico per cartList
                     listHtml += `
@@ -106,7 +113,7 @@ function updateCart() {
                             <select class="product-quantity" data-product-id="${item.id}">
                     `;
                     
-                    for (var i = 1; i <= maxOptions; i++) {
+                    for (let i = 1; i <= maxOptions; i++) {
 				        if(i==item.selectedQuantity) {
 							listHtml += `
                         		<option value=${i} selected>${i}</option>
@@ -141,14 +148,6 @@ function updateCart() {
                     
                 });
                 
-                /*
-                paymentHtml += `
-                    <div class="cart-payment-item">
-                    	<strong class="product-name">Spedizione</strong>
-                    	<p class="product-price">€ 5.00</p>
-                    </div>
-                `;
-                */
                 
                 paymentHtml += `
                     <br/>
@@ -168,12 +167,12 @@ function updateCart() {
                 cartList.append(listHtml);
                 cartPayment.append(paymentHtml);
                 
-                var quantityHeader = document.getElementById("cartQuantity");
+                quantityHeader = document.getElementById("cartQuantity");
                 quantityHeader.innerHTML = totalQuantity;
                 
             } else {
                 cartList.append(`<p id="emptyCart">Il carrello è vuoto</p>`);
-                var quantityHeader = document.getElementById("cartQuantity");
+                quantityHeader = document.getElementById("cartQuantity");
                 quantityHeader.innerHTML = "";
             }
         },
@@ -189,8 +188,8 @@ $(document).ready(function() {
     
     //Funzione che modifica la quantità selezionata di un prodotto
      $(document).on("change", ".product-quantity", function () {
-        var productId = $(this).data("product-id");
-        var selectedQuantity = parseInt($(this).val()); // Converte il valore selezionato in un numero intero
+        let productId = $(this).data("product-id");
+        let selectedQuantity = parseInt($(this).val()); // Converte il valore selezionato in un numero intero
 
         // Effettua una richiesta AJAX per aggiornare la quantità del prodotto nel carrello
         $.ajax({

@@ -7,7 +7,6 @@
     border-bottom-left-radius: 10px;
     overflow-x: hidden;
     opacity: 0;
-    /*transition: opacity 0.5s;*/
     z-index: 90;
 }
 

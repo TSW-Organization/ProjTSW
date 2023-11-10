@@ -1,36 +1,30 @@
 // FUNZIONE PER SIDEBAR CATEGORIE
-var sidebarOpen = false;
+let sidebarOpen = false;
 function toggleSidebar() {
-    var sidebar = document.getElementById("sidebar");
-    //var main = document.getElementsByTagName("main")[0];
-    //var footer = document.getElementsByTagName("footer")[0];
-    var body = document.getElementsByTagName("body")[0];
+    let sidebar = document.getElementById("sidebar");
+    let body = document.getElementsByTagName("body")[0];
 
-    if(sidebarOpen==false) {
+    if(!sidebarOpen) {
         sidebar.style.left = "0px";
         sidebar.style.transition = "left 600ms";
-        //main.style.opacity = "0.8";
-        //footer.style.opacity = "0.8";
         sidebarOpen = true;
         body.classList.add("sidebar-open");
     }
     else {
         sidebar.style.left = "-400px";
         sidebar.style.transition = "left 600ms";
-        //main.style.opacity = "1";
-        //footer.style.opacity = "1";
         sidebarOpen=false;
         body.classList.remove("sidebar-open");
     }  
 }
 
 // FUNZIONE PER USERBAR
-var userbarOpen = false;
+let userbarOpen = false;
 function toggleUserbar() {
-    var userbar = document.getElementById("userbar");
-    var body = document.getElementsByTagName("body")[0];
+    let userbar = document.getElementById("userbar");
+    let body = document.getElementsByTagName("body")[0];
 
-    if(userbarOpen==false) {
+    if(!userbarOpen) {
         userbar.style.display = "block";
         userbar.style.opacity = "1";
         userbarOpen = true;
@@ -48,11 +42,11 @@ function toggleUserbar() {
 // FUNZIONE CHE CHIUDE TUTTE LE SIDEBAR
 function closeAll() {
 
-    if(sidebarOpen==true) {
+    if(sidebarOpen) {
         toggleSidebar();
     }
     
-    if(userbarOpen==true) {
+    if(userbarOpen) {
         toggleUserbar();
     }
 }
@@ -60,6 +54,6 @@ function closeAll() {
 // FUNZIONE PER LA CREAZIONE DELLE PAGINE DEI PRODOTTI IN BASE ALLA CATEGORIA CLICCATA NELLA SIDEBAR
 function categoryClick(category) {
 	
-    var url = 'products?category=' + encodeURIComponent(category);
+    let url = 'products?category=' + encodeURIComponent(category);
     window.location.href = url;
 }

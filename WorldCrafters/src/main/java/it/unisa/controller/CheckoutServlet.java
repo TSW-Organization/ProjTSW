@@ -15,32 +15,44 @@ public class CheckoutServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
     	
-
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession(false);
-		
-		if (session != null) {
-            // Verifica se l'attributo desiderato è presente nella sessione
-            Object userId = session.getAttribute("userId");
-
-            if (userId != null) {
-            	if((int) session.getAttribute("userId") != -1) {
-            		request.getRequestDispatcher("checkout.jsp").forward(request, response);
-            	}
-            } else {
-            	response.sendRedirect("login.jsp");
-            }
+		Object userId = null;
+		if(session!= null) {
+			userId = session.getAttribute("userId");
+		}	
+		if (userId!=null) {
+        	if((int) session.getAttribute("userId") != -1) {   		
+        		try {
+        			request.getRequestDispatcher("checkout.jsp").forward(request, response);
+            	} catch (ServletException se) {
+            		se.printStackTrace();
+            	} catch (IOException e){
+            		e.printStackTrace();
+            	}	
+        	}
         } else {
-        	response.sendRedirect("login.jsp");
+        	try {
+        		response.sendRedirect("login.jsp");
+        	} catch (IOException e){
+        		e.printStackTrace();
+        	}
+        	
         }
 		
 	}
 
-
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		doGet(request, response);
+		try {
+			doGet(request, response);
+    	} catch (ServletException se) {
+    		se.printStackTrace();
+    	} catch (IOException e){
+    		e.printStackTrace();
+    	}	
 	}
 
 }

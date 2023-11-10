@@ -32,10 +32,15 @@ public class AdminDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-            	resultSet.close();
-            	statement.close();
-                connection.close();
-
+	        	if (statement != null) {
+	                statement.close();
+	            }
+	    		if (resultSet != null) {
+	                resultSet.close();
+	            }
+	            if (connection != null) {
+	                connection.close();
+	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -67,10 +72,15 @@ public class AdminDAO {
 	        e.printStackTrace();
 	    } finally {
 	    	try {
-            	resultSet.close();
-            	statement.close();
-                connection.close();
-
+	    		if (statement != null) {
+	                statement.close();
+	            }
+	    		if (resultSet != null) {
+	                resultSet.close();
+	            }
+	            if (connection != null) {
+	                connection.close();
+	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -102,10 +112,15 @@ public class AdminDAO {
 	        e.printStackTrace();
 	    } finally {
 	    	try {
-            	resultSet.close();
-            	statement.close();
-                connection.close();
-
+	    		if (statement != null) {
+	                statement.close();
+	            }
+	    		if (resultSet != null) {
+	                resultSet.close();
+	            }
+	            if (connection != null) {
+	                connection.close();
+	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }

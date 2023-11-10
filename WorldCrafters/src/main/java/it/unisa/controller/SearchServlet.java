@@ -19,11 +19,17 @@ import it.unisa.dao.ProductDAO;
 public class SearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
 		response.setContentType("application/json; charset=UTF-8");
-        PrintWriter out = response.getWriter();
+        PrintWriter out = null;
+        
+        try {
+        	out = response.getWriter();
+    	} catch (IOException e){
+    		e.printStackTrace();
+    	}
 
         // Qui dovresti ottenere la lista di prodotti dal tuo ProductDAO
         ProductDAO productDAO = new ProductDAO();
@@ -32,7 +38,10 @@ public class SearchServlet extends HttpServlet {
         // Converti la lista di prodotti in formato JSON e inviali al client
         Gson gson = new Gson();
         String json = gson.toJson(products);
-        out.print(json);
+        
+        if(out!=null) {
+        	out.print(json);
+        }
     }
 
 }

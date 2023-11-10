@@ -14,7 +14,7 @@ public class LogoutServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
        
- 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
@@ -23,14 +23,23 @@ public class LogoutServlet extends HttpServlet {
 			session.removeAttribute("userId");
 			session.invalidate();
 		}
-		
-		response.sendRedirect("login.jsp");
+			
+		try {
+			response.sendRedirect("login.jsp");
+        } catch (IOException e) {
+    		e.printStackTrace();
+    	}
 	}
 
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		doGet(request, response);
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		try {
+			doGet(request, response);
+        } catch (ServletException se) {
+    		se.printStackTrace();
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
 	}
 
 }

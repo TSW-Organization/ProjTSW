@@ -17,18 +17,29 @@ public class DeletePurchaseRequestServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
        
-
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		PurchaseDAO purchaseDAO = new PurchaseDAO();
-		int purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
+		int purchaseId = -1;
+		
+		try {
+			purchaseId = Integer.parseInt(request.getParameter("purchaseId"));
+    	} catch (NumberFormatException e){
+    		e.printStackTrace();
+    	}
 		
 		purchaseDAO.setDeleteRequestStatus(purchaseId, true);
 		
 		JsonObject jsonResponse = new JsonObject();
 	    jsonResponse.addProperty("success", true);
 	    response.setContentType("application/json");
-	    response.getWriter().write(jsonResponse.toString());
+	    
+	    try {
+	    	response.getWriter().write(jsonResponse.toString());
+    	} catch (IOException e){
+    		e.printStackTrace();
+    	}    
 	}
 
 }

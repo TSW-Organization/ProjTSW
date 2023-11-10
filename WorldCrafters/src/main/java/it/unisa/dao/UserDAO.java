@@ -35,16 +35,15 @@ public class UserDAO {
 	    } finally {
 	        
 	    	try {
-	    		statement.close();
+	    		if (statement != null) {
+	                statement.close();
+	            }
 	    		if (resultSet != null) {
 	                resultSet.close();
 	            }
-	            if (statement != null) {
-	                statement.close();
-	            }
 	            if (connection != null) {
 	                connection.close();
-	            }
+	            } 
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -76,12 +75,11 @@ public class UserDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	        	statement.close();
-	        	if (resultSet != null) {
-	                resultSet.close();
-	            }
-	            if (statement != null) {
+	        	if (statement != null) {
 	                statement.close();
+	            }
+	    		if (resultSet != null) {
+	                resultSet.close();
 	            }
 	            if (connection != null) {
 	                connection.close();
@@ -124,18 +122,16 @@ public class UserDAO {
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    } finally {
-	        try {
-	        	
-	        	if (resultSet != null) {
-	                resultSet.close();
-	            }
-	            if (statement != null) {
+	        try {    	
+	        	if (statement != null) {
 	                statement.close();
+	            }
+	    		if (resultSet != null) {
+	                resultSet.close();
 	            }
 	            if (connection != null) {
 	                connection.close();
 	            }
-	            statement.close();
 	        } catch (SQLException e) {
 	            e.printStackTrace();
 	        }
@@ -167,11 +163,11 @@ public class UserDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (resultSet != null) {
-	                resultSet.close();
-	            }
-	            if (statement != null) {
+	        	if (statement != null) {
 	                statement.close();
+	            }
+	    		if (resultSet != null) {
+	                resultSet.close();
 	            }
 	            if (connection != null) {
 	                connection.close();

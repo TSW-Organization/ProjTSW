@@ -1,10 +1,13 @@
 package it.unisa.utils;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -13,27 +16,40 @@ public class DriverManagerConnectionPool  {
 	private DriverManagerConnectionPool() {}
 	
 	private static List<Connection> freeDbConnections;
-	private final static Logger logger = Logger.getLogger(DriverManagerConnectionPool.class.getName());
+	private static final Logger logger = Logger.getLogger(DriverManagerConnectionPool.class.getName());
 			
 	static {
-		freeDbConnections = new LinkedList<Connection>();
+		freeDbConnections = new LinkedList<>();
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
-			logger.log(Level.WARNING, "DB driver not found:"+ e.getMessage());
+			logger.log(Level.WARNING, "DB driver not found");
 			
 		} 
 	}
 	
 	private static synchronized Connection createDBConnection() throws SQLException {
 		Connection newConnection = null;
-		String ip = "localhost";
-		String port = "3306";
-		String db = "worldcrafters";
-		String username = "root";
-		String password = "1234";
+		String dbUrl = null;
+		String dbUsername = null;
+		String dbPassword = null;
+		     
+        try {
+        	InputStream input = DriverManagerConnectionPool.class.getClassLoader().getResourceAsStream("config.properties");
+        	Properties prop = new Properties();
+            if (input == null) {
+                logger.log(Level.WARNING, "Sorry, unable to find config.properties");
+            }
+            prop.load(input);
 
-		newConnection = DriverManager.getConnection("jdbc:mysql://"+ ip+":"+ port+"/"+db+"?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC", username, password);
+            dbUrl = prop.getProperty("db.url");
+            dbUsername = prop.getProperty("db.username");
+            dbPassword = prop.getProperty("db.password");
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE, "Error loading configuration", ex);
+        }
+
+        newConnection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
 		newConnection.setAutoCommit(false);
 		return newConnection;
 	}
@@ -60,7 +76,7 @@ public class DriverManagerConnectionPool  {
 		return connection;
 	}
 
-	public static synchronized void releaseConnection(Connection connection) throws SQLException {
+	public static synchronized void releaseConnection(Connection connection) {
 		if(connection != null) freeDbConnections.add(connection);
 	}
 }

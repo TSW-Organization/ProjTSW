@@ -2,8 +2,9 @@
 <%@ page import="javax.servlet.http.HttpSession" %>
 
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
+    <title>WorldCrafters</title>
     <link rel="stylesheet" type="text/css" href="styles/userbar.css">
     <script src="scripts/sidebar-userbar.js"></script>
 </head>

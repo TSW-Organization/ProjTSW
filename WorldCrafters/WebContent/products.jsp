@@ -4,8 +4,9 @@
 <%@ page import="it.unisa.bean.Product" %>
 
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
+	<title>WorldCrafters</title>
 	<%@ include file="templates/head.html" %>
     <link rel="stylesheet" type="text/css" href="styles/products.css">
 </head>
@@ -48,7 +49,7 @@
 					<div class="product">
                         <div class="product-image">
                             <a href="product?id=<%= product.getId() %>">
-					            <img src="<%= product.getImgSrc()%>">
+					            <img src="<%= product.getImgSrc()%>" alt="Product Image">
 					        </a>
                         </div>
                         <div class="product-details">
@@ -58,7 +59,6 @@
                             <div class="product-price">
                                 € <%= String.format("%.2f", product.getPrice()) %>
                             </div>
-                            <!--<button class="add-to-cart">Add to cart</button>-->
                         </div>  
                    	</div>
 				<%} %>
@@ -69,8 +69,8 @@
     </main>
 	
 	<%
-		String category = request.getParameter("category");
-	   	String search = request.getParameter("search");
+    	String category = (request.getParameter("category") != null) ? request.getParameter("category").replaceAll("[^a-zA-Z0-9]", "") : null;
+    	String search = (request.getParameter("search") != null) ? request.getParameter("search").replaceAll("[^a-zA-Z0-9]", "") : null;
 	%>
 
     <%-- Mostra la paginazione solo se c'è più di una pagina --%>

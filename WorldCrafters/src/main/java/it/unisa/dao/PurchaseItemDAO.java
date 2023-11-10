@@ -40,11 +40,11 @@ public class PurchaseItemDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (resultSet != null) {
-	                resultSet.close();
-	            }
-	            if (statement != null) {
+	        	if (statement != null) {
 	                statement.close();
+	            }
+	    		if (resultSet != null) {
+	                resultSet.close();
 	            }
 	            if (connection != null) {
 	                connection.close();

@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
+	<title>WorldCrafters</title>
 	<%@ include file="templates/head.html" %>
     <link rel="stylesheet" type="text/css" href="styles/checkout.css">
     <script src="scripts/checkout.js"></script>
@@ -108,9 +109,6 @@
 						</div>
 			
 					</div>
-			        <!--<label>
-			        	<input type="checkbox" checked="checked" name="sameAddress"> Indirizzo di spedizione uguale a quello di fatturazione
-			        </label>-->
 			        <input type="submit" value="Procedi con il pagamento" class="btn">
 				</form>
 				

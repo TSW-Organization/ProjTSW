@@ -22,98 +22,39 @@ import it.unisa.dao.UserDAO;
 public class LoginServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	private static final String LOGIN = "/login.jsp";
+	private static final String EMAIL = "email";
+	private static final String ERROR = "error";
+	
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request, response);
+		try {
+			doPost(request, response);
+        } catch (ServletException se) {
+    		se.printStackTrace();
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
 	}
 	
 	
-	@SuppressWarnings("unchecked")
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
-		String email = request.getParameter("email").trim();
+		String email = request.getParameter(EMAIL).trim();
         String password = request.getParameter("password");
-        int userId;
-        String error = "";
-        UserDAO userDAO = new UserDAO();
         AdminDAO adminDAO = new AdminDAO();
         	
 		//Se è admin
-        if(adminDAO.authenticateEmail(email)==true) {
+        if(adminDAO.authenticateEmail(email)) {
 			
-        	request.setAttribute("email", email);
-        	if(adminDAO.authenticate(email, password)==true) {
-        		
-	            HttpSession session = request.getSession();
-	            session.setAttribute("isAdmin", true);
-	            session.setMaxInactiveInterval(24*60*60);  //Imposta la durata della sessione a 24 ore
-
-	            response.sendRedirect("home");
-        	} else {
-        		error += "Password errata<br>";
-        		request.setAttribute("error", error);
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
-				dispatcher.forward(request, response);
-        	}
-
-		
-		//Se è user
+        	caseAdmin(request, response, email, password);
 		} else {
-			
-			if (!isValidEmail(email)) {
-				error += "Inserisci email valida<br>";
-				request.setAttribute("error", error);
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
-	        	dispatcher.forward(request, response);
-			} else if(userDAO.authenticateEmail(email)==false){	
-				error += "Email inesistente<br>";
-				request.setAttribute("error", error);
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
-	        	dispatcher.forward(request, response);
-			} else {
-				
-				//Email esistente
-				request.setAttribute("email", email);
-				
-				userId = userDAO.authenticate(email,password);
-				
-				if (userId != -1) {
-        
-					HttpSession session = request.getSession();    
-			        session.setAttribute("userId", userId);
-			        session.setMaxInactiveInterval(24*60*60);  //Imposta la durata della sessione a 24 ore
-
-			        CartDAO cartDAO = new CartDAO();
-					CartItemDAO cartItemDAO = new CartItemDAO();
-					int cartId = cartDAO.getCartByUserId(userId);
-					List<Product> productList;
-
-					List<Product> productListDb = cartDAO.getAllCartProducts(cartId);
-					
-					if(productListDb.size()==0) {
-						productList = (List<Product>) session.getAttribute("productList");
-							
-						//Controllo se é già presente un carrello
-						if(cartId == -1) {
-							//creo nuovo carrello
-							cartId = cartDAO.setCart(userId);
-						}
-						for(Product product:productList) {
-							cartItemDAO.setCartItem(cartId, product.getId(), product.getSelectedQuantity());
-						}
-			
-					}
-
-			        response.sendRedirect("home");
-		        } else {
-		        	error += "Password errata<br>";
-		        	request.setAttribute("error", error);
-		        	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/login.jsp");
-		        	dispatcher.forward(request, response); // Reindirizza alla pagina di login con un messaggio di errore
-		        }
-				
-			}
-			
+			//Controllo sè è un user	
+			if(checkIfUser(request, response, email)) {
+				caseUser(request, response, email, password);
+			}	
 		}
 
     }
@@ -123,5 +64,125 @@ public class LoginServlet extends HttpServlet {
         String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         return email.matches(emailRegex);
     }
+    
+    private void caseAdmin(HttpServletRequest request, HttpServletResponse response, String email, String password) {
+    	
+    	AdminDAO adminDAO = new AdminDAO();
+        String error = "";
+    	request.setAttribute(EMAIL, email);
+    	if(adminDAO.authenticate(email, password)) {
+    		
+            HttpSession session = request.getSession();
+            session.setAttribute("isAdmin", true);
+            session.setMaxInactiveInterval(24*60*60);  //Imposta la durata della sessione a 24 ore
+
+            try {
+            	response.sendRedirect("home");
+            } catch (IOException e) {
+        		e.printStackTrace();
+        	}
+    	} else {
+    		error = "Password errata<br>";
+    		request.setAttribute(ERROR, error);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(LOGIN);
+			try {
+				dispatcher.forward(request, response);
+            } catch (ServletException se) {
+        		se.printStackTrace();
+        	} catch (IOException e) {
+        		e.printStackTrace();
+        	}
+    	}
+    }
+    
+    private boolean checkIfUser(HttpServletRequest request, HttpServletResponse response, String email) {
+    	
+    	UserDAO userDAO = new UserDAO();
+    	String error = "";
+    	boolean isUser = true;
+    	
+        if (!isValidEmail(email)) {
+            error = "Inserisci email valida<br>";
+            request.setAttribute(ERROR, error);
+        } else if(!userDAO .authenticateEmail(email)){	
+			error = "Email inesistente<br>";
+			request.setAttribute(ERROR, error);
+		}
+        
+        if(!error.equals("")) {
+        	RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(LOGIN);
+        	try {
+        		dispatcher.forward(request, response);
+            } catch (ServletException se) {
+        		se.printStackTrace();
+        	} catch (IOException e) {
+        		e.printStackTrace();
+        	}
+        	isUser = false;
+        }
+        
+        return isUser;
+    }
+    
+	private void caseUser(HttpServletRequest request, HttpServletResponse response, String email, String password) {
+    	
+    	request.setAttribute(EMAIL, email);
+    	UserDAO userDAO = new UserDAO();
+    	int userId = userDAO.authenticate(email,password);
+    	
+    	if (userId != -1) {
+
+    	    HttpSession session = request.getSession();    
+    	    session.setAttribute("userId", userId);
+    	    session.setMaxInactiveInterval(24*60*60);  //Imposta la durata della sessione a 24 ore
+    	    
+    	    retrieveCart(session, userId);
+
+    	    try {
+    	        response.sendRedirect("home");
+    	    } catch (IOException e) {
+    	        e.printStackTrace();
+    	    }
+    	    
+    	} else {
+    	    String error = "Password errata<br>";
+    	    request.setAttribute(ERROR, error);
+    	    RequestDispatcher dispatcher = getServletContext().getRequestDispatcher(LOGIN);
+    	    try {
+    	        dispatcher.forward(request, response); // Reindirizza alla pagina di login con un messaggio di errore
+    	    } catch (ServletException se) {
+    	        se.printStackTrace();
+    	    } catch (IOException e) {
+    	        e.printStackTrace();
+    	    }
+    	}
+    	
+    }
+    
+	@SuppressWarnings("unchecked")
+    private void retrieveCart(HttpSession session, int userId) {
+    	
+    	CartDAO cartDAO = new CartDAO();
+	    CartItemDAO cartItemDAO = new CartItemDAO();
+	    int cartId = cartDAO.getCartByUserId(userId);
+	    List<Product> productList = null;
+	    List<Product> productListDb = cartDAO.getAllCartProducts(cartId);
+	    
+	    if(productListDb.isEmpty()) {
+	        productList = (List<Product>) session.getAttribute("productList");
+	            
+	        //Controllo se é già presente un carrello
+	        if(cartId == -1) {
+	            //creo nuovo carrello
+	            cartId = cartDAO.setCart(userId);
+	        }
+	        if(productList!=null) {
+	        	for(Product product:productList) {
+		            cartItemDAO.setCartItem(cartId, product.getId(), product.getSelectedQuantity());
+		        }
+	        }
+	    }
+    }
+   
     
 }

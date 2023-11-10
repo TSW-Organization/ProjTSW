@@ -23,10 +23,17 @@ public class RemoveFromCartServlet extends HttpServlet {
        
     
 	@SuppressWarnings("unchecked")
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		
-        int productId = Integer.parseInt(request.getParameter("productId"));
+        int productId = -1;
+        
+        try {
+        	productId = Integer.parseInt(request.getParameter("productId"));
+    	} catch (NumberFormatException e){
+    		e.printStackTrace();
+    	}
         CartItemDAO cartItemDAO= new CartItemDAO();
 		
 		HttpSession session = request.getSession();
