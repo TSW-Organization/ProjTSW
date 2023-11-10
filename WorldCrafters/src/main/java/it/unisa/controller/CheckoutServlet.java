@@ -1,6 +1,7 @@
 package it.unisa.controller;
 
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
@@ -32,16 +33,16 @@ public class CheckoutServlet extends HttpServlet {
         		try {
         			request.getRequestDispatcher("checkout.jsp").forward(request, response);
             	} catch (ServletException se) {
-            		se.printStackTrace();
+            		logger.log(Level.WARNING, se.getMessage());
             	} catch (IOException e){
-            		e.printStackTrace();
+            		logger.log(Level.WARNING, e.getMessage());
             	}	
         	}
         } else {
         	try {
         		response.sendRedirect("login.jsp");
         	} catch (IOException e){
-        		e.printStackTrace();
+        		logger.log(Level.WARNING, e.getMessage());
         	}
         	
         }
@@ -53,9 +54,9 @@ public class CheckoutServlet extends HttpServlet {
 		try {
 			doGet(request, response);
     	} catch (ServletException se) {
-    		se.printStackTrace();
+    		logger.log(Level.WARNING, se.getMessage());
     	} catch (IOException e){
-    		e.printStackTrace();
+    		logger.log(Level.WARNING, e.getMessage());
     	}	
 	}
 

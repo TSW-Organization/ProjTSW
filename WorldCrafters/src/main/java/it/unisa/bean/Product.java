@@ -17,23 +17,6 @@ public class Product implements Serializable {
 	private int favorites;
 	private Date listingDate;
 	private String description;
-	
-	
-	public Product() {}
-	
-	public Product(int id, String name, double price, String seller, String imgSrc, Category category, int quantity, int favorites, Date listingDate, String description) {
-		this.id = id;
-		this.name = name;
-		this.price = price;
-		this.seller = seller;
-		this.imgSrc = imgSrc;
-		this.category = category;
-		this.quantity = quantity;
-		this.favorites = favorites;
-		this.listingDate = listingDate;
-		this.description = description;
-	}
-
 
 	public int getId() {
 		return id;

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
@@ -38,9 +39,9 @@ public class CheckoutFormServlet extends HttpServlet {
 		try {
 			dispatcher.forward(request, response);
         } catch (ServletException se) {
-    		se.printStackTrace();
+        	logger.log(Level.WARNING, se.getMessage());
     	} catch (IOException e) {
-    		e.printStackTrace();
+    		logger.log(Level.WARNING, e.getMessage());
     	}
 	}
 
@@ -79,9 +80,9 @@ public class CheckoutFormServlet extends HttpServlet {
             try {
             	request.getRequestDispatcher("/checkout.jsp").forward(request, response);
             } catch (ServletException se) {
-        		se.printStackTrace();
+            	logger.log(Level.WARNING, se.getMessage());
         	} catch (IOException e) {
-        		e.printStackTrace();
+        		logger.log(Level.WARNING, e.getMessage());
         	}
         } else {
             // I campi sono validi, puoi inviare i dati al server
@@ -124,9 +125,9 @@ public class CheckoutFormServlet extends HttpServlet {
             try {
             	dispatcher.forward(request, response);
             } catch (ServletException se) {
-        		se.printStackTrace();
+            	logger.log(Level.WARNING, se.getMessage());
         	} catch (IOException e) {
-        		e.printStackTrace();
+        		logger.log(Level.WARNING, e.getMessage());
         	}
         }
         
@@ -176,7 +177,7 @@ public class CheckoutFormServlet extends HttpServlet {
     		expYearInt = Integer.parseInt(expYear);
     		cvvInt = Integer.parseInt(cvv);
     	} catch (NumberFormatException e) {
-    		e.printStackTrace();
+    		logger.log(Level.WARNING, e.getMessage());
     	}
     	return paymentDAO.setPayment(currentDate, currentTime, amount, userId, accountholder, cardNumber, expMonthInt, expYearInt, cvvInt);
 		
