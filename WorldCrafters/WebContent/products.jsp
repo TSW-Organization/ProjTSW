@@ -80,9 +80,9 @@
         <%-- Mostra il link alla pagina precedente se non si è sulla prima pagina --%>
         <% if (currentPage > 1) { %>
         	<% if (category != null) { %>
-	       		<a href="?category=<%= category %>&page=<%= currentPage - 1 %>">&lt;</a>
+	       		<a href="?category=<%= Encode.forHtml(category) %>&page=<%= currentPage - 1 %>">&lt;</a>
 	   		<% } else if (search != null) { %>
-	       		<a href="?search=<%= search %>&page=<%= currentPage - 1 %>">&lt;</a>
+	       		<a href="?search=<%= Encode.forHtml(search) %>&page=<%= currentPage - 1 %>">&lt;</a>
 	   		<% } %>
         <% } %>
 
@@ -96,9 +96,9 @@
                     <strong><%= i %></strong>
                 <% } else { %>
                 	<% if (category != null) { %>
-			       		<a href="?category=<%= category %>&page=<%= i %>"><%= i %></a>
+			       		<a href="?category=<%= Encode.forHtml(category) %>&page=<%= i %>"><%= i %></a>
 			   		<% } else if (search != null) { %>
-			       		<a href="?search=<%= search %>&page=<%= i %>"><%= i %></a>
+			       		<a href="?search=<%= Encode.forHtml(search) %>&page=<%= i %>"><%= i %></a>
 			   		<% } %> 
                 <% } %>
             <% } %>
@@ -108,9 +108,9 @@
 
             <% if (startPage > 1) { %>
                 <% if (category != null) { %>
-		       		<a href="?category=<%= category %>&page=1">1</a>
+		       		<a href="?category=<%= Encode.forHtml(category) %>&page=1">1</a>
 		   		<% } else if (search != null) { %>
-		       		<a href="?search=<%= search %>&page=1">1</a>
+		       		<a href="?search=<%= Encode.forHtml(search) %>&page=1">1</a>
 		   		<% } %>
                 <span>...</span>
             <% } %>
@@ -121,9 +121,9 @@
                     <strong><%= i %></strong>
                 <% } else { %>
                     <% if (category != null) { %>
-			       		<a href="?category=<%= category %>&page=<%= i %>"><%= i %></a>
+			       		<a href="?category=<%= Encode.forHtml(category) %>&page=<%= i %>"><%= i %></a>
 			   		<% } else if (search != null) { %>
-			       		<a href="?search=<%= search %>&page=<%= i %>"><%= i %></a>
+			       		<a href="?search=<%= Encode.forHtml(search) %>&page=<%= i %>"><%= i %></a>
 			   		<% } %>
                 <% } %>
             <% } %>
@@ -131,9 +131,9 @@
             <% if (endPage < pagesNumber) { %>
                 <span>...</span>
                 <% if (category != null) { %>
-		       		<a href="?category=<%= category %>&page=<%= pagesNumber %>"><%= pagesNumber %></a>
+		       		<a href="?category=<%= Encode.forHtml(category) %>&page=<%= pagesNumber %>"><%= pagesNumber %></a>
 		   		<% } else if (search != null) { %>
-		       		<a href="?search=<%= search %>&page=<%= pagesNumber %>"><%= pagesNumber %></a>
+		       		<a href="?search=<%= Encode.forHtml(search) %>&page=<%= pagesNumber %>"><%= pagesNumber %></a>
 		   		<% } %>
             <% } %>
         <% } %>
@@ -141,9 +141,9 @@
         <%-- Mostra il link alla pagina successiva se non si è sull'ultima pagina --%>
         <% if (currentPage < pagesNumber) { %>
         	<% if (category != null) { %>
-	       		<a href="?category=<%= category %>&page=<%= currentPage + 1 %>">&gt;</a>
+	       		<a href="?category=<%= Encode.forHtml(category) %>&page=<%= currentPage + 1 %>">&gt;</a>
 	   		<% } else if (search != null) { %>
-	       		<a href="?search=<%= search %>&page=<%= currentPage + 1 %>">&gt;</a>
+	       		<a href="?search=<%= Encode.forHtml(search) %>&page=<%= currentPage + 1 %>">&gt;</a>
 	   		<% } %>
         <% } %>
     </div>
