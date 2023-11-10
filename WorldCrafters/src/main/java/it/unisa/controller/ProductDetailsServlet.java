@@ -1,6 +1,7 @@
 package it.unisa.controller;
 
 import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
@@ -30,7 +31,7 @@ public class ProductDetailsServlet extends HttpServlet {
 		try {
 			productId = Integer.parseInt(productIdStr);
 		} catch (NumberFormatException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, e.getMessage());
 		}
 	    
 		ProductDAO productDAO = new ProductDAO();
@@ -42,9 +43,9 @@ public class ProductDetailsServlet extends HttpServlet {
 		try {
 			request.getRequestDispatcher("product-details.jsp").forward(request, response);
         } catch (ServletException se) {
-    		se.printStackTrace();
+        	logger.log(Level.WARNING, se.getMessage());
     	} catch (IOException e) {
-    		e.printStackTrace();
+    		logger.log(Level.WARNING, e.getMessage());
     	}
 	}
 
@@ -53,9 +54,9 @@ public class ProductDetailsServlet extends HttpServlet {
 		try {
 			doGet(request, response);
         } catch (ServletException se) {
-    		se.printStackTrace();
+        	logger.log(Level.WARNING, se.getMessage());
     	} catch (IOException e) {
-    		e.printStackTrace();
+    		logger.log(Level.WARNING, e.getMessage());
     	}
 	}
 

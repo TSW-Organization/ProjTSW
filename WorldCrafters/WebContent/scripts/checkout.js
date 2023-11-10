@@ -102,23 +102,6 @@ document.addEventListener("DOMContentLoaded", function() {
 	    }
 	});
 	
-	//per expDate
-	const expDate = document.getElementById("expDate");		
-	expDate.addEventListener("input", function() {
-		let v = this.value.replace(/\s+/g, '').replace(/\D/gi, '');
-        let matches = v.match(/\d{2,4}/g);
-        let match = matches && matches[0] || '';
-        let parts = [];
-        for (let i=0, len=match.length; i<len; i+=2) {
-            parts.push(match.substring(i, i+2));
-        }
-        if (parts.length) {
-            this.value = parts.join('/');
-        } else {
-            this.value = value;
-        }
-	});
-	
 	//per expMonth
 	const expMonth = document.getElementsByName("expMonth")[0];
 	expMonth.addEventListener("input", function() {

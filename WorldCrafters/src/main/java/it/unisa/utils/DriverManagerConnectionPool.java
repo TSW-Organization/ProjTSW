@@ -49,9 +49,14 @@ public class DriverManagerConnectionPool  {
             logger.log(Level.SEVERE, "Error loading configuration", ex);
         }
 
-        newConnection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
-		newConnection.setAutoCommit(false);
-		return newConnection;
+        try {
+        	newConnection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+    		newConnection.setAutoCommit(false);
+        } catch (Exception e) {
+        	logger.log(Level.WARNING, e.getMessage());
+        }
+        return newConnection;
+        
 	}
 
 
