@@ -2,6 +2,7 @@
 
 <%@ page import="java.util.List" %>
 <%@ page import="it.unisa.bean.Product" %>
+<%@ page import="org.owasp.encoder.Encode" %>
 
 <!DOCTYPE html>
 <html lang="it">
@@ -69,8 +70,8 @@
     </main>
 	
 	<%
-    	String category = (request.getParameter("category") != null) ? request.getParameter("category").replaceAll("[^a-zA-Z0-9]", "") : null;
-    	String search = (request.getParameter("search") != null) ? request.getParameter("search").replaceAll("[^a-zA-Z0-9]", "") : null;
+	    String category = Encode.forHtml(request.getParameter("category"));
+	    String search = Encode.forHtml(request.getParameter("search"));
 	%>
 
     <%-- Mostra la paginazione solo se c'è più di una pagina --%>
