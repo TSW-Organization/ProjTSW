@@ -21,8 +21,10 @@ public class UpdateCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	@SuppressWarnings("unchecked")
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		final String PRODUCT_LIST = "productList";
 		Gson gson = new Gson();
 		response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -30,7 +32,7 @@ public class UpdateCartServlet extends HttpServlet {
         HttpSession session = request.getSession();
         int userId;
         int cartId;
-        List<Product> productList = new ArrayList<>();
+        List<Product> productList;
         
 		if(session.getAttribute("userId")!=null) {
 					
@@ -40,23 +42,31 @@ public class UpdateCartServlet extends HttpServlet {
 
 				productList = cartDAO.getAllCartProducts(cartId);
 				
-				session.setAttribute("productList", productList);
+				session.setAttribute(PRODUCT_LIST, productList);
 		}
 		
-        productList = (List<Product>) session.getAttribute("productList");
+        productList = (List<Product>) session.getAttribute(PRODUCT_LIST);
         
         if (productList == null || productList.isEmpty()) {
 
         	productList = new ArrayList<>();
-        	session.setAttribute("productList", productList);
+        	session.setAttribute(PRODUCT_LIST, productList);
         	String json = gson.toJson(productList);
-            response.getWriter().write(json);
+        	try {
+            	response.getWriter().write(json);
+        	} catch (IOException e){
+        		e.printStackTrace();
+        	}
             return;
         }
 
 
-        String json = gson.toJson(productList);
-        response.getWriter().write(json);
+        String json = gson.toJson(productList);    
+        try {
+        	response.getWriter().write(json);
+    	} catch (IOException e){
+    		e.printStackTrace();
+    	}
          
 	}
 	

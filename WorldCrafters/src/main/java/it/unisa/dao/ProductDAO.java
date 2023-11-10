@@ -14,6 +14,15 @@ import it.unisa.utils.DriverManagerConnectionPool;
 
 public class ProductDAO {
 
+	private static final String PRICE = "price";
+	private static final String SELLER = "seller";
+	private static final String IMG_SRC = "imgSrc";
+	private static final String CATEGORY = "category";
+	private static final String QUANTITY = "quantity";
+	private static final String FAVORITES = "favorites";
+	private static final String LISTING_DATE = "listingDate";
+	private static final String DESCRIPTION = "Description";
+	
 	
 	public List<Product> getAllProducts() {
         
@@ -32,14 +41,14 @@ public class ProductDAO {
 	        while (resultSet.next()) {
 	        	int id = resultSet.getInt("id");
 	        	String name = resultSet.getString("name");
-	            double price = resultSet.getDouble("price");
-	            String seller = resultSet.getString("seller");
-	            String imgSrc = resultSet.getString("imgSrc");
-	            Category category = Category.valueOf(resultSet.getString("category"));
-	            int quantity = resultSet.getInt("quantity");
-	            int favorites = resultSet.getInt("favorites");
-	            Date listingDate = resultSet.getDate("listingDate");
-	            String description = resultSet.getString("description");
+	            double price = resultSet.getDouble(PRICE);
+	            String seller = resultSet.getString(SELLER);
+	            String imgSrc = resultSet.getString(IMG_SRC);
+	            Category category = Category.valueOf(resultSet.getString(CATEGORY).toUpperCase());
+	            int quantity = resultSet.getInt(QUANTITY);
+	            int favorites = resultSet.getInt(FAVORITES);
+	            Date listingDate = resultSet.getDate(LISTING_DATE);
+	            String description = resultSet.getString(DESCRIPTION);
 
 	            Product product = new Product();
 	            product.setId(id);
@@ -59,11 +68,11 @@ public class ProductDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (resultSet != null) {
-	                resultSet.close();
-	            }
-	            if (statement != null) {
+	        	if (statement != null) {
 	                statement.close();
+	            }
+	    		if (resultSet != null) {
+	                resultSet.close();
 	            }
 	            if (connection != null) {
 	                connection.close();
@@ -93,14 +102,14 @@ public class ProductDAO {
 	        while (resultSet.next()) {
 	        	int id = resultSet.getInt("id");
 	        	String name = resultSet.getString("name");
-	            double price = resultSet.getDouble("price");
-	            String seller = resultSet.getString("seller");
-	            String imgSrc = resultSet.getString("imgSrc");
-	            Category category = Category.valueOf(resultSet.getString("category"));
-	            int quantity = resultSet.getInt("quantity");
-	            int favorites = resultSet.getInt("favorites");
-	            Date listingDate = resultSet.getDate("listingDate");
-	            String description = resultSet.getString("description");
+	            double price = resultSet.getDouble(PRICE);
+	            String seller = resultSet.getString(SELLER);
+	            String imgSrc = resultSet.getString(IMG_SRC);
+	            Category category = Category.valueOf(resultSet.getString(CATEGORY).toUpperCase());
+	            int quantity = resultSet.getInt(QUANTITY);
+	            int favorites = resultSet.getInt(FAVORITES);
+	            Date listingDate = resultSet.getDate(LISTING_DATE);
+	            String description = resultSet.getString(DESCRIPTION);
 
 	            Product product = new Product();
 	            product.setId(id);
@@ -120,11 +129,11 @@ public class ProductDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (resultSet != null) {
-	                resultSet.close();
-	            }
-	            if (statement != null) {
+	        	if (statement != null) {
 	                statement.close();
+	            }
+	    		if (resultSet != null) {
+	                resultSet.close();
 	            }
 	            if (connection != null) {
 	                connection.close();
@@ -182,14 +191,14 @@ public class ProductDAO {
 	        while (resultSet.next()) {
 	        	int id = resultSet.getInt("id");
 	        	String name = resultSet.getString("name");
-	            double price = resultSet.getDouble("price");
-	            String seller = resultSet.getString("seller");
-	            String imgSrc = resultSet.getString("imgSrc");
-	            Category category = Category.valueOf(resultSet.getString("category"));
-	            int quantity = resultSet.getInt("quantity");
-	            int favorites = resultSet.getInt("favorites");
-	            Date listingDate = resultSet.getDate("listingDate");
-	            String description = resultSet.getString("description");
+	            double price = resultSet.getDouble(PRICE);
+	            String seller = resultSet.getString(SELLER);
+	            String imgSrc = resultSet.getString(IMG_SRC);
+	            Category category = Category.valueOf(resultSet.getString(CATEGORY).toUpperCase());
+	            int quantity = resultSet.getInt(QUANTITY);
+	            int favorites = resultSet.getInt(FAVORITES);
+	            Date listingDate = resultSet.getDate(LISTING_DATE);
+	            String description = resultSet.getString(DESCRIPTION);
 
 	            Product product = new Product();
 	            product.setId(id);
@@ -209,11 +218,11 @@ public class ProductDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (resultSet != null) {
-	                resultSet.close();
-	            }
-	            if (statement != null) {
+	        	if (statement != null) {
 	                statement.close();
+	            }
+	    		if (resultSet != null) {
+	                resultSet.close();
 	            }
 	            if (connection != null) {
 	                connection.close();
@@ -246,14 +255,14 @@ public class ProductDAO {
 	        if(resultSet.next()) {
 	        	int id = resultSet.getInt("id");
 	        	String name = resultSet.getString("name");
-	            double price = resultSet.getDouble("price");
-	            String seller = resultSet.getString("seller");
-	            String imgSrc = resultSet.getString("imgSrc");
-	            Category category = Category.valueOf(resultSet.getString("category"));
-	            int quantity = resultSet.getInt("quantity");
-	            int favorites = resultSet.getInt("favorites");
-	            Date listingDate = resultSet.getDate("listingDate");
-	            String description = resultSet.getString("description");
+	            double price = resultSet.getDouble(PRICE);
+	            String seller = resultSet.getString(SELLER);
+	            String imgSrc = resultSet.getString(IMG_SRC);
+	            Category category = Category.valueOf(resultSet.getString(CATEGORY).toUpperCase());
+	            int quantity = resultSet.getInt(QUANTITY);
+	            int favorites = resultSet.getInt(FAVORITES);
+	            Date listingDate = resultSet.getDate(LISTING_DATE);
+	            String description = resultSet.getString(DESCRIPTION);
 
 	            product.setId(id);
 	            product.setName(name);
@@ -271,11 +280,11 @@ public class ProductDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (resultSet != null) {
-	                resultSet.close();
-	            }
-	            if (statement != null) {
+	        	if (statement != null) {
 	                statement.close();
+	            }
+	    		if (resultSet != null) {
+	                resultSet.close();
 	            }
 	            if (connection != null) {
 	                connection.close();
@@ -308,14 +317,14 @@ public class ProductDAO {
 	        while (resultSet.next()) {
 	        	int id = resultSet.getInt("id");
 	        	String name = resultSet.getString("name");
-	            double price = resultSet.getDouble("price");
-	            String seller = resultSet.getString("seller");
-	            String imgSrc = resultSet.getString("imgSrc");
-	            Category category = Category.valueOf(resultSet.getString("category"));
-	            int quantity = resultSet.getInt("quantity");
-	            int favorites = resultSet.getInt("favorites");
-	            Date listingDate = resultSet.getDate("listingDate");
-	            String description = resultSet.getString("description");
+	            double price = resultSet.getDouble(PRICE);
+	            String seller = resultSet.getString(SELLER);
+	            String imgSrc = resultSet.getString(IMG_SRC);
+	            Category category = Category.valueOf(resultSet.getString(CATEGORY).toUpperCase());
+	            int quantity = resultSet.getInt(QUANTITY);
+	            int favorites = resultSet.getInt(FAVORITES);
+	            Date listingDate = resultSet.getDate(LISTING_DATE);
+	            String description = resultSet.getString(DESCRIPTION);
 
 	            Product product = new Product();
 	            product.setId(id);
@@ -335,11 +344,11 @@ public class ProductDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (resultSet != null) {
-	                resultSet.close();
-	            }
-	            if (statement != null) {
+	        	if (statement != null) {
 	                statement.close();
+	            }
+	    		if (resultSet != null) {
+	                resultSet.close();
 	            }
 	            if (connection != null) {
 	                connection.close();
@@ -373,14 +382,14 @@ public class ProductDAO {
 	        while (resultSet.next()) {
 	        	int id = resultSet.getInt("id");
 	        	String name = resultSet.getString("name");
-	            double price = resultSet.getDouble("price");
-	            String seller = resultSet.getString("seller");
-	            String imgSrc = resultSet.getString("imgSrc");
-	            Category category = Category.valueOf(resultSet.getString("category"));
-	            int quantity = resultSet.getInt("quantity");
-	            int favorites = resultSet.getInt("favorites");
-	            Date listingDate = resultSet.getDate("listingDate");
-	            String description = resultSet.getString("description");
+	            double price = resultSet.getDouble(PRICE);
+	            String seller = resultSet.getString(SELLER);
+	            String imgSrc = resultSet.getString(IMG_SRC);
+	            Category category = Category.valueOf(resultSet.getString(CATEGORY).toUpperCase());
+	            int quantity = resultSet.getInt(QUANTITY);
+	            int favorites = resultSet.getInt(FAVORITES);
+	            Date listingDate = resultSet.getDate(LISTING_DATE);
+	            String description = resultSet.getString(DESCRIPTION);
 
 	            Product product = new Product();
 	            product.setId(id);
@@ -400,11 +409,11 @@ public class ProductDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (resultSet != null) {
-	                resultSet.close();
-	            }
-	            if (statement != null) {
+	        	if (statement != null) {
 	                statement.close();
+	            }
+	    		if (resultSet != null) {
+	                resultSet.close();
 	            }
 	            if (connection != null) {
 	                connection.close();
@@ -472,14 +481,14 @@ public class ProductDAO {
 	        while (resultSet.next()) {
 	        	int id = resultSet.getInt("id");
 	        	String name = resultSet.getString("name");
-	            double price = resultSet.getDouble("price");
-	            String seller = resultSet.getString("seller");
-	            String imgSrc = resultSet.getString("imgSrc");
-	            Category category = Category.valueOf(resultSet.getString("category"));
-	            int quantity = resultSet.getInt("quantity");
-	            int favorites = resultSet.getInt("favorites");
-	            Date listingDate = resultSet.getDate("listingDate");
-	            String description = resultSet.getString("description");
+	            double price = resultSet.getDouble(PRICE);
+	            String seller = resultSet.getString(SELLER);
+	            String imgSrc = resultSet.getString(IMG_SRC);
+	            Category category = Category.valueOf(resultSet.getString(CATEGORY).toUpperCase());
+	            int quantity = resultSet.getInt(QUANTITY);
+	            int favorites = resultSet.getInt(FAVORITES);
+	            Date listingDate = resultSet.getDate(LISTING_DATE);
+	            String description = resultSet.getString(DESCRIPTION);
 	
 	            Product product = new Product();
 	            product.setId(id);
@@ -499,11 +508,11 @@ public class ProductDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (resultSet != null) {
-	                resultSet.close();
-	            }
-	            if (statement != null) {
+	        	if (statement != null) {
 	                statement.close();
+	            }
+	    		if (resultSet != null) {
+	                resultSet.close();
 	            }
 	            if (connection != null) {
 	                connection.close();

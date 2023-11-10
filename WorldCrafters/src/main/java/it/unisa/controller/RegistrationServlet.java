@@ -1,6 +1,8 @@
 package it.unisa.controller;
 
 import java.io.IOException;
+import java.util.regex.Pattern;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,10 +19,10 @@ public class RegistrationServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
 		UserDAO userDAO = new UserDAO();
-		AdminDAO adminDAO = new AdminDAO();
 
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
@@ -29,32 +31,11 @@ public class RegistrationServlet extends HttpServlet {
         String confirmPassword = request.getParameter("confirmPassword");
         String error = "";
         
-        //Controllare che l'email non sia già presente in user o admin
-		boolean userValid = userDAO.verifyEmail(email);
-		boolean adminValid = adminDAO.verifyEmail(email);
-		
-		if(!(userValid && adminValid)) {
-			error += "Email non disponibile<br>";
-		}
-        	
-        if (firstName == null || firstName.trim().equals("") || !firstName.matches("^[a-zA-Z\\s]+$")) {
-			error += "Inserisci nome valido<br>";
-		} else {
-			request.setAttribute("firstName", firstName);
-		}
-
-		if (lastName == null || lastName.trim().equals("") || !lastName.matches("^[a-zA-Z\\s]+$")) {
-			error += "Inserisci cognome valido<br>";
-		} else {
-			request.setAttribute("lastName", lastName);
-		}
-        
-        if (!isValidEmail(email)) {
-			error += "Inserisci email valida<br>";
-		} else {
-			request.setAttribute("email", email);
-		}
-        
+        error += checkEmailAvailability(email);
+        error += validateField(firstName, "firstName", request, "Inserisci nome valido", "^[a-zA-Z\\s]+$");
+        error += validateField(lastName, "lastName", request, "Inserisci cognome valido", "^[a-zA-Z\\s]+$");
+        error += validateField(email, "email", request, "Inserisci email valida", "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$");
+             
         if(!isValidPassword(password)) {
         	error += "La password deve contenere almeno 8 caratteri, una lettera maiuscola, una cifra e un simbolo<br>";
         } else {
@@ -66,64 +47,64 @@ public class RegistrationServlet extends HttpServlet {
 		if (!error.equals("")) {
 			request.setAttribute("error", error);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/register.jsp");
-			dispatcher.forward(request, response);
+			try {
+				dispatcher.forward(request, response);
+	    	} catch (ServletException se) {
+	    		se.printStackTrace();
+	    	} catch (IOException e) {
+	    		e.printStackTrace();
+	    	}
+			
 		} else {
 
 			//Dopo il controllo viene registrato in database
-			userDAO.registerUser(firstName, lastName, email, password);
-	        response.sendRedirect("login.jsp");
+			userDAO.registerUser(firstName, lastName, email, password);  
+	        try {
+	        	response.sendRedirect("login.jsp");
+	    	} catch (IOException e) {
+	    		e.printStackTrace();
+	    	}
 		
 		}
 		
-    }
-        
-
-	//Verifica se l'indirizzo email è valido utilizzando una semplice espressione regolare
-	private boolean isValidEmail(String email) {
-	    String emailRegex = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
-	    return email.matches(emailRegex);
-	}
+    } 
 	
 	private boolean isValidPassword(String password) {
-	    // Verifica se la password ha almeno 8 caratteri
-	    if (password.length() < 8) {
-	        return false;
-	    }
 
-	    // Verifica se la password contiene almeno una lettera maiuscola
-	    if (!password.matches(".*[A-Z].*")) {
-	        return false;
-	    }
+	    boolean bool = true;
+		if(password.length() < 8 || !password.matches(".*[A-Z].*") || !password.matches(".*\\d.*") || !password.matches(".*[!@#$%^&*].*")) {
+	        bool = false;
+	    }	
+		return bool;
 
-	    // Verifica se la password contiene almeno una cifra
-	    if (!password.matches(".*\\d.*")) {
-	        return false;
-	    }
-
-	    // Verifica se la password contiene almeno un simbolo
-	    if (!password.matches(".*[!@#$%^&*].*")) {
-	        return false;
-	    }
-
-	    return true;
+	}
+	
+	private String checkEmailAvailability(String email) {
+		
+		UserDAO userDAO = new UserDAO();
+		AdminDAO adminDAO = new AdminDAO();
+		String error = "";
+		
+		//Controllare che l'email non sia già presente in user o admin
+		boolean userValid = userDAO.verifyEmail(email);
+		boolean adminValid = adminDAO.verifyEmail(email);
+		
+		if(!(userValid && adminValid)) {
+			error = "Email non disponibile<br>";
+		}
+		
+		return error;
+	}
+	
+	private String validateField(String input, String attribute, HttpServletRequest request, String errorMessage, String regex) {
+		
+		String error = "";		
+		if (input == null || input.trim().equals("") || !Pattern.matches(regex, input)) {
+            error = errorMessage + "<br>";
+        } else {
+            request.setAttribute(attribute, input);
+        }	
+		return error;	
 	}
 
-	/*
-    private String hashPassword(String password) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hashedBytes = md.digest(password.getBytes());
-
-            StringBuilder result = new StringBuilder();
-            for (byte b : hashedBytes) {
-                result.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
-            }
-
-            return result.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-    */
 }

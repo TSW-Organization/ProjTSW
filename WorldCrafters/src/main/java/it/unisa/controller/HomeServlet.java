@@ -18,7 +18,7 @@ public class HomeServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
     	
-
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// Crea un'istanza di ProductDAO
@@ -29,13 +29,25 @@ public class HomeServlet extends HttpServlet {
 		
 		
 		request.setAttribute("products", products);	
-		request.getRequestDispatcher("home.jsp").forward(request, response);
+	
+		try {
+			request.getRequestDispatcher("home.jsp").forward(request, response);
+    	} catch (ServletException se) {
+    		se.printStackTrace();
+    	} catch (IOException e){
+    		e.printStackTrace();
+    	}
 	}
 
-
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		doGet(request, response);
+		try {
+			doGet(request, response);
+    	} catch (ServletException se) {
+    		se.printStackTrace();
+    	} catch (IOException e){
+    		e.printStackTrace();
+    	}
 	}
 
 }

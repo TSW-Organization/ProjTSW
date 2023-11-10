@@ -8,6 +8,7 @@ window.addEventListener('DOMContentLoaded', function() {
         let validationType = $(this).data('validation');
         let value = $(this).val().trim();
         let isValid = false;
+        let password;
 
         // Aggiungi qui le tue regole di validazione per ogni campo
         switch (validationType) {
@@ -26,7 +27,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 isValid = value.length >= 8 && /[A-Z]/.test(value) && /\d/.test(value) && /[!@#$%^&*]/.test(value);
                 break;
             case 'confirmPassword':
-                let password = $('#password').val().trim();
+                password = $('#password').val().trim();
                 // Confronta la "Conferma Password" con la password
                 isValid = value === password;
                 break;

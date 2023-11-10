@@ -52,11 +52,11 @@ public class PurchaseDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (resultSet != null) {
-	                resultSet.close();
-	            }
-	            if (statement != null) {
+	        	if (statement != null) {
 	                statement.close();
+	            }
+	    		if (resultSet != null) {
+	                resultSet.close();
 	            }
 	            if (connection != null) {
 	                connection.close();
@@ -121,11 +121,11 @@ public class PurchaseDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (resultSet != null) {
-	                resultSet.close();
-	            }
-	            if (statement != null) {
+	        	if (statement != null) {
 	                statement.close();
+	            }
+	    		if (resultSet != null) {
+	                resultSet.close();
 	            }
 	            if (connection != null) {
 	                connection.close();
@@ -143,7 +143,6 @@ public class PurchaseDAO {
 		
 		Connection connection = null;
 	    PreparedStatement statement = null;
-	    ResultSet resultSet = null;
 
 	    try {
 	        connection = DriverManagerConnectionPool.getConnection();
@@ -159,9 +158,6 @@ public class PurchaseDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (resultSet != null) {
-	                resultSet.close();
-	            }
 	            if (statement != null) {
 	                statement.close();
 	            }

@@ -15,6 +15,7 @@ public class AdminController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // Recupera la lista dei prodotti dal ProductDAO
         ProductDAO productDAO = new ProductDAO();
@@ -24,6 +25,11 @@ public class AdminController extends HttpServlet {
         request.setAttribute("products", products);
 
         // Esegui il reindirizzamento con sendRedirect()
-        response.sendRedirect("home.jsp");
+        try {
+        	response.sendRedirect("home.jsp");
+        } catch (IOException e) {
+        	e.printStackTrace();
+        }
+        
     }
 }

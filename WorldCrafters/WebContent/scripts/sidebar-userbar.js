@@ -4,19 +4,15 @@ function toggleSidebar() {
     let sidebar = document.getElementById("sidebar");
     let body = document.getElementsByTagName("body")[0];
 
-    if(sidebarOpen==false) {
+    if(!sidebarOpen) {
         sidebar.style.left = "0px";
         sidebar.style.transition = "left 600ms";
-        //main.style.opacity = "0.8";
-        //footer.style.opacity = "0.8";
         sidebarOpen = true;
         body.classList.add("sidebar-open");
     }
     else {
         sidebar.style.left = "-400px";
         sidebar.style.transition = "left 600ms";
-        //main.style.opacity = "1";
-        //footer.style.opacity = "1";
         sidebarOpen=false;
         body.classList.remove("sidebar-open");
     }  
@@ -28,7 +24,7 @@ function toggleUserbar() {
     let userbar = document.getElementById("userbar");
     let body = document.getElementsByTagName("body")[0];
 
-    if(userbarOpen==false) {
+    if(!userbarOpen) {
         userbar.style.display = "block";
         userbar.style.opacity = "1";
         userbarOpen = true;
@@ -46,11 +42,11 @@ function toggleUserbar() {
 // FUNZIONE CHE CHIUDE TUTTE LE SIDEBAR
 function closeAll() {
 
-    if(sidebarOpen==true) {
+    if(sidebarOpen) {
         toggleSidebar();
     }
     
-    if(userbarOpen==true) {
+    if(userbarOpen) {
         toggleUserbar();
     }
 }

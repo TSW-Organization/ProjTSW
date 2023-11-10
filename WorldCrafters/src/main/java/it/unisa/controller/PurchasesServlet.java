@@ -26,7 +26,7 @@ public class PurchasesServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
        
-  
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// Crea un'istanza di ProductDAO
@@ -58,17 +58,32 @@ public class PurchasesServlet extends HttpServlet {
 		    
 			request.setAttribute("purchases", purchases);
 			request.setAttribute("payments", payments);
-			request.setAttribute("productsByPurchase", productsByPurchase);
-			request.getRequestDispatcher("purchases.jsp").forward(request, response);
+			request.setAttribute("productsByPurchase", productsByPurchase);	
+			try {
+				request.getRequestDispatcher("purchases.jsp").forward(request, response);
+	    	} catch (ServletException se) {
+	    		se.printStackTrace();
+	    	} catch (IOException e) {
+	    		e.printStackTrace();
+	    	}
 	    } else {
-	    	response.sendRedirect("login.jsp");
+	    	try {
+	    		response.sendRedirect("login.jsp");
+	    	} catch (IOException e) {
+	    		e.printStackTrace();
+	    	}
 	    }
 	}
 
-
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		doGet(request, response);
+		try {
+			doGet(request, response);
+    	} catch (ServletException se) {
+    		se.printStackTrace();
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
 	}
 
 }

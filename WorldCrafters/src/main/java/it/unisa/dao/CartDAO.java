@@ -38,11 +38,11 @@ public class CartDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (resultSet != null) {
-	                resultSet.close();
-	            }
-	            if (statement != null) {
+	        	if (statement != null) {
 	                statement.close();
+	            }
+	    		if (resultSet != null) {
+	                resultSet.close();
 	            }
 	            if (connection != null) {
 	                connection.close();
@@ -85,11 +85,11 @@ public class CartDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (resultSet != null) {
-	                resultSet.close();
-	            }
-	            if (statement != null) {
+	        	if (statement != null) {
 	                statement.close();
+	            }
+	    		if (resultSet != null) {
+	                resultSet.close();
 	            }
 	            if (connection != null) {
 	                connection.close();
@@ -134,7 +134,7 @@ public class CartDAO {
 	            int favorites = resultSet.getInt("favorites");
 	            Date listingDate = resultSet.getDate("listingDate");
 	            String description = resultSet.getString("description");
-	            Category category = Category.valueOf(resultSet.getString("category"));
+	            Category category = Category.valueOf(resultSet.getString("category").toUpperCase());
 	            
 	            Product product = new Product();
 	            product.setId(id);
@@ -156,11 +156,11 @@ public class CartDAO {
 	        e.printStackTrace();
 	    } finally {
 	        try {
-	            if (resultSet != null) {
-	                resultSet.close();
-	            }
-	            if (statement != null) {
+	        	if (statement != null) {
 	                statement.close();
+	            }
+	    		if (resultSet != null) {
+	                resultSet.close();
 	            }
 	            if (connection != null) {
 	                connection.close();

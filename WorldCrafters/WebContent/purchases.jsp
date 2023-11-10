@@ -81,7 +81,7 @@
 				    	<% String status = purchase.getStatus().toString(); %>
 				    	<% boolean deleteRequest = purchase.getDeleteRequest(); %>
 				    	<% if(deleteRequest==false) {%>
-				    		<% if(status!="consegnato" && status!="annullato") { %>
+				    		<% if(status!="CONSEGNATO" && status!="ANNULLATO") { %>
 				    			<p id="deleteRequest" onclick="deleteRequest('<%=purchase.getId()%>')">Annulla ordine</p>
 				    		<% } %>
 				    	<% } else {%>
