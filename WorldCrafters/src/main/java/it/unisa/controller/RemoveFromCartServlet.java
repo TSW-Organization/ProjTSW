@@ -2,6 +2,8 @@ package it.unisa.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +22,8 @@ import it.unisa.dao.CartItemDAO;
 public class RemoveFromCartServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
-       
-    
+	private static final Logger logger = Logger.getLogger(RemoveFromCartServlet.class.getName());
+        
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,7 +34,7 @@ public class RemoveFromCartServlet extends HttpServlet {
         try {
         	productId = Integer.parseInt(request.getParameter("productId"));
     	} catch (NumberFormatException e){
-    		e.printStackTrace();
+    		logger.log(Level.WARNING, e.getMessage());
     	}
         CartItemDAO cartItemDAO= new CartItemDAO();
 		

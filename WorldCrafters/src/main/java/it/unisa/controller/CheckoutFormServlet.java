@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.List;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
@@ -25,7 +26,10 @@ import it.unisa.dao.PurchaseItemDAO;
 
 @WebServlet("/CheckoutForm")
 public class CheckoutFormServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
+	
+	private static final Logger logger = Logger.getLogger(CheckoutFormServlet.class.getName());
        
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -7,12 +7,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.sql.Date;
 import java.util.List;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import it.unisa.bean.Category;
 import it.unisa.bean.Product;
 import it.unisa.utils.DriverManagerConnectionPool; 
 
 public class ProductDAO {
+	
+	private static final Logger logger = Logger.getLogger(ProductDAO.class.getName());
 
 	private static final String PRICE = "price";
 	private static final String SELLER = "seller";
@@ -65,7 +68,7 @@ public class ProductDAO {
 	            products.add(product);
 	        }
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	        	if (statement != null) {
@@ -78,7 +81,7 @@ public class ProductDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 
@@ -126,7 +129,7 @@ public class ProductDAO {
 	            products.add(product);
 	        }
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	        	if (statement != null) {
@@ -139,7 +142,7 @@ public class ProductDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 
@@ -215,7 +218,7 @@ public class ProductDAO {
 	            products.add(product);
 	        }
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	        	if (statement != null) {
@@ -228,7 +231,7 @@ public class ProductDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 
@@ -277,7 +280,7 @@ public class ProductDAO {
 
 	        }
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	        	if (statement != null) {
@@ -290,7 +293,7 @@ public class ProductDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 
@@ -341,7 +344,7 @@ public class ProductDAO {
 	            products.add(product);
 	        }
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	        	if (statement != null) {
@@ -354,7 +357,7 @@ public class ProductDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 
@@ -406,7 +409,7 @@ public class ProductDAO {
 	            products.add(product);
 	        }
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	        	if (statement != null) {
@@ -419,7 +422,7 @@ public class ProductDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 
@@ -443,7 +446,7 @@ public class ProductDAO {
 	        connection.commit();
 
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	            if (statement != null) {
@@ -453,7 +456,7 @@ public class ProductDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 
@@ -505,7 +508,7 @@ public class ProductDAO {
 	            products.add(product);
 	        }
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	        	if (statement != null) {
@@ -518,7 +521,7 @@ public class ProductDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 	

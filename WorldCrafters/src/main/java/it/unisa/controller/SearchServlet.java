@@ -3,6 +3,8 @@ package it.unisa.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +19,9 @@ import it.unisa.dao.ProductDAO;
 
 @WebServlet("/api/search")
 public class SearchServlet extends HttpServlet {
+	
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(SearchServlet.class.getName());
        
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -28,7 +32,7 @@ public class SearchServlet extends HttpServlet {
         try {
         	out = response.getWriter();
     	} catch (IOException e){
-    		e.printStackTrace();
+    		logger.log(Level.WARNING, e.getMessage());
     	}
 
         // Qui dovresti ottenere la lista di prodotti dal tuo ProductDAO

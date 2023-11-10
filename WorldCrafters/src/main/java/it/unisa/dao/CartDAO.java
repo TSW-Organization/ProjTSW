@@ -8,13 +8,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import it.unisa.bean.Category;
 import it.unisa.bean.Product;
 import it.unisa.utils.DriverManagerConnectionPool;
 
 public class CartDAO {
 	
+	private static final Logger logger = Logger.getLogger(CartDAO.class.getName());
 	
 	public int getCartByUserId(int userId) {
 			
@@ -35,7 +37,7 @@ public class CartDAO {
 	        }
 	        
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	        	if (statement != null) {
@@ -48,7 +50,7 @@ public class CartDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 
@@ -82,7 +84,7 @@ public class CartDAO {
 
 	        connection.commit();
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	        	if (statement != null) {
@@ -95,7 +97,7 @@ public class CartDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 
@@ -153,7 +155,7 @@ public class CartDAO {
 	        }
 	        
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	        	if (statement != null) {
@@ -166,7 +168,7 @@ public class CartDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 
@@ -191,7 +193,7 @@ public class CartDAO {
 
 	        connection.commit();
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	            if (statement != null) {
@@ -201,7 +203,7 @@ public class CartDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 

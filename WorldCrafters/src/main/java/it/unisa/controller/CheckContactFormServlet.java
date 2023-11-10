@@ -1,6 +1,9 @@
 package it.unisa.controller;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 public class CheckContactFormServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(CheckContactFormServlet.class.getName());
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,9 +24,9 @@ public class CheckContactFormServlet extends HttpServlet {
 		try {
 			dispatcher.forward(request, response);
 		} catch (ServletException se) {
-			se.printStackTrace();
+			logger.log(Level.WARNING, se.getMessage());
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.log(Level.WARNING, e.getMessage());
 		}
 		
 		
@@ -49,15 +53,15 @@ public class CheckContactFormServlet extends HttpServlet {
 	        try {
 	        	dispatcher.forward(request, response);
 	        } catch (ServletException se) {
-	        	se.printStackTrace();
+	        	logger.log(Level.WARNING, se.getMessage());
 	        } catch (IOException e) {
-	        	e.printStackTrace();
+	        	logger.log(Level.WARNING, e.getMessage());
 	        } 
 	    } else {
 	        try {
 	            response.sendRedirect("contact-success.jsp");
 	        } catch (IOException e) {
-	            e.printStackTrace();
+	        	logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 	}

@@ -9,12 +9,16 @@ import java.sql.Statement;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import it.unisa.bean.Purchase;
 import it.unisa.bean.Status;
 import it.unisa.utils.DriverManagerConnectionPool;
 
 public class PurchaseDAO {
+	
+	private static final Logger logger = Logger.getLogger(PurchaseDAO.class.getName());
 	
 	public int setPurchase(Date date, Time time, double amount, int userId, int paymentId, String fullName, String address, String city, String state, String zipCode) {
 		
@@ -49,7 +53,7 @@ public class PurchaseDAO {
 
 	        connection.commit();
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	        	if (statement != null) {
@@ -62,7 +66,7 @@ public class PurchaseDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 
@@ -118,7 +122,7 @@ public class PurchaseDAO {
 	            purchases.add(purchase);
 	        }
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	        	if (statement != null) {
@@ -131,7 +135,7 @@ public class PurchaseDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }
 
@@ -155,7 +159,7 @@ public class PurchaseDAO {
 
 	        connection.commit();
 	    } catch (SQLException e) {
-	        e.printStackTrace();
+	        logger.log(Level.WARNING, e.getMessage());
 	    } finally {
 	        try {
 	            if (statement != null) {
@@ -165,7 +169,7 @@ public class PurchaseDAO {
 	                connection.close();
 	            }
 	        } catch (SQLException e) {
-	            e.printStackTrace();
+	            logger.log(Level.WARNING, e.getMessage());
 	        }
 	    }		
 		

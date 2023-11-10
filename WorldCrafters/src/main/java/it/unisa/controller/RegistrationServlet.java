@@ -1,6 +1,8 @@
 package it.unisa.controller;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 import javax.servlet.RequestDispatcher;
@@ -18,6 +20,7 @@ import it.unisa.dao.UserDAO;
 public class RegistrationServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(RegistrationServlet.class.getName());
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,9 +53,9 @@ public class RegistrationServlet extends HttpServlet {
 			try {
 				dispatcher.forward(request, response);
 	    	} catch (ServletException se) {
-	    		se.printStackTrace();
+	    		logger.log(Level.WARNING, se.getMessage());
 	    	} catch (IOException e) {
-	    		e.printStackTrace();
+	    		logger.log(Level.WARNING, e.getMessage());
 	    	}
 			
 		} else {
@@ -62,7 +65,7 @@ public class RegistrationServlet extends HttpServlet {
 	        try {
 	        	response.sendRedirect("login.jsp");
 	    	} catch (IOException e) {
-	    		e.printStackTrace();
+	    		logger.log(Level.WARNING, e.getMessage());
 	    	}
 		
 		}
