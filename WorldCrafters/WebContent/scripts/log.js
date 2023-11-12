@@ -20,7 +20,7 @@ window.addEventListener('DOMContentLoaded', function() {
         // Aggiungi qui le tue regole di validazione per ogni campo
         switch (validationType) {
             case 'email':
-                isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value); // Valida l'indirizzo email
+                isValid = /^[^\s@]+@(?:[^\s@]+\.)+[^\s@]+$/.test(value); // Valida l'indirizzo email
                 break;
             case 'password':
 				isValid = value!=='';

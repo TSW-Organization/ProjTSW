@@ -49,7 +49,7 @@ $(document).ready(function () {
 		        isValid = /^[A-Za-z\s]+$/.test(value); // Consente solo lettere e spazi
 		        break;
 		    case 'email':
-		        isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value); // Valida l'indirizzo email
+		        isValid = /^[^\s@]+@(?:[^\s@]+\.)+[^\s@]+$/.test(value); // Valida l'indirizzo email
 		        break;
 		    case 'address':
 			    isValid = /^[A-Za-z\s]+\s\d+$/.test(value); // Deve essere nel formato "stringa di lettere e il numero"

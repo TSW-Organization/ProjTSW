@@ -19,7 +19,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 isValid = /^[A-Za-z\s]+$/.test(value); // Consente solo lettere e spazi
                 break;
             case 'email':
-                isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value); // Valida l'indirizzo email
+                isValid = /^[^\s@]+@(?:[^\s@]+\.)+[^\s@]+$/.test(value); // Valida l'indirizzo email
                 break;
             case 'password':
                 // La password deve avere almeno 8 caratteri
