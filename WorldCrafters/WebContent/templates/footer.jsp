@@ -25,21 +25,14 @@
                 </p>
             </div>
             <div class="carousel-cell cell-3">
-                <h1>Opportunità di vendita</h1>
+                <h1>Social</h1>
                 <p>
-                    Se siete voi stessi artigiani o avete prodotti artigianali unici da vendere, WorldCrafters vi offre la possibilità di 
-                    aprire un negozio sul nostro sito e raggiungere una vasta base di clienti interessati.
+                    Unisciti alla nostra community online e rimani sempre aggiornato sulle ultime tendenze, offerte speciali e novità entusiasmanti! Seguici sui nostri 
+                    canali social per esplorare il vasto mondo di WorldCrafters. Grazie al tuo supporto, costruiamo insieme un universo di esperienze straordinarie.        
                 </p>
             </div>
         </div>
-        
-        <div id="info">
-            <h1>Social</h1>
-            <p>
-                (inserire i link ai profili social di WorldCrafters)<br><br>
-            </p> 
-        </div>
-    
+           
         <div id="signature">
             <p>@2023 WorldCrafters</p>
         </div>

@@ -75,7 +75,7 @@ public class RegistrationServlet extends HttpServlet {
 	private boolean isValidPassword(String password) {
 
 	    boolean bool = true;
-		if(password.length() < 8 || !password.matches(".*[A-Z].*") || !password.matches(".*\\d.*") || !password.matches(".*[!@#$%^&*].*")) {
+		if(!password.matches("^(?=.*[A-Z])(?=.*\\\\d)(?=.*[!@#$%^&*]).{8,}$")) {
 	        bool = false;
 	    }	
 		return bool;
