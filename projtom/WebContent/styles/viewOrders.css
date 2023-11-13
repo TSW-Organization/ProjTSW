@@ -1,0 +1,89 @@
+/* styles/viewOrders.css */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+}
+
+main {
+    flex: 1;
+}
+
+.view-orders-content {
+    margin: 20px; /* Aggiungi margini secondo le tue preferenze */
+}
+
+.order-window {
+    margin-bottom: 20px; /* Aggiungi spazio tra la finestra degli ordini e la paginazione */
+}
+
+.order-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.order-table th, .order-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.pagination {
+    margin-top: 20px; /* Aggiungi spazio sopra la paginazione */
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px;
+    margin: 0 4px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+}
+
+footer {
+    margin-top: auto; /* Footer allinea in basso */
+}
+/* Aggiungi questo stile nel tuo foglio di stile CSS o in un nuovo file CSS */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #3498db;
+    color: white;
+    padding: 8px;
+    font-size: 14px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #2980B9;
+}
+
