@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
+    <title>WorldCrafters</title>
     <link rel="stylesheet" type="text/css" href="styles/header.css">
     <script src="scripts/cart.js"></script>
     <script src="scripts/header.js"></script>
@@ -12,7 +13,7 @@
 	<header>
         
         <a id="logoContainer" href="home">
-        	<img src="images/logo2.png">
+        	<img src="images/logo2.png" alt="Logo">
         	<span>WorldCrafters</span>
         </a>
         
@@ -25,7 +26,7 @@
 		</div>
     	
         <a class="link" id="homeButton" href="home">Home</a>
-        <!-- <a class="topnav" href="#"><i class="fa fa-heart fa-xl" aria-hidden="true"></i></a>-->
+
         <div>
         	<a class="link" id="cartButton" href="cart"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
         	<span id="cartQuantity"></span>

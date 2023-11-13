@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
     
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
+    <title>WorldCrafters</title>
     <link rel="stylesheet" type="text/css" href="styles/sidebar.css">
     <script src="scripts/sidebar-userbar.js"></script>
 </head>

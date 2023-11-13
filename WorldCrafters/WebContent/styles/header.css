@@ -21,8 +21,12 @@ header a {
     text-decoration: none;
     font-weight: bold;
     cursor: pointer;
-    color: black;
+    color: #002642;
     font-size: 20px;
+}
+
+header a:hover {
+	color: #F19A3E;
 }
 
 #logoContainer {
@@ -32,6 +36,7 @@ header a {
 	justify-content: space-between;
 }
 
+
 .link {
 	flex-basis: 4%;
 }
@@ -39,17 +44,25 @@ header a {
 #cartQuantity {
 	font-weight: bold;
 	font-size: 18px;
-	color: orange;
+	color: #F19A3E;
 }
 
 #searchbar {
     display: flex;
     justify-content: space-between;
     flex-basis: 40%;
-    background-color:antiquewhite;
+    background-color:#FDF6ED;
     border-radius: 5px;
     padding: 5px 1px;
    	position: relative;
+}
+
+.fa-search {
+	color: #002642;
+}
+
+.fa-search:hover {
+	color: #F19A3E;
 }
 
 #searchInput {
@@ -59,11 +72,12 @@ header a {
     outline: none;
     padding: 5px;
     font-size: 20px;
+    color:#002642;
 }
 
 #searchResults {
   position: absolute;
-  background-color:white;
+  background-color:#FDF6ED;
   width: 100%;
   margin-top: 36px;
   list-style: none;
@@ -96,7 +110,7 @@ header a {
 }
 
 #logoContainer span {
-	color: white;
+	color: 002642;
 	font-size: 30px;
 }
 
@@ -127,16 +141,20 @@ header a {
 	header i {
 		font-size: 15px;
 	}
+	
+	#cartQuantity {
+		font-size: 15px;
+	}
 
 	#logoContainer {
 		flex-basis: 6%;
 	}
 	
-	#searchbarContainer {
+	#searchbar {
 	    padding: 3px;
 	}
 	
-	#searchbarContainer input {    
+	#searchbar input {    
 	    padding: 3px;
 	    font-size: 12px;
 	}

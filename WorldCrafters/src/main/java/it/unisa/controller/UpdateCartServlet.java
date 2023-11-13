@@ -3,6 +3,9 @@ package it.unisa.controller;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.google.gson.Gson;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,18 +14,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import it.unisa.DAO.CartDAO;
 import it.unisa.bean.Product;
+import it.unisa.dao.CartDAO;
 
 
 @WebServlet("/updateCart")
 public class UpdateCartServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(UpdateCartServlet.class.getName());
        
 	@SuppressWarnings("unchecked")
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		final String PRODUCT_LIST = "productList";
 		Gson gson = new Gson();
 		response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -30,7 +36,7 @@ public class UpdateCartServlet extends HttpServlet {
         HttpSession session = request.getSession();
         int userId;
         int cartId;
-        List<Product> productList = new ArrayList<>();
+        List<Product> productList;
         
 		if(session.getAttribute("userId")!=null) {
 					
@@ -40,22 +46,31 @@ public class UpdateCartServlet extends HttpServlet {
 
 				productList = cartDAO.getAllCartProducts(cartId);
 				
-				session.setAttribute("productList", productList);
+				session.setAttribute(PRODUCT_LIST, productList);
 		}
 		
-        productList = (List<Product>) session.getAttribute("productList");
+        productList = (List<Product>) session.getAttribute(PRODUCT_LIST);
         
         if (productList == null || productList.isEmpty()) {
 
         	productList = new ArrayList<>();
+        	session.setAttribute(PRODUCT_LIST, productList);
         	String json = gson.toJson(productList);
-            response.getWriter().write(json);
+        	try {
+            	response.getWriter().write(json);
+        	} catch (IOException e){
+        		logger.log(Level.WARNING, e.getMessage());
+        	}
             return;
         }
 
 
-        String json = gson.toJson(productList);
-        response.getWriter().write(json);
+        String json = gson.toJson(productList);    
+        try {
+        	response.getWriter().write(json);
+    	} catch (IOException e){
+    		logger.log(Level.WARNING, e.getMessage());
+    	}
          
 	}
 	

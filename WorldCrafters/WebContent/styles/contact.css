@@ -105,7 +105,6 @@
 	#contactContainer input[type="text"], input[type="email"], textarea {
 	    width: 100%;
 	    padding: 10px;
-	    font-size: 16px;
 	    border-radius: 4px;
 	    border: 1px solid #ccc;
 	    font-size: 11px;

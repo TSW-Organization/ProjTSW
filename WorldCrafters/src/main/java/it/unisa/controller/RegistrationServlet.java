@@ -1,68 +1,113 @@
 package it.unisa.controller;
 
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Pattern;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import it.unisa.DAO.UserDAO;
-import it.unisa.bean.User;
-import it.unisa.utils.DriverManagerConnectionPool;
+import it.unisa.dao.AdminDAO;
+import it.unisa.dao.UserDAO;
 
 
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(RegistrationServlet.class.getName());
 
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserDAO userDAO = new UserDAO();
+        
+		UserDAO userDAO = new UserDAO();
 
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        String confirmPassword = request.getParameter("confirm-password");
-
-        if (userDAO.isEmailRegistered(email)) {
-            request.setAttribute("emailError", "L'email è già in uso");
-            request.setAttribute("redirectCode", 0);  // Codice 0 per errore
-            request.setAttribute("redirectURL", "login.jsp");
+        String confirmPassword = request.getParameter("confirmPassword");
+        String error = "";
+        
+        error += checkEmailAvailability(email);
+        error += validateField(firstName, "firstName", request, "Inserisci nome valido", "^[a-zA-Z\\s]+$");
+        error += validateField(lastName, "lastName", request, "Inserisci cognome valido", "^[a-zA-Z\\s]+$");
+        error += validateField(email, "email", request, "Inserisci email valida", "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$");
+             
+        if(!isValidPassword(password)) {
+        	error += "La password deve contenere almeno 8 caratteri, una lettera maiuscola, una cifra e un simbolo<br>";
         } else {
-            String hashedPassword = hashPassword(password);
-            int userID = userDAO.registerUser(firstName, lastName, email, hashedPassword);
-            request.setAttribute("redirectCode", 1);  // Codice 1 per successo
-            request.setAttribute("redirectURL", "login.jsp");
+        	if(!password.equals(confirmPassword)) {
+            	error += "Le password non corrispondono<br>";
+            }
         }
+        
+		if (!error.equals("")) {
+			request.setAttribute("error", error);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/register.jsp");
+			try {
+				dispatcher.forward(request, response);
+	    	} catch (ServletException se) {
+	    		logger.log(Level.WARNING, se.getMessage());
+	    	} catch (IOException e) {
+	    		logger.log(Level.WARNING, e.getMessage());
+	    	}
+			
+		} else {
 
-        // Esegue il reindirizzamento dalla servlet
-        request.getRequestDispatcher("register.jsp").forward(request, response);
-    }
+			//Dopo il controllo viene registrato in database
+			userDAO.registerUser(firstName, lastName, email, password);  
+	        try {
+	        	response.sendRedirect("login.jsp");
+	    	} catch (IOException e) {
+	    		logger.log(Level.WARNING, e.getMessage());
+	    	}
+		
+		}
+		
+    } 
+	
+	private boolean isValidPassword(String password) {
 
-	private String hashPassword(String password) {
-	    try {
-	        MessageDigest md = MessageDigest.getInstance("SHA-256");
-	        byte[] hashedBytes = md.digest(password.getBytes());
+	    boolean bool = true;
+		if(password.length() < 8 || !password.matches(".*[A-Z].*") || !password.matches(".*\\d.*") || !password.matches(".*[!@#$%^&*].*")) {
+	        bool = false;
+	    }	
+		return bool;
 
-	        StringBuilder result = new StringBuilder();
-	        for (byte b : hashedBytes) {
-	            result.append(Integer.toString((b & 0xff) + 0x100, 16).substring(1));
-	        }
-
-	        return result.toString();
-	    } catch (NoSuchAlgorithmException e) {
-	        e.printStackTrace();
-	        return null;
-	    }
-	   
-	} 
 	}
+	
+	private String checkEmailAvailability(String email) {
+		
+		UserDAO userDAO = new UserDAO();
+		AdminDAO adminDAO = new AdminDAO();
+		String error = "";
+		
+		//Controllare che l'email non sia già presente in user o admin
+		boolean userValid = userDAO.verifyEmail(email);
+		boolean adminValid = adminDAO.verifyEmail(email);
+		
+		if(!(userValid && adminValid)) {
+			error = "Email non disponibile<br>";
+		}
+		
+		return error;
+	}
+	
+	private String validateField(String input, String attribute, HttpServletRequest request, String errorMessage, String regex) {
+		
+		String error = "";		
+		if (input == null || input.trim().equals("") || !Pattern.matches(regex, input)) {
+            error = errorMessage + "<br>";
+        } else {
+            request.setAttribute(attribute, input);
+        }	
+		return error;	
+	}
+
+}

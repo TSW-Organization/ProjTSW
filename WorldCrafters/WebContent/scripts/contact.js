@@ -1,43 +1,9 @@
-// CONTACT
-window.onload = function() {
-    var form = document.getElementById("contact-form");
-    var isFormSubmitted = false;
-
-    form.addEventListener("submit", function() {
-        isFormSubmitted = true;
-    });
-
-    window.addEventListener("beforeunload", function(event) {
-        if (!isFormSubmitted) {
-            event.preventDefault();
-            event.returnValue = "Sei sicuro di voler lasciare questa pagina? Le modifiche non salvate andranno perse.";
-        }
-    });
-
-    window.addEventListener("popstate", function(event) {
-        if (!isFormSubmitted) {
-            event.preventDefault();
-            var confirmLeave = confirm("Sei sicuro di voler lasciare questa pagina? Le modifiche non salvate andranno perse.");
-            if (confirmLeave) {
-                history.back();
-            }
-        }
-    });
-
-    history.pushState(null, null, location.href);
-    window.onpopstate = function() {
-        history.pushState(null, null, location.href);
-    };
-};
-
-///////////////////////////////////////////
-
 $(document).ready(function () {
     // Aggiungi un listener per l'evento di cambio nei campi di input
     $('input[data-validation], textarea[data-validation]').on('input', function () {
-        var validationType = $(this).data('validation');
-        var value = $(this).val().trim();
-        var isValid = false;
+        let validationType = $(this).data('validation');
+        let value = $(this).val().trim();
+        let isValid = false;
 
         // Aggiungi qui le tue regole di validazione per ogni campo
         switch (validationType) {

@@ -1,6 +1,9 @@
 package it.unisa.controller;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,33 +17,47 @@ import javax.servlet.http.HttpSession;
 public class CheckoutServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	
+	private static final Logger logger = Logger.getLogger(CheckoutServlet.class.getName());
     	
-
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession(false);
-		
-		if (session != null) {
-            // Verifica se l'attributo desiderato è presente nella sessione
-            Object userId = session.getAttribute("userId");
-
-            if (userId != null) {
-            	if((int) session.getAttribute("userId") != -1) {
-            		request.getRequestDispatcher("checkout.jsp").forward(request, response);
-            	}
-            } else {
-            	response.sendRedirect("cart");
-            }
+		Object userId = null;
+		if(session!= null) {
+			userId = session.getAttribute("userId");
+		}	
+		if (userId!=null) {
+        	if((int) session.getAttribute("userId") != -1) {   		
+        		try {
+        			request.getRequestDispatcher("checkout.jsp").forward(request, response);
+            	} catch (ServletException se) {
+            		logger.log(Level.WARNING, se.getMessage());
+            	} catch (IOException e){
+            		logger.log(Level.WARNING, e.getMessage());
+            	}	
+        	}
         } else {
-        	response.sendRedirect("cart");
+        	try {
+        		response.sendRedirect("login.jsp");
+        	} catch (IOException e){
+        		logger.log(Level.WARNING, e.getMessage());
+        	}
+        	
         }
 		
 	}
 
-
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		doGet(request, response);
+		try {
+			doGet(request, response);
+    	} catch (ServletException se) {
+    		logger.log(Level.WARNING, se.getMessage());
+    	} catch (IOException e){
+    		logger.log(Level.WARNING, e.getMessage());
+    	}	
 	}
 
 }

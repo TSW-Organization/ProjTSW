@@ -2,30 +2,36 @@
 <%@ page import="javax.servlet.http.HttpSession" %>
 
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
+    <title>WorldCrafters</title>
     <link rel="stylesheet" type="text/css" href="styles/userbar.css">
     <script src="scripts/sidebar-userbar.js"></script>
-    <script src="scripts/log-reg.js"></script>
 </head>
 <body>
 	
-    <% HttpSession sessione = request.getSession();%>
-    <% boolean authenticated = (sessione.getAttribute("authenticated") != null && (boolean) sessione.getAttribute("authenticated")); %>
-	<% if(authenticated) { %>
+    <% HttpSession session1 = request.getSession();%>
+    <% if(session1.getAttribute("userId")!=null) { %>
+	    <% int userId = (int) session1.getAttribute("userId");%>
     	<div id="userbar">
 	        <ul>
 	            <li><a href="purchases">Ordini effettuati<br></a></li>
 	            <li><a href="contact.jsp">Assistenza<br></a></li>
-	            <li><a href="logout">Logout<br></a></li>
+	            <li><a href="logout" onclick="invalidateSession()">Logout<br></a></li>
+	        </ul>
+	    </div>
+	<% } else if(session1.getAttribute("isAdmin")!=null && session1.getAttribute("isAdmin").toString().equals("true")) { %>
+		<div id="userbar">
+	        <ul>
+	            <li><a href="logout" onclick="invalidateSession()">Logout<br></a></li>
 	        </ul>
 	    </div>
 	<% } else { %>
     	<div id="userbar">
 	        <ul>
-			<li><a href="#" onclick="openOverlay('login-overlay', 'login.jsp')">Login</a></li>
-			<li><a href="#" onclick="openOverlay('register-overlay', 'register.jsp')">Register</a></li>
-     	    <li><a href="contact.jsp">Assistenza<br></a></li>
+	            <li><a href="login.jsp">Sign in</a></li>
+	            <li><a href="register.jsp">Sign up</a></li>
+	            <li><a href="contact.jsp">Assistenza<br></a></li>
 	        </ul>
 	    </div>
 	<% } %>

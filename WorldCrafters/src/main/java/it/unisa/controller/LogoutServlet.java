@@ -1,6 +1,9 @@
 package it.unisa.controller;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,8 +16,9 @@ import javax.servlet.http.HttpSession;
 public class LogoutServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(LogoutServlet.class.getName());
        
- 
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
@@ -23,14 +27,23 @@ public class LogoutServlet extends HttpServlet {
 			session.removeAttribute("userId");
 			session.invalidate();
 		}
-		
-		response.sendRedirect("login.jsp");
+			
+		try {
+			response.sendRedirect("login.jsp");
+        } catch (IOException e) {
+        	logger.log(Level.WARNING, e.getMessage());
+    	}
 	}
 
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		doGet(request, response);
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {	
+		try {
+			doGet(request, response);
+        } catch (ServletException se) {
+        	logger.log(Level.WARNING, se.getMessage());
+    	} catch (IOException e) {
+    		logger.log(Level.WARNING, e.getMessage());
+    	}
 	}
 
 }
